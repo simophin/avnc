@@ -223,6 +223,11 @@
     <string name="pref_km_language_switch_to_super">Language Switch → Super</string>
     <string name="pref_km_back_to_escape">Back → Escape</string>
     <string name="pref_km_back_to_escape_summary">Does not affect the navigation bar</string>
+    <string name="pref_key_capture">Capture system shortcuts</string>
+    <string name="pref_key_capture_summary_disabled">Send shortcuts like Alt+Tab &amp; Super/Meta to the server. Tap to enable AVNC\'s accessibility service.</string>
+    <string name="pref_key_capture_summary_enabled">Enabled. System shortcuts are sent to the server during a session. Tap to disable.</string>
+    <string name="key_capture_service_label">AVNC key capture</string>
+    <string name="key_capture_service_description">Allows AVNC to send system keyboard shortcuts (e.g. Alt+Tab, Super/Meta key combinations) to the remote server. Key events are captured only while a VNC session is open in the foreground, and are never stored or sent anywhere else.</string>
     <string name="pref_orientation">Screen orientation</string>
     <string name="pref_orientation_option_auto">Automatic</string>
     <string name="pref_orientation_option_portrait">Portrait</string>

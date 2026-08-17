@@ -193,6 +193,11 @@
             app:key="km_back_to_escape"
             app:summary="@string/pref_km_back_to_escape_summary"
             app:title="@string/pref_km_back_to_escape" />
+
+        <Preference
+            app:key="key_capture"
+            app:summary="@string/pref_key_capture_summary_disabled"
+            app:title="@string/pref_key_capture" />
     </PreferenceCategory>
 
 </PreferenceScreen>

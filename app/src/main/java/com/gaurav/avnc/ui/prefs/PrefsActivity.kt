@@ -8,16 +8,20 @@
 
 package com.gaurav.avnc.ui.prefs
 
+import android.content.Intent
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.gaurav.avnc.R
+import com.gaurav.avnc.service.KeyCaptureService
 import com.gaurav.avnc.util.DeviceAuthPrompt
 import com.gaurav.avnc.util.EdgeToEdgeHelper
 import com.google.android.material.appbar.MaterialToolbar
@@ -132,6 +136,21 @@ class PrefsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreference
             findPreference<SwitchPreference>("invert_vertical_scrolling")!!.apply {
                 showIf { it.values.contains("remote-scroll") }
             }
+
+            // Key capture is controlled by system Accessibility settings, so this pref
+            // simply opens those settings. Current status is reflected in summary.
+            findPreference<Preference>("key_capture")!!.setOnPreferenceClickListener {
+                runCatching { startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }
+                        .onFailure { Log.w("PrefsActivity", "Unable to open Accessibility settings", it) }
+                true
+            }
+        }
+
+        override fun onResume() {
+            super.onResume()
+            findPreference<Preference>("key_capture")?.setSummary(
+                    if (KeyCaptureService.isEnabled(requireContext())) R.string.pref_key_capture_summary_enabled
+                    else R.string.pref_key_capture_summary_disabled)
         }
 
         override fun onDestroy() {
