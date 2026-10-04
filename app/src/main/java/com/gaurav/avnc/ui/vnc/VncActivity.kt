@@ -134,18 +134,9 @@ class VncActivity : AppCompatActivity() {
             viewModel.refreshFrameBuffer()
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Start receiving key events captured by KeyCaptureService (if enabled by user).
-        // Events are simply routed to inputHandler, same as normally dispatched key events.
-        // Unhandled events (e.g. when disconnected) are returned to the system untouched.
-        KeyCaptureService.keyEventReceiver = capturedKeyReceiver
-    }
-
     override fun onPause() {
         super.onPause()
-        if (KeyCaptureService.keyEventReceiver === capturedKeyReceiver)
-            KeyCaptureService.keyEventReceiver = null
+        stopKeyCapture()
     }
 
     override fun onStop() {
@@ -164,6 +155,9 @@ class VncActivity : AppCompatActivity() {
         if (hasFocus) {
             viewModel.sendClipboardText()
             restoreKeyboard()
+            startKeyCapture()
+        } else {
+            stopKeyCapture()
         }
     }
 
@@ -525,6 +519,23 @@ class VncActivity : AppCompatActivity() {
      ************************************************************************************/
 
     private val capturedKeyReceiver: (KeyEvent) -> Boolean = { inputHandler.onKeyEvent(it) }
+
+    /**
+     * Start receiving key events captured by KeyCaptureService (if enabled by user).
+     * Events are simply routed to inputHandler, same as normally dispatched key events.
+     * Unhandled events (e.g. when disconnected) are returned to the system untouched.
+     *
+     * This is tied to window focus, not to activity lifecycle, because in multi-window
+     * & desktop mode, activity can remain resumed while some other window has focus.
+     */
+    private fun startKeyCapture() {
+        KeyCaptureService.keyEventReceiver = capturedKeyReceiver
+    }
+
+    private fun stopKeyCapture() {
+        if (KeyCaptureService.keyEventReceiver === capturedKeyReceiver)
+            KeyCaptureService.keyEventReceiver = null
+    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         return inputHandler.onKeyEvent(event) || super.onKeyDown(keyCode, event)
