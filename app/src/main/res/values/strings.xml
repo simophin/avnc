@@ -29,7 +29,11 @@
     <string name="title_forget">Forget</string>
     <string name="title_remember">Remember</string>
     <string name="title_export">Export</string>
+    <string name="title_export_file">Export to file</string>
+    <string name="title_export_qr">Display QR code</string>
     <string name="title_import">Import</string>
+    <string name="title_import_file">Import file</string>
+    <string name="title_import_qr">Scan QR code</string>
     <string name="title_view_only_mode">View-only</string>
     <string name="title_connect_on_app_start">Auto-connect when app starts</string>
     <string name="title_enable_wol">Wake-on-LAN</string>
@@ -45,6 +49,8 @@
     <string name="title_unknown_ssh_host">Unknown SSH host</string>
     <string name="title_ssh_host_key_changed">SSH host key changed</string>
     <string name="title_continue">Continue</string>
+    <string name="title_export_settings">Export settings</string>
+    <string name="title_export_profiles">Export servers</string>
     <string name="title_export_passwords_and_keys">Export passwords and keys</string>
     <string name="title_delete_servers_before_import">Delete current servers before import</string>
     <string name="title_password">Password</string>
@@ -101,6 +107,11 @@
     <string name="msg_saved">Saved</string>
     <string name="msg_done">Done</string>
     <string name="msg_export_auth_required">Authenticate to export servers</string>
+    <string name="err_import_too_large">Import file is too large (limit: 1 MiB).</string>
+    <string name="err_invalid_qr_code">Invalid AVNC QR code.</string>
+    <string name="err_qr_export_failed">Failed to generate QR code:</string>
+    <string name="err_unsupported_qr_uri">Unsupported or invalid URI.</string>
+    <string name="msg_confirm_import_uri">Import from the following URI?</string>
     <string name="msg_required">Required</string>
     <string name="msg_invalid_mac_address">Invalid MAC address</string>
     <string name="msg_invalid_key_file">Invalid private key file</string>
@@ -257,7 +268,7 @@
     <string name="pref_discovery_autorun">Autorun</string>
     <string name="pref_discovery_autorun_summary">Discover servers while on homepage</string>
     <string name="pref_rediscovery_indicator">Highlight rediscovered servers</string>
-    <string name="pref_import_export">Import/Export servers</string>
+    <string name="pref_import_export">Import/Export</string>
     <string name="pref_debugging">Debugging</string>
     <string name="pref_logs">Logs</string>
     <string name="pref_keycode_map">Keycode map</string>
