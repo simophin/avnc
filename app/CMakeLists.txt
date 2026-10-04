@@ -1,8 +1,30 @@
 
 cmake_minimum_required(VERSION 3.13)
 
+###############################################################################
+# vcpkg setup
+# This must be done before project() is called.
+###############################################################################
+if (ANDROID_ABI STREQUAL "arm64-v8a")
+    set(VCPKG_TARGET_TRIPLET "arm64-android")
+elseif (ANDROID_ABI STREQUAL "armeabi-v7a")
+    set(VCPKG_TARGET_TRIPLET "arm-neon-android")
+elseif (ANDROID_ABI STREQUAL "x86")
+    set(VCPKG_TARGET_TRIPLET "x86-android")
+elseif (ANDROID_ABI STREQUAL "x86_64")
+    set(VCPKG_TARGET_TRIPLET "x64-android")
+else ()
+    message(FATAL_ERROR "Unknown ANDROID_ABI: ${ANDROID_ABI}")
+endif ()
 
-project(NativeVNC C CXX ASM)
+set(VCPKG_BOOTSTRAP_OPTIONS "-disableMetrics")
+set(ENV{ANDROID_NDK_HOME} ${ANDROID_NDK})
+
+
+###############################################################################
+# Project
+###############################################################################
+project(NativeVNC C CXX)
 
 set(AVNC_EXTERN_DIR ${PROJECT_SOURCE_DIR}/../extern)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared Libs" FORCE)
@@ -20,58 +42,8 @@ macro(avnc_check_submodule name)
 endmacro()
 
 
-# Required to enable SIMD support on ARM
-if (CMAKE_ANDROID_ARCH STREQUAL "arm64")
-    set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} --target=aarch64-linux-android${ANDROID_NATIVE_API_LEVEL}")
-elseif (CMAKE_ANDROID_ARCH STREQUAL "arm")
-    set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} --target=arm-linux-androideabi${ANDROID_NATIVE_API_LEVEL}")
-endif ()
-
 # Clear build id in release builds to allow reproducible builds on F-Droid
 add_link_options("LINKER:$<$<NOT:$<CONFIG:Debug>>:--build-id=none>")
-
-
-###############################################################################
-# JPEG
-###############################################################################
-avnc_check_submodule(libjpeg-turbo)
-
-set(AVNC_LIBJPEG_SRC_DIR ${AVNC_EXTERN_DIR}/libjpeg-turbo)
-set(AVNC_LIBJPEG_BUILD_DIR ${CMAKE_BINARY_DIR}/libjpeg-turbo)
-
-add_subdirectory(${AVNC_LIBJPEG_SRC_DIR} ${AVNC_LIBJPEG_BUILD_DIR})
-
-# Set these variables so FindJPEG can find the library
-set(JPEG_LIBRARY ${AVNC_LIBJPEG_BUILD_DIR}/libturbojpeg.a)
-set(JPEG_INCLUDE_DIR ${AVNC_LIBJPEG_SRC_DIR})
-
-include_directories(${AVNC_LIBJPEG_SRC_DIR} ${AVNC_LIBJPEG_BUILD_DIR})
-
-
-###############################################################################
-# SSL
-###############################################################################
-avnc_check_submodule(wolfssl)
-
-set(AVNC_LIBSSL_SRC_DIR ${AVNC_EXTERN_DIR}/wolfssl)
-set(AVNC_LIBSSL_BUILD_DIR ${CMAKE_BINARY_DIR}/wolfssl)
-
-# CMake support in wolfSSl is still under development, so we have to
-# manually set some flags to enable OpenSSL compatibility layer
-set(WOLFSSL_CRL yes)
-set(WOLFSSL_DES3 yes)
-add_definitions(-DOPENSSL_ALL -DOPENSSL_EXTRA -DHAVE_CRL -DHAVE_EX_DATA
-        -DHAVE_ANON -DWOLFSSL_AES_DIRECT -DHAVE_AES_ECB -DWOLFSSL_DES_ECB
-        -DWC_NO_HARDEN -DWOLFSSL_NO_OPTIONS_H)
-
-add_subdirectory(${AVNC_LIBSSL_SRC_DIR} ${AVNC_LIBSSL_BUILD_DIR})
-
-# Set these variables so FindOpenSSL can find the library
-set(OPENSSL_SSL_LIBRARY ${AVNC_LIBSSL_BUILD_DIR}/libwolfssl.a)
-set(OPENSSL_CRYPTO_LIBRARY ${AVNC_LIBSSL_BUILD_DIR}/libwolfssl.a)
-set(OPENSSL_INCLUDE_DIR ${AVNC_LIBSSL_SRC_DIR}/wolfssl)
-
-include_directories(${AVNC_LIBSSL_SRC_DIR})
 
 
 ###############################################################################

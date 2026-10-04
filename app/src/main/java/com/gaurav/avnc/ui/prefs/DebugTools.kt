@@ -22,7 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.BaseInputConnection
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.annotation.Keep
 import androidx.core.view.forEach
@@ -35,7 +34,8 @@ import com.gaurav.avnc.databinding.FragmentKeyTestBinding
 import com.gaurav.avnc.databinding.FragmentLogsBinding
 import com.gaurav.avnc.databinding.FragmentTouchTestBinding
 import com.gaurav.avnc.util.Debugging
-import com.gaurav.avnc.util.setClipboardText
+import com.gaurav.avnc.util.setClipboardTextWithNotification
+import com.gaurav.avnc.util.showKeyboard
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,10 +51,7 @@ abstract class DebugFragment : Fragment() {
 
     fun copyLogs(logs: String) {
         val wrapped = Debugging.wrapLogs(title(), logs)
-        lifecycleScope.launch {
-            if (setClipboardText(requireContext(), wrapped)) snackbar(getString(R.string.msg_copied_to_clipboard))
-            else snackbar("Error copying text")
-        }
+        requireActivity().setClipboardTextWithNotification(wrapped)
     }
 
     fun snackbar(text: String) = Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT).show()
@@ -182,12 +179,7 @@ class KeyTestFragment : DebugFragment() {
             event.dispatch(binding.preview, binding.preview.keyDispatcherState, binding.preview)
         }
 
-        binding.inputArea.setOnClickListener {
-            with(requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager) {
-                binding.inputArea.requestFocus()
-                showSoftInput(binding.inputArea, 0)
-            }
-        }
+        binding.inputArea.setOnClickListener { showKeyboard(binding.inputArea) }
 
         binding.resetBtn.setOnClickListener {
             eventLog.setLength(0)
@@ -215,4 +207,6 @@ class KeyTestView(context: Context, attributeSet: AttributeSet?) : View(context,
         outAttrs.imeOptions = outAttrs.imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI or EditorInfo.IME_FLAG_NO_FULLSCREEN
         return BaseInputConnection(this, false)
     }
+
+    override fun onCheckIsTextEditor() = true
 }
