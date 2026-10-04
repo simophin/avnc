@@ -59,6 +59,13 @@ android {
             applicationIdSuffix ".ci"
             versionNameSuffix " (CI)"
         }
+
+        forked {
+            initWith(release)
+            applicationIdSuffix ".forked"
+            versionNameSuffix " (forked)"
+            signingConfig signingConfigs.debug
+        }
     }
 
     buildFeatures {
