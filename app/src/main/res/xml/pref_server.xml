@@ -17,6 +17,13 @@
 
     <SwitchPreference
         app:defaultValue="false"
+        app:dependency="clipboard_sync"
+        app:key="clipboard_receive"
+        app:summary="@string/pref_clipboard_receive_summary"
+        app:title="@string/pref_clipboard_receive" />
+
+    <SwitchPreference
+        app:defaultValue="false"
         app:key="lock_saved_server"
         app:summary="@string/pref_saved_server_lock_summary"
         app:title="@string/pref_saved_server_lock" />

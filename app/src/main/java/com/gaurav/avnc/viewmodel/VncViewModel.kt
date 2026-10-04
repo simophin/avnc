@@ -318,7 +318,7 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
 
     private var clipReceiverJob: Job? = null
     private fun receiveClipboardText(text: String) {
-        if (!pref.server.clipboardSync)
+        if (!pref.server.clipboardSync || !pref.server.clipboardReceive)
             return
 
         // This is a protective measure against servers which send every 'selection' made on the server.

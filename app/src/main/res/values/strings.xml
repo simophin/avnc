@@ -248,6 +248,8 @@
     <string name="pref_zoom_max">Maximum</string>
     <string name="pref_per_orientation_zoom">Separate zoom for each orientation</string>
     <string name="pref_clipboard_sync">Clipboard sync</string>
+    <string name="pref_clipboard_receive">Copy server clipboard to device</string>
+    <string name="pref_clipboard_receive_summary">Some servers send every text selection, overwriting your device clipboard</string>
     <string name="pref_saved_server_lock_summary">Require biometric/password unlock to connect</string>
     <string name="pref_saved_server_lock">Lock saved servers</string>
     <string name="pref_auto_reconnect">Reconnect automatically</string>
