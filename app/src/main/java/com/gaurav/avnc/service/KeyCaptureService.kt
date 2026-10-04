@@ -30,7 +30,7 @@ import android.view.accessibility.AccessibilityManager
  * The service is completely passive unless the user explicitly enables it in
  * system Accessibility settings, AND a VNC session is currently in foreground
  * ([keyEventReceiver] is only set while [com.gaurav.avnc.ui.vnc.VncActivity]
- * is resumed & connected). In all other cases key events are left untouched.
+ * window has input focus). In all other cases key events are left untouched.
  */
 class KeyCaptureService : AccessibilityService() {
 
