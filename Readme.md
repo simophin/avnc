@@ -66,6 +66,11 @@ Publish a GitHub release for a tag containing the release workflow to build and
 attach `AVNC-<tag>-forked.apk` automatically. Published prereleases also run the
 workflow. The APK uses the `com.gaurav.avnc.forked` application ID.
 
+To test the Release workflow without publishing, run it manually from the Actions
+tab or with `gh workflow run release.yml`. It builds the selected branch by
+default; the optional `tag` input selects a tag or commit instead. Manual runs
+save the signed APK as an Actions artifact and do not attach it to a release.
+
 The signing key is committed at `signing/release.jks` (alias `release`). Its store
 and key password are the same and are saved in the repository Actions secret
 `RELEASE_KEYSTORE_PASSWORD`. The workflow requires this secret before building.
