@@ -46,18 +46,19 @@ jobs:
           fi
           ./gradlew --no-daemon assembleForked
 
-      - name: Verify and name APK
+      - name: Verify APK
         run: |
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs app/build/outputs/apk/forked/app-forked.apk
-          mkdir -p release-assets
-          cp app/build/outputs/apk/forked/app-forked.apk "release-assets/AVNC-${RELEASE_TAG}-forked.apk"
 
       - name: Attach APK to GitHub release
         if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: gh release upload "$RELEASE_TAG" "release-assets/AVNC-${RELEASE_TAG}-forked.apk" --clobber
+        run: |
+          mkdir -p release-assets
+          cp app/build/outputs/apk/forked/app-forked.apk "release-assets/AVNC-${RELEASE_TAG}-forked.apk"
+          gh release upload "$RELEASE_TAG" "release-assets/AVNC-${RELEASE_TAG}-forked.apk" --clobber
 
       - name: Save APK from manual test build
         if: github.event_name == 'workflow_dispatch'
