@@ -16,7 +16,9 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
+      - name: Install Android build tools
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;28.2.13676358" "cmake;3.22.1"
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
@@ -24,12 +26,15 @@ jobs:
 
       - name: Sign APK
         env:
-          CI_SIGNING_KS: ${{ secrets.CI_SIGNING_KS }}
-          CI_SIGNING_KS_PASSWORD: ${{ secrets.CI_SIGNING_KS_PASSWORD }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
         working-directory: ./app/build/outputs/apk/ci/
         run: |
-          echo $CI_SIGNING_KS | base64 --decode > keystore.jks
-          $ANDROID_HOME/build-tools/34.0.0/apksigner sign --in app-ci-unsigned.apk --out app-ci.apk --ks keystore.jks --ks-pass 'env:CI_SIGNING_KS_PASSWORD'
+          if [ -z "$RELEASE_KEYSTORE_PASSWORD" ]; then
+            echo "::error::RELEASE_KEYSTORE_PASSWORD is not configured"
+            exit 1
+          fi
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" sign --in app-ci-unsigned.apk --out app-ci.apk --ks "$GITHUB_WORKSPACE/signing/release.jks" --ks-key-alias release --ks-pass 'env:RELEASE_KEYSTORE_PASSWORD'
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose app-ci.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v7

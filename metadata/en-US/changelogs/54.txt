@@ -1,0 +1,5 @@
+* Improve desktop viewer controls, insets, and automatic remote resizing
+* Reduce rendering latency with cached textures and partial framebuffer uploads
+* Capture system keyboard shortcuts only while the VNC window has focus
+* Import and export settings and server profiles using files, QR codes, and HTTP(S) links
+* Remove built-in SSH tunneling; use an external tunnel for SSH connections
