@@ -9,6 +9,5 @@ AVNC 是一個 Android 上開源的 VNC 客戶端，可以遠程控制任何運�
 - 零設置伺服器尋找
 - 支援安全性傳輸層（AnonTLS、VeNCrypt）
 - 匯入/匯出伺服器
-- 支援 VNC中繼器
 - 剪貼板同步
 - 支援 `vnc://`URI

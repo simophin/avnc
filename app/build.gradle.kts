@@ -46,7 +46,7 @@ android {
 
     val releaseKeystorePassword = providers.environmentVariable("RELEASE_KEYSTORE_PASSWORD").orNull
     if (!releaseKeystorePassword.isNullOrBlank()) {
-        signingConfigs.create("forkedRelease") {
+        signingConfigs.create("release") {
             storeFile = rootProject.file("signing/release.jks")
             storePassword = releaseKeystorePassword
             keyAlias = "release"
@@ -62,6 +62,7 @@ android {
         }
 
         release {
+            signingConfig = signingConfigs.findByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -69,15 +70,9 @@ android {
 
         create("ci") {
             initWith(getByName("release"))
+            signingConfig = null
             applicationIdSuffix = ".ci"
             versionNameSuffix = " (CI)"
-        }
-
-        create("forked") {
-            initWith(getByName("release"))
-            applicationIdSuffix = ".forked"
-            versionNameSuffix = " (forked)"
-            signingConfig = signingConfigs.findByName("forkedRelease") ?: signingConfigs.getByName("debug")
         }
     }
 

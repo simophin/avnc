@@ -26,7 +26,6 @@
     <string name="title_hide_remote_cursor">پنهان کردن اشاره‌گر دوردست</string>
     <string name="title_continue">ادامه</string>
     <string name="title_delete_servers_before_import">حذف کارسازهای کنونی پیش از درون‌ریزی</string>
-    <string name="title_use_repeater">استفاده از تکرارکننده</string>
     <string name="title_about">درباره</string>
     <string name="title_license">پروانه</string>
     <string name="title_open_source_libraries">کتابخانه‌های متن‌باز</string>
@@ -35,9 +34,7 @@
     <string name="hint_urlbar">اتّصال به یک کارساز</string>
     <string name="hint_server_name">نام (مثلا: رایانهٔ کاری)</string>
     <string name="hint_host">میزبان</string>
-    <string name="hint_repeater_host">میزبان تکرارکننده</string>
     <string name="hint_port">درگاه</string>
-    <string name="hint_server_id">آی‌دی کارساز</string>
     <string name="hint_username">نام کاربری</string>
     <string name="hint_password">گذرواژه</string>
     <string name="msg_about_app">یک کارخواه سریع و ایمن VNC. به صورت دوردست هر افزاره‌ای که یک کارساز VNC را اجرا کند را ببینید و کنترل کنید.

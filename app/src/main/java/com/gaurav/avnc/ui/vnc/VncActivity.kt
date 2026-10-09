@@ -74,7 +74,6 @@ class VncActivity : AppCompatActivity() {
     private val inputHandler = InputHandler()
     val virtualKeys by lazy { VirtualKeys(this, inputHandler) }
     val toolbar by lazy { Toolbar(this) }
-    val desktopToolbar by lazy { DesktopToolbar(this) }
     private val serverUnlockPrompt = DeviceAuthPrompt(this)
     private val layoutManager by lazy { LayoutManager(this) }
     private var oldState: SavedState? = null
@@ -102,7 +101,6 @@ class VncActivity : AppCompatActivity() {
         binding.inputView.initialize(viewModel, inputHandler)
         viewModel.frameViewRef = WeakReference(binding.frameView)
 
-        desktopToolbar.initialize { layoutManager.toggleFullscreen() }
         setupLayout()
         setupNoVideoOverlay()
 

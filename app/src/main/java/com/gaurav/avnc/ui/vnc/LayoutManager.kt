@@ -57,7 +57,6 @@ class LayoutManager(private val activity: VncActivity) {
 
     fun onConnectionStateChanged() {
         updateFullscreen()
-        activity.desktopToolbar.updateVisibility(windowInsets)
         viewModel.resizeRemoteDesktop()
     }
 
@@ -72,11 +71,7 @@ class LayoutManager(private val activity: VncActivity) {
 
     private fun hookGlobalLayoutListener() {
         addOnGlobalLayoutListener(activity, rootView) {
-            activity.desktopToolbar.updateVisibility(windowInsets)
-            val desktop = activity.binding.desktopToolbar.root.isVisible
-            viewModel.frameState.setWindowSize(
-                    (if (desktop) frameView.width else rootView.width).toFloat(),
-                    (if (desktop) frameView.height else rootView.height).toFloat())
+            viewModel.frameState.setWindowSize(rootView.width.toFloat(), rootView.height.toFloat())
             viewModel.frameState.setViewportSize(frameView.width.toFloat(), frameView.height.toFloat())
             activity.virtualKeys.container?.let { updateVirtualKeyInsets(it) }
 
@@ -137,11 +132,6 @@ class LayoutManager(private val activity: VncActivity) {
      ************************************************************************************/
     private var fullscreenEnabled = viewModel.pref.viewer.fullscreen
     private val defaultSystemBarBehaviour = insetController.systemBarsBehavior
-
-    fun toggleFullscreen() {
-        fullscreenEnabled = !fullscreenEnabled
-        updateFullscreen()
-    }
 
     private fun updateFullscreen() {
         if (fullscreenEnabled && viewModel.connected)

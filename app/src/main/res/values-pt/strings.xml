@@ -62,7 +62,6 @@
     <string name="title_delete_servers_before_import">Apagar os servidores atuais antes de importar</string>
     <string name="title_image_quality_raw">Imagem não processada</string>
     <string name="title_vnc_security">Segurança</string>
-    <string name="title_use_repeater">Usar repetidor</string>
     <string name="title_about">Sobre</string>
     <string name="title_license">Licença</string>
     <string name="title_open_source_libraries">Bibliotecas de código livre</string>
@@ -83,9 +82,7 @@
     <string name="msg_zoom_reset">Zoom redefinido para 100%</string>
     <string name="msg_zoom_saved">Zoom atual definido como padrão</string>
     <string name="msg_pip_not_supported">Não suportado neste aparelho</string>
-    <string name="hint_repeater_host">Host do repetidor</string>
     <string name="hint_port">Porta</string>
-    <string name="hint_server_id">ID do servidor</string>
     <string name="hint_username">Nome de utilizador</string>
     <string name="hint_password">Palavra-passe</string>
     <string name="msg_ptr_hiding_not_supported">Não suportado neste aparelho</string>

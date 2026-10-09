@@ -35,7 +35,6 @@
     <string name="title_vnc_security">الأمان</string>
     <string name="title_continue">متابعة</string>
     <string name="title_delete_servers_before_import">حذف الخوادم الحالية قبل عملية الاستيراد</string>
-    <string name="title_use_repeater">استخدام مكرر الإشارة</string>
     <string name="title_about">معلومات عن AVNC</string>
     <string name="title_license">الترخيص</string>
     <string name="title_open_source_libraries">المكتبات مفتوحة المصدر</string>
@@ -50,9 +49,7 @@
     <string name="hint_urlbar">اتصل بخادم</string>
     <string name="hint_server_name">الاسم (مثال: كمبيوتر العمل)</string>
     <string name="hint_host">المضيف</string>
-    <string name="hint_repeater_host">مضيف مكرر الإشارة</string>
     <string name="hint_port">المنفذ</string>
-    <string name="hint_server_id">معرف الخادم</string>
     <string name="hint_username">اسم المستخدم</string>
     <string name="hint_password">كلمة المرور</string>
     <string name="hint_wol_mac">عنوان MAC</string>

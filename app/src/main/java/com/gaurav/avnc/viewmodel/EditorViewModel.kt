@@ -31,14 +31,10 @@ class EditorViewModel(app: Application, state: SavedStateHandle, initialProfile:
      * more complex handling, and live feedback in UI.
      * For these, we have to use dedicated LiveData fields.
      */
-    val useRepeater = state.getLiveData("useRepeater", profile.useRepeater)
-    val idOnRepeater = state.getLiveData("idOnRepeater", if (profile.useRepeater) profile.idOnRepeater.toString() else "")
     val useRawEncoding = state.getLiveData("useRawEncoding", profile.useRawEncoding)
     val enableWol = state.getLiveData("enableWol", profile.enableWol)
 
     fun prepareProfileForSave(): ServerProfile {
-        profile.useRepeater = useRepeater.value == true
-        profile.idOnRepeater = idOnRepeater.value?.toIntOrNull() ?: 0
         profile.useRawEncoding = useRawEncoding.value == true
         profile.enableWol = enableWol.value == true
         profile.channelType = ServerProfile.CHANNEL_TCP

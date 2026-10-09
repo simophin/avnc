@@ -11,5 +11,4 @@ Funksjoner:
 - Zeroconf-tjeneroppdagelse
 - TLS-støtte (AnonTLS, VeNCrypt)
 - Importer/eksporter tjenere
-- VNC-gjentagelsesstøtte
 - Utklippstavlesyknronisering med tjener

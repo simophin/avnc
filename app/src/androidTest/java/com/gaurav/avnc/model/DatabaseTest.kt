@@ -77,4 +77,46 @@ class DatabaseTest {
             }
         }
     }
+
+    @Test
+    fun removingRepeaterPreservesProfiles() {
+        helper.createDatabase(dbName, 8).use { db ->
+            val values = ContentValues()
+            db.query("PRAGMA table_info(profiles)").use { columns ->
+                while (columns.moveToNext()) {
+                    val name = columns.getString(columns.getColumnIndexOrThrow("name"))
+                    val type = columns.getString(columns.getColumnIndexOrThrow("type"))
+                    if (type == "TEXT") values.put(name, "")
+                    else values.put(name, 0)
+                }
+            }
+            for (id in 1..2) {
+                values.put("ID", id)
+                values.put("name", "Saved server $id")
+                values.put("host", "server-$id")
+                values.put("port", 5901)
+                values.put("password", "vnc-secret")
+                values.put("useRepeater", id - 1)
+                values.put("idOnRepeater", 12345)
+                db.insert("profiles", SQLiteDatabase.CONFLICT_ABORT, values)
+            }
+        }
+
+        helper.runMigrationsAndValidate(dbName, 9, true).use { db ->
+            db.query("SELECT * FROM profiles ORDER BY ID").use { profiles ->
+                assertEquals(2, profiles.count)
+                assertFalse(profiles.columnNames.contains("useRepeater"))
+                assertFalse(profiles.columnNames.contains("idOnRepeater"))
+                for (id in 1..2) {
+                    assertTrue(profiles.moveToNext())
+                    assertEquals(id, profiles.getInt(profiles.getColumnIndexOrThrow("ID")))
+                    assertEquals("Saved server $id", profiles.getString(profiles.getColumnIndexOrThrow("name")))
+                    assertEquals("server-$id", profiles.getString(profiles.getColumnIndexOrThrow("host")))
+                    assertEquals(5901, profiles.getInt(profiles.getColumnIndexOrThrow("port")))
+                    assertEquals("vnc-secret", profiles.getString(profiles.getColumnIndexOrThrow("password")))
+                }
+            }
+        }
+    }
+
 }

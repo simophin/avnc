@@ -5,7 +5,6 @@ Fitur:
 - Material Design (dengan tema Gelap)
 - Gerakan yang dapat dikonfigurasi
 - Tombol Virtual
-- Dukungan VNC Repeater
 - Dukungan Wake-on-LAN
 - Mode Picture-in-Picture
 - Mode Hanya Tampil

@@ -30,14 +30,12 @@
     <string name="title_always_show_advanced_editor">Vždy zobrazit pokročilé možnosti</string>
     <string name="title_continue">Pokračovat</string>
     <string name="title_delete_servers_before_import">Odstranit stávající servery před importem</string>
-    <string name="title_use_repeater">Použít opakovač</string>
     <string name="title_about">O aplikaci</string>
     <string name="title_license">Licence</string>
     <string name="title_open_source_libraries">Zdrojové kódy knihoven</string>
     <string name="title_report_bug">Nahlásit problém</string>
     <string name="title_source_code">Zdrojový kód</string>
     <string name="title_unlock_dialog">Odemknout pro pokračování</string>
-    <string name="hint_server_id">ID serveru</string>
     <string name="hint_send_text_to_server">Poslat text na server</string>
     <string name="title_next">Další</string>
     <string name="hint_username">Jméno</string>
@@ -92,7 +90,6 @@
     <string name="hint_urlbar">Připojit k serveru</string>
     <string name="hint_host">Hostitel</string>
     <string name="title_load_defaults">Nahrát základní</string>
-    <string name="hint_repeater_host">Opakovač hostitele</string>
     <string name="hint_port">Port</string>
     <string name="msg_copied_to_clipboard">Zkopírováno</string>
     <string name="pref_tools_summary">Import / Export, ladění</string>

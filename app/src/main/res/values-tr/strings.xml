@@ -15,14 +15,12 @@
     <string name="title_import">İçe aktar</string>
     <string name="title_view_only_mode">Yalnızca görüntüle</string>
     <string name="title_continue">Devam et</string>
-    <string name="title_use_repeater">Yineleyici kullan</string>
     <string name="title_about">Hakkında</string>
     <string name="title_license">Lisans</string>
     <string name="title_open_source_libraries">Açık kaynaklı kütüphaneler</string>
     <string name="hint_urlbar">Bir sunucuya bağlan</string>
     <string name="hint_server_name">Ad (örn. İş Bilgisayarı)</string>
     <string name="hint_host">Ana makine</string>
-    <string name="hint_repeater_host">Yineleyici ana makine</string>
     <string name="hint_password">Parola</string>
     <string name="msg_about_app">Hızlı ve güvenli bir VNC istemcisi. Bir VNC sunucusu çalıştıran herhangi bir aygıtı uzaktan görüntüleyin ve denetleyin.
 \n
@@ -89,7 +87,6 @@
 \nBir sunucu eklemek için \'<b>+</b>\' simgesine tıklayın veya
 \ndoğrudan bağlanmak için üst adres çubuğunu kullanın.</string>
     <string name="pref_vk_show_all">Tüm tuşları göster</string>
-    <string name="hint_server_id">Sunucu kimliği</string>
     <string name="hint_username">Kullanıcı adı</string>
     <string name="msg_loading">Yükleniyor…</string>
     <string name="msg_imported">İçe aktarıldı</string>

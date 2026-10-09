@@ -19,7 +19,6 @@
     <string name="hint_server_name">Navn (f.eks. arbeids-PC)</string>
     <string name="hint_host">Vert</string>
     <string name="hint_port">Port</string>
-    <string name="hint_server_id">Tjener-ID</string>
     <string name="hint_username">Brukernavn</string>
     <string name="msg_server_profile_deleted">Tjener slettet</string>
     <string name="msg_server_profile_added">Tjener lagt til</string>
@@ -123,7 +122,6 @@
 \nAVNC er gemenhetslig fri programvare — laget av mange bidragsytere.</string>
     <string name="desc_discovered_list">Liste over oppdagede tjenere</string>
     <string name="pref_viewer">Viser</string>
-    <string name="hint_repeater_host">Gjentaker-vert</string>
     <string name="pref_tools_summary">Import/eksport, avlusing</string>
     <string name="pref_server_summary">Innlogging, oppdagelse</string>
     <string name="pref_toolbar_alignment_option_end">Slutt</string>
@@ -133,7 +131,6 @@
 \nKlikk på «<b>+</b>»-knappen for å legge til en tjener,
 \neller feltet ovenfor for å koble til direkte.</string>
     <string name="pref_km_back_to_escape">Tilbake → Esc</string>
-    <string name="title_use_repeater">Bruk gjentaker</string>
     <string name="tip_discovery">Oppdagelse kan automatisk finne støttede tjenere
 \npå nettverket ditt.</string>
     <string name="pref_gesture_style_touchscreen_summary">Utfør handlinger ved berøring</string>

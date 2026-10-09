@@ -58,7 +58,7 @@ jobs:
         with:
           cache-provider: basic
 
-      - name: Build signed forked APK
+      - name: Build signed release APK
         env:
           RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
         run: |
@@ -66,11 +66,11 @@ jobs:
             echo "::error::RELEASE_KEYSTORE_PASSWORD is not configured"
             exit 1
           fi
-          ./gradlew --no-daemon --build-cache assembleForked
+          ./gradlew --no-daemon --build-cache assembleRelease
 
       - name: Verify APK
         run: |
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs app/build/outputs/apk/forked/app-forked.apk
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs app/build/outputs/apk/release/app-release.apk
 
       - name: Attach APK to GitHub release
         if: github.event_name == 'release'
@@ -79,13 +79,13 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           mkdir -p release-assets
-          cp app/build/outputs/apk/forked/app-forked.apk "release-assets/AVNC-${RELEASE_TAG}-forked.apk"
-          gh release upload "$RELEASE_TAG" "release-assets/AVNC-${RELEASE_TAG}-forked.apk" --clobber
+          cp app/build/outputs/apk/release/app-release.apk "release-assets/AVNC-Forked-${RELEASE_TAG}.apk"
+          gh release upload "$RELEASE_TAG" "release-assets/AVNC-Forked-${RELEASE_TAG}.apk" --clobber
 
       - name: Save APK from manual test build
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v7
         with:
-          name: forked-apk
+          name: release-apk
           archive: false
-          path: app/build/outputs/apk/forked/app-forked.apk
+          path: app/build/outputs/apk/release/app-release.apk

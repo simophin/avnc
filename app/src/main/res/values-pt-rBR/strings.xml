@@ -26,7 +26,6 @@
     <string name="title_hide_remote_cursor">Esconder ponteiro remoto</string>
     <string name="title_continue">Continuar</string>
     <string name="title_delete_servers_before_import">Excluir os servidores atuais antes de importar</string>
-    <string name="title_use_repeater">Usar repetidor</string>
     <string name="title_about">Sobre</string>
     <string name="title_license">Licença</string>
     <string name="title_open_source_libraries">Bibliotecas de código livre</string>
@@ -35,9 +34,7 @@
     <string name="hint_urlbar">Conectar ao servidor</string>
     <string name="hint_server_name">Nome (ex. PC do trabalho)</string>
     <string name="hint_host">Host</string>
-    <string name="hint_repeater_host">Host do repetidor</string>
     <string name="hint_port">Porta</string>
-    <string name="hint_server_id">ID do servidor</string>
     <string name="hint_username">Usuário</string>
     <string name="hint_password">Senha</string>
     <string name="msg_about_app">Um cliente VNC rápido e seguro. Permite visualizar e controlar remotamente qualquer dispositivo que executa um servidor VNC.

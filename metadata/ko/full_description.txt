@@ -11,5 +11,4 @@ AVNC는 안드로이드용 오픈 소스 VNC 클라이언트입니다. VNC 서�
 - Zeroconf 서버 검색 
 - TLS 지원(AnonTLS, VeNCrypt) 
 - 서버 가져오기/내보내기 
-- VNC 중계기 지원 
 - 서버와 클립보드 동기화

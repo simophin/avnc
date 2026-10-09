@@ -23,7 +23,6 @@
     <string name="title_vnc_security">Drošība</string>
     <string name="title_continue">Turpināt</string>
     <string name="title_delete_servers_before_import">Pirms ievietošanas izdzēst pašlaik saglabātos serverus</string>
-    <string name="title_use_repeater">Izmantot retranslatoru</string>
     <string name="title_about">Par lietotni</string>
     <string name="title_license">Licences noteikumi</string>
     <string name="title_open_source_libraries">Atvērtā pirmkoda bibliotēkas</string>
@@ -42,9 +41,7 @@
     <string name="hint_urlbar">Pieslēgties serverim</string>
     <string name="hint_server_name">Nosaukums (piem., Mans dators)</string>
     <string name="hint_host">Resursdatora nosaukums/IP adrese</string>
-    <string name="hint_repeater_host">Retranslatoru resursdatora nosaukums/IP adrese</string>
     <string name="hint_port">Ports</string>
-    <string name="hint_server_id">Servera identifikators (ID)</string>
     <string name="hint_username">Lietotājvārds</string>
     <string name="hint_password">Parole</string>
     <string name="hint_wol_mac">MAC adrese</string>

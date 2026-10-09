@@ -23,7 +23,6 @@
     <string name="hint_server_name">Имя (например: Рабочий ПК)</string>
     <string name="hint_host">Хост</string>
     <string name="hint_port">Порт</string>
-    <string name="hint_server_id">Идентификатор сервера</string>
     <string name="msg_exported">Экспортировано</string>
     <string name="msg_copied_to_clipboard">Скопировано</string>
     <string name="desc_saved_servers_tab">Сохранённые серверы</string>
@@ -153,7 +152,6 @@
     <string name="title_image_quality_raw">Сырое</string>
     <string name="title_image_quality">Качество изображения</string>
     <string name="title_vnc_security">Безопасность</string>
-    <string name="hint_repeater_host">Хост ретранслятора</string>
     <string name="msg_zoom_reset">Сброс масштаба до 100%</string>
     <string name="msg_zoom_saved">Сохранение текущего масштаба по умолчанию</string>
     <string name="pref_gesture_action_pan">Подвинуть локальную рамку</string>
@@ -171,7 +169,6 @@
     <string name="pref_saved_server_lock">Блокировка сохраненных серверов</string>
     <string name="pref_gesture_style_auto_summary">На основе настроек приложения</string>
     <string name="pref_gesture_style_touchscreen">Сенсорный экран</string>
-    <string name="title_use_repeater">Использовать повторитель</string>
     <string name="title_unlock_dialog">Разблокировать для продолжения</string>
     <string name="msg_export_auth_required">Аутентификация на серверах экспорта</string>
     <string name="msg_gesture_style_help"><b>Сенсорный экран</b>\nВыполнять действия в точках соприкосновения\n\n<b>Сенсорная панель</b>\nВыполнять действия по указателю</string>

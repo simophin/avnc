@@ -27,6 +27,7 @@ import com.gaurav.avnc.model.ServerProfile
     AutoMigration(from = 5, to = 6),                                          // in v2.x.x
     AutoMigration(from = 6, to = 7, spec = MainDb.MigrationSpec6to7::class),  // in v3.0.0
     AutoMigration(from = 7, to = 8, spec = MainDb.MigrationSpec7to8::class),
+    AutoMigration(from = 8, to = 9, spec = MainDb.MigrationSpec8to9::class),
 ])
 abstract class MainDb : RoomDatabase() {
     abstract val serverProfileDao: ServerProfileDao
@@ -35,7 +36,7 @@ abstract class MainDb : RoomDatabase() {
         /**
          * Current database version
          */
-        const val VERSION = 8
+        const val VERSION = 9
 
         private var instance: MainDb? = null
 
@@ -83,5 +84,9 @@ abstract class MainDb : RoomDatabase() {
     @DeleteColumn(tableName = "profiles", columnName = "sshPassword")
     @DeleteColumn(tableName = "profiles", columnName = "sshPrivateKey")
     class MigrationSpec7to8 : AutoMigrationSpec
+
+    @DeleteColumn(tableName = "profiles", columnName = "useRepeater")
+    @DeleteColumn(tableName = "profiles", columnName = "idOnRepeater")
+    class MigrationSpec8to9 : AutoMigrationSpec
 
 }

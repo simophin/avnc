@@ -5,7 +5,6 @@ Funcionalidades:
 - Desenho Material (com tema Escuro)
 - Gestos configuráveis
 - Chaves Virtuais
-- Suporte de Repetidor VNC
 - Suporte Wake-on-LAN
 - Modo de Imagem-em-Imagem
 - Modo só de visualização

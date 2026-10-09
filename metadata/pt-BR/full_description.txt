@@ -11,5 +11,4 @@ Funcionalidades:
 - Descoberta do Servidor Zeroconf
 - Suporte ao TLS (AnonTLS, VeNCrypt)
 - Importação/exportação de servidores
-- Suporte ao repetidor VNC
 - Sincronização do clipboard com servidor

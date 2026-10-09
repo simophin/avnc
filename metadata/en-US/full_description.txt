@@ -5,7 +5,6 @@ Features:
 - Material Design (with Dark theme)
 - Configurable gestures
 - Virtual Keys
-- VNC Repeater support
 - Wake-on-LAN support
 - Picture-in-Picture mode
 - View-only mode
