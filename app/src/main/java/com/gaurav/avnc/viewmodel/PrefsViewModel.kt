@@ -269,8 +269,6 @@ class PrefsViewModel(app: Application) : BaseViewModel(app) {
     private fun scrubSecrets(profiles: List<ServerProfile>) {
         profiles.forEach {
             it.password = ""
-            it.sshPassword = ""
-            it.sshPrivateKey = ""
         }
     }
 }

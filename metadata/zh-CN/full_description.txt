@@ -7,7 +7,6 @@ AVNC 是一个适用于 Android 的开源 VNC 客户端。它允许远程控制�
 - 虚拟按键
 - 支持 VNC Repeater
 - 支持局域网唤醒
-- 内置 SSH 隧道 (VNC over SSH)
 - 画中画模式
 - 仅查看模式
 - 无视频模式

@@ -2,7 +2,6 @@
 <resources>
     <string name="title_image_quality">Qualità immagine</string>
     <string name="title_remember">Ricorda</string>
-    <string name="title_private_key">Chiave privata</string>
     <string name="title_clear">Cancella</string>
     <string name="msg_saved">Salvato</string>
     <string name="msg_export_auth_required">Autenticati per esportare il server</string>
@@ -26,18 +25,13 @@
     <string name="title_undo">Annulla</string>
     <string name="title_settings">Impostazioni</string>
     <string name="title_vnc_login">Accesso VNC</string>
-    <string name="title_ssh_login">Accesso SSH</string>
     <string name="title_forget">Dimentica</string>
     <string name="title_button_up_delay">Invia click con un ritardo</string>
     <string name="title_orientation">Orientamento</string>
     <string name="title_image_quality_raw">Raw</string>
     <string name="title_vnc_security">Sicurezza</string>
-    <string name="title_use_ssh_tunnel">Usa tunnel SSH</string>
-    <string name="title_ssh_host_key_changed">Chiave host SSH cambiata</string>
     <string name="title_delete_servers_before_import">Elimina i server salvati prima di importare</string>
-    <string name="title_password">Password</string>
     <string name="title_use_repeater">Usa il ripetitore</string>
-    <string name="title_change">Cambia</string>
     <string name="title_about">Info</string>
     <string name="title_license">Licenza</string>
     <string name="title_report_bug">Segnala un problema</string>
@@ -51,9 +45,6 @@
     <string name="hint_port">Porta</string>
     <string name="hint_username">Nome utente</string>
     <string name="hint_wol_mac">MAC address</string>
-    <string name="hint_ssh_host">Host SSH</string>
-    <string name="hint_ssh_port">Porta SSH</string>
-    <string name="hint_key_password">Chiave password</string>
     <string name="hint_send_text_to_server">Invia testo al server</string>
     <string name="msg_server_profile_deleted">Server eliminato</string>
     <string name="msg_zoom_unlocked">Zoom sbloccato</string>
@@ -66,7 +57,6 @@
     <string name="msg_imported">Importato</string>
     <string name="msg_exported">Esportato</string>
     <string name="msg_done">Fatto</string>
-    <string name="msg_invalid_key_file">File chiave privata invalido</string>
     <string name="msg_invalid_vnc_uri">VNC URL invalida</string>
     <string name="msg_tap_to_select_a_key">Clicca per selezionare chiave:</string>
     <string name="msg_button_up_delay_help">Ritardare gli eventi di click può essere d\'aiuto in alcuni rari casi se un\'app non risponde ai click.</string>
@@ -95,17 +85,14 @@
     <string name="pref_tools">Strumenti</string>
     <string name="pref_tools_summary">Importa/Esporta, debugging</string>
     <string name="pref_experimental_summary">Oggetti extra</string>
-    <string name="title_unlock_private_key">Sblocca chiave privata</string>
     <string name="title_import">Importa</string>
     <string name="title_connect_on_app_start">Connetti automaticamente all\'avvio dell\'app</string>
     <string name="title_enable_wol">Wake-on-LAN</string>
-    <string name="title_export_passwords_and_keys">Esporta password e chiavi</string>
     <string name="hint_server_id">Server ID</string>
     <string name="title_source_code">Codice sorgente</string>
     <string name="msg_about_app">Un client VNC veloce e sicuro. Visualizza e controlla da remoto qualsiasi dispositivo che esegue un server VNC.\n\n\nAVNC è un software open source e copyleft —realizzato con l\'aiuto di molti collaboratori.</string>
     <string name="msg_server_profile_added">Server aggiunto</string>
     <string name="msg_copied_to_clipboard">Copiato</string>
-    <string name="title_unknown_ssh_host">Host SSH sconosciuto</string>
     <string name="title_continue">Continua</string>
     <string name="title_open_source_libraries">Librerie open source</string>
     <string name="hint_password">Password</string>
@@ -219,8 +206,6 @@
     <string name="pref_saved_server_lock_summary">Richiedi sblocco biometrico o password per connette</string>
     <string name="pref_saved_server_lock">Blocca server salvati</string>
     <string name="pref_auto_reconnect">Riconnetti automaticamente</string>
-    <string name="pref_forget_known_hosts">Dimentica host sconosciuti</string>
-    <string name="pref_forget_known_hosts_question">Dimenticare gli host SSH conosciuti e i certificati server riconosciuti?</string>
     <string name="pref_discovery">Rilevazione</string>
     <string name="pref_discovery_autorun">Avvio automatico</string>
     <string name="pref_discovery_autorun_summary">Rileva server dalla schermata principale</string>

@@ -31,7 +31,6 @@ import com.gaurav.avnc.CleanPrefsRule
 import com.gaurav.avnc.DisableAnimationsRule
 import com.gaurav.avnc.EmptyDatabaseRule
 import com.gaurav.avnc.R
-import com.gaurav.avnc.SshTunnelScenario
 import com.gaurav.avnc.VncSessionTest
 import com.gaurav.avnc.checkDoesNotExist
 import com.gaurav.avnc.checkIsDisplayed
@@ -45,7 +44,6 @@ import com.gaurav.avnc.model.ServerProfile
 import com.gaurav.avnc.pollingAssert
 import com.gaurav.avnc.targetContext
 import com.gaurav.avnc.targetPrefs
-import com.gaurav.avnc.util.forgetKnownHosts
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Description
@@ -165,39 +163,6 @@ class LoginFragmentTest : VncSessionTest() {
 
             onView(withText(android.R.string.ok)).doClick()
             assertConnected()
-            stop()
-        }
-    }
-
-    @Test
-    fun autocompleteSshPassword() {
-        runBlocking {
-            dbRule.db.serverProfileDao.save(listOf(
-                    ServerProfile(name = "N1", sshHost = "SH1", sshPassword = "SP1"),
-                    ServerProfile(name = "N2", sshHost = "SH2", sshPassword = SAMPLE_PASSWORD),
-            ))
-        }
-        SshTunnelScenario().apply {
-            setupAuthWithPassword(SAMPLE_USERNAME, SAMPLE_PASSWORD)
-            profile.sshPassword = ""
-            forgetKnownHosts(targetContext)
-            start()
-            checkAndTrustHostFingerprint()
-
-            onView(withText(R.string.title_ssh_login)).inDialog().checkWillBeDisplayed()
-
-            onView(withId(R.id.password_layout)).inDialog().checkEndIconModeIs(TextInputLayout.END_ICON_DROPDOWN_MENU)
-            onView(withId(R.id.password)).inDialog().checkIsDisplayed().doClick()
-            Espresso.closeSoftKeyboard()
-
-            // For passwords, profile name and host name should be displayed, not the actual password
-            onView(withSubstring("SP1")).inPopup().checkDoesNotExist()
-            onView(withSubstring(SAMPLE_PASSWORD)).inPopup().checkDoesNotExist()
-            onView(withSubstring("N1")).inPopup().checkWillBeDisplayed()
-            onView(withSubstring("SH2")).inPopup().checkWillBeDisplayed().doClick()
-
-            onView(withText(android.R.string.ok)).doClick()
-            vncSession.assertConnected()
             stop()
         }
     }

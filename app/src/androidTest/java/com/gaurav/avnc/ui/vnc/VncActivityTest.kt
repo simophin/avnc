@@ -31,7 +31,6 @@ import com.gaurav.avnc.CleanPrefsRule
 import com.gaurav.avnc.EmptyDatabaseRule
 import com.gaurav.avnc.ProgressAssertion
 import com.gaurav.avnc.R
-import com.gaurav.avnc.SshTunnelScenario
 import com.gaurav.avnc.VncSessionScenario
 import com.gaurav.avnc.VncSessionTest
 import com.gaurav.avnc.checkDoesNotExist
@@ -51,13 +50,11 @@ import com.gaurav.avnc.setClipboardHtml
 import com.gaurav.avnc.setClipboardText
 import com.gaurav.avnc.targetContext
 import com.gaurav.avnc.targetPrefs
-import com.gaurav.avnc.util.forgetKnownHosts
 import com.gaurav.avnc.vnc.XKeySym
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import kotlinx.coroutines.runBlocking
-import org.apache.sshd.common.util.security.SecurityUtils
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -411,150 +408,6 @@ class VncActivityTest : VncSessionTest() {
             onView(withId(R.id.keyboard_btn)).checkWillBeDisplayed()
             onView(withId(R.id.virtual_keys_btn)).checkIsDisplayed()
             onView(withId(R.id.zoom_options_toggle)).checkIsDisplayed()
-        }
-    }
-}
-
-@SdkSuppress(minSdkVersion = 26) // Mina SSHD requires NIO classes
-class SshTunnelTest {
-    companion object {
-        const val USER = "Ross"
-        const val PASSWORD = "Pivot!"
-        const val KEY = """
-                        -----BEGIN OPENSSH PRIVATE KEY-----
-                        b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAaAAAABNlY2RzYS
-                        1zaGEyLW5pc3RwMjU2AAAACG5pc3RwMjU2AAAAQQSsy1odRW+GqZckvbcZ83gb57HbGeqE
-                        /PwUGZJ4nbE/hUSCKi8P84Nt4F8eXXUZNbyD1316oxhcvI46kUXijn7cAAAAqADu8ZMA7v
-                        GTAAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBKzLWh1Fb4aplyS9
-                        txnzeBvnsdsZ6oT8/BQZknidsT+FRIIqLw/zg23gXx5ddRk1vIPXfXqjGFy8jjqRReKOft
-                        wAAAAgDYCqrzLv6vvAVb9hsyTpfT38eFTJfewpJjtLKMio5eAAAAAPZ2F1cmF2QGVsZWN0
-                        cm9uAQ==
-                        -----END OPENSSH PRIVATE KEY-----
-                        """
-
-        const val ENCRYPTED_KEY = """
-                        -----BEGIN OPENSSH PRIVATE KEY-----
-                        b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBwn299AK
-                        nRIs6CuasauHZ3AAAAGAAAAAEAAABoAAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlz
-                        dHAyNTYAAABBBIWxgMc+OMzJX7ZGmluw5jWmCIHg2xrLvQFXBtPmEfi08ZyfNi+bny2R9U
-                        LD4RWmnqkW2AjnZQKbTBei7nQSKOkAAACwmuKiwE391rPtzSJBezBv4+TTKk2Eadkd/w85
-                        nROToV6IJWYWn6mG2wHrJ5OqqWnrMBj9cOph+86JFJZ8/EYeCZqgDEDsl5mbo/fIaqQ/jD
-                        1Yc2jQLCUqaTlgxZIsU6B4+m3OeqfHvCdcZZZdSpn/quPFdcO6uGdLypL8uVQ84C1pJxFf
-                        xry5mdsKdaUiC1ILpwf/+2chAA6h81E/G+RiDN8KuMNEkmbQf4xnj9IL3XE=
-                        -----END OPENSSH PRIVATE KEY-----
-                        """
-        const val ENCRYPTED_KEY_PASSWORD = "1234"
-
-        const val PKCS8_KEY = """
-                        -----BEGIN PRIVATE KEY-----
-                        MIG2AgEAMBAGByqGSM49AgEGBSuBBAAiBIGeMIGbAgEBBDBimbpEtheeSyycspfn
-                        o63tyCe/jPGi1UdOZPiHeDJvuguEoQlbIjCnrvVLT/s4sp2hZANiAAQ61WOxechs
-                        9DrgZAhZVMrxDpJi8w/HgdHeRJxSPZcsjgCBRfjnWQk552zJgYIyXJZeJ3f6Ucny
-                        SW2K9yTFyJwDDCdlfpynbarSu8ffUPkTK0ozfDit3utt9mRBi1sILpc=
-                        -----END PRIVATE KEY-----
-                        """
-    }
-
-    @Before
-    fun before() {
-        forgetKnownHosts(targetContext)
-    }
-
-    @Test
-    fun sshTunnelWithPassword() {
-        SshTunnelScenario().apply {
-            setupAuthWithPassword(USER, PASSWORD)
-            start()
-            checkAndTrustHostFingerprint()
-            vncSession.assertConnected()
-            stop()
-        }
-    }
-
-    @Test
-    fun sshTunnelWithoutSavingPassword() {
-        SshTunnelScenario().apply {
-            setupAuthWithPassword(USER, PASSWORD)
-            profile.sshPassword = "" // Clear password
-            start()
-            checkAndTrustHostFingerprint()
-
-            onView(withText(R.string.title_ssh_login)).checkWillBeDisplayed()
-            onView(withHint(R.string.hint_password)).doTypeText(PASSWORD)
-            onView(withText(android.R.string.ok)).doClick()
-
-            vncSession.assertConnected()
-            stop()
-        }
-    }
-
-    @Test
-    fun sshTunnelWithKey() {
-        SshTunnelScenario().apply {
-            setupAuthWithKey(USER, KEY, null)
-            start()
-            checkAndTrustHostFingerprint()
-            vncSession.assertConnected()
-            stop()
-        }
-    }
-
-    @Test
-    fun sshTunnelWithEncryptedKey() {
-        SshTunnelScenario().apply {
-            setupAuthWithKey(USER, ENCRYPTED_KEY, ENCRYPTED_KEY_PASSWORD)
-            start()
-            checkAndTrustHostFingerprint()
-
-            onView(withText(R.string.title_unlock_private_key)).checkWillBeDisplayed()
-            onView(withHint(R.string.hint_key_password)).doTypeText(ENCRYPTED_KEY_PASSWORD)
-            onView(withText(android.R.string.ok)).doClick()
-
-            vncSession.assertConnected()
-            stop()
-        }
-
-        // Key cache test
-        // Once unlocked, password should not be asked again
-        SshTunnelScenario().apply {
-            setupAuthWithKey(USER, ENCRYPTED_KEY, ENCRYPTED_KEY_PASSWORD)
-            start()
-            vncSession.assertConnected()
-            stop()
-        }
-    }
-
-    @Test
-    fun sshTunnelWithPKCS8Key() {
-        val pubKey = PKCS8_KEY.byteInputStream().use {
-            SecurityUtils.loadKeyPairIdentities(null, null, it, null).first().public
-        }
-
-        SshTunnelScenario().apply {
-            setupAuthWithKey(USER, pubKey, PKCS8_KEY)
-            start()
-            checkAndTrustHostFingerprint()
-            vncSession.assertConnected()
-            stop()
-        }
-    }
-
-    @Test
-    fun knownHost() {
-        SshTunnelScenario().apply {
-            setupAuthWithPassword(USER, PASSWORD)
-            start()
-            checkAndTrustHostFingerprint()
-            vncSession.assertConnected()
-            stop()
-        }
-
-        SshTunnelScenario().apply {
-            setupAuthWithPassword(USER, PASSWORD)
-            start()
-            // Unknown hosts dialog should not be triggered now
-            vncSession.assertConnected()
-            stop()
         }
     }
 }

@@ -7,7 +7,6 @@ Características:
 - Teclas virtuais
 - Soporte para repetidor VNC
 - Soporte Wake-on-LAN
-- Túnel SSH incorporado (VNC sobre SSH)
 - Modo imaxe-en-imaxe
 - Modo só visualización
 - Modo sen vídeo

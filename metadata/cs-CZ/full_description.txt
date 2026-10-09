@@ -10,7 +10,6 @@ Funkce:
 - Režim pouze zobrazení
 - Nalezení serverů Zeroconf
 - Podpora TLS (AnonTLS, VeNCrypt)
-- Tunel SSH (VNC přes SSH)
 - Import/export serverů
 - Podpora VNC opakovačů
 - Synchronizace schránky se serverem

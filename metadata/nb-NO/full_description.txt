@@ -10,7 +10,6 @@ Funksjoner:
 - Skrivebeskyttet modus
 - Zeroconf-tjeneroppdagelse
 - TLS-støtte (AnonTLS, VeNCrypt)
-- SSH-tunnel (VNC over SSH)
 - Importer/eksporter tjenere
 - VNC-gjentagelsesstøtte
 - Utklippstavlesyknronisering med tjener

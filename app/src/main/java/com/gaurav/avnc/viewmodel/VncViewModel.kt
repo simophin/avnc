@@ -28,14 +28,12 @@ import com.gaurav.avnc.util.LiveRequest
 import com.gaurav.avnc.util.Tones
 import com.gaurav.avnc.util.debugCheck
 import com.gaurav.avnc.util.getClipboardText
-import com.gaurav.avnc.util.getKnownHostsFile
 import com.gaurav.avnc.util.getUnknownCertificateMessage
 import com.gaurav.avnc.util.isCertificateTrusted
 import com.gaurav.avnc.util.isTrue
 import com.gaurav.avnc.util.monitor
 import com.gaurav.avnc.util.setClipboardText
 import com.gaurav.avnc.util.trustCertificate
-import com.gaurav.avnc.viewmodel.service.SshClient
 import com.gaurav.avnc.vnc.UserCredential
 import com.gaurav.avnc.vnc.VncClient
 import kotlinx.coroutines.Dispatchers
@@ -185,7 +183,7 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
 
     /**
      * Used to confirm something with user before continuing.
-     * This is mostly used to warn about unknown SSH host, x509 certificates etc.
+     * This is mostly used to warn about untrusted X509 certificates.
      * This request accepts two strings: First is used as title, second contains the message.
      */
     val confirmationRequest = LiveRequest<Pair<String, String>, Boolean>()
@@ -345,8 +343,7 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
 
         // If info is already available, return it
         if ((type == LoginInfo.Type.VNC_PASSWORD && li.password.isNotBlank()) ||
-            (type == LoginInfo.Type.VNC_CREDENTIAL && li.username.isNotBlank() && li.password.isNotBlank()) ||
-            (type == LoginInfo.Type.SSH_PASSWORD && li.password.isNotBlank()))
+            (type == LoginInfo.Type.VNC_CREDENTIAL && li.username.isNotBlank() && li.password.isNotBlank()))
             return li
 
         // Something is missing, so we have to ask the user
@@ -538,25 +535,6 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
             if (pref.ui.bell) {
                 Tones.notify(ToneGenerator.TONE_PROP_BEEP)
             }
-        }
-
-
-        /**************************** [SshClient.Observer] *******************/
-
-        override fun getKnownSshHostsFile() = getKnownHostsFile(app)
-
-        override fun getSshPassword(): String {
-            return getLoginInfo(LoginInfo.Type.SSH_PASSWORD).password
-        }
-
-        override fun getSshKeyPassword(): String {
-            return getLoginInfo(LoginInfo.Type.SSH_KEY_PASSWORD).password
-        }
-
-        override fun confirmSshHostKeyWithUser(message: String, isNewHost: Boolean): Boolean {
-            val titleRes = if (isNewHost) R.string.title_unknown_ssh_host else R.string.title_ssh_host_key_changed
-            val title = app.getString(titleRes)
-            return confirmationRequest.getResponseFor(Pair(title, message), viewModelScope)
         }
     }
 }

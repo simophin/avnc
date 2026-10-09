@@ -55,7 +55,6 @@ class LibrariesFragment : Fragment() {
         }
     }
 
-
     private data class Library(
             val name: String,
             val homepage: String
@@ -70,9 +69,6 @@ class LibrariesFragment : Fragment() {
 
             Library("wolfSSL",
                     "https://github.com/wolfSSL/wolfssl"),
-
-            Library("ConnectBot's SSH library",
-                    "https://github.com/connectbot/sshlib/"),
 
             Library("Android Jetpack (Androidx)",
                     "https://github.com/libjpeg-turbo/libjpeg-turbo"),

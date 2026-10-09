@@ -19,9 +19,7 @@ data class LoginInfo(
 ) {
     enum class Type {
         VNC_PASSWORD,
-        VNC_CREDENTIAL,  // Username & Password
-        SSH_PASSWORD,
-        SSH_KEY_PASSWORD
+        VNC_CREDENTIAL  // Username & Password
     }
 
     companion object {
@@ -32,8 +30,6 @@ data class LoginInfo(
             return when (type) {
                 Type.VNC_PASSWORD -> LoginInfo(type, "", profile.password)
                 Type.VNC_CREDENTIAL -> LoginInfo(type, profile.username, profile.password)
-                Type.SSH_PASSWORD -> LoginInfo(type, "", profile.sshPassword)
-                Type.SSH_KEY_PASSWORD -> LoginInfo(type, "", "") // Not present in profile
             }
         }
     }
@@ -50,10 +46,6 @@ data class LoginInfo(
                 profile.username = username
                 profile.password = password
             }
-            Type.SSH_PASSWORD -> {
-                profile.sshPassword = password
-            }
-            Type.SSH_KEY_PASSWORD -> {}
         }
     }
 }

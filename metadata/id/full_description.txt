@@ -7,7 +7,6 @@ Fitur:
 - Tombol Virtual
 - Dukungan VNC Repeater
 - Dukungan Wake-on-LAN
-- Terowongan SSH bawaan (VNC melalui SSH)
 - Mode Picture-in-Picture
 - Mode Hanya Tampil
 - Mode Tanpa Video

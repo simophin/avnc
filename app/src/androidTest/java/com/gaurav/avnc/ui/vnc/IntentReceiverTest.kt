@@ -94,6 +94,14 @@ class IntentReceiverTest {
     }
 
     @Test
+    fun sshUriIsRejectedBeforeSaving() {
+        ActivityScenario.launch<Activity>(newUriIntent("vnc://localhost?ChannelType=24&SshHost=proxy&SaveConnection=true")).use {
+            pollingAssert { assertEquals(Lifecycle.State.DESTROYED, it.state) }
+        }
+        assertEquals(0, runBlocking { dbRule.db.serverProfileDao.getList() }.size)
+    }
+
+    @Test
     fun uriForSavedConnection() {
         val server = TestServer().apply { start() }
         runBlocking {

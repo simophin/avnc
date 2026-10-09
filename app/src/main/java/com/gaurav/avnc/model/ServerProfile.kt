@@ -65,7 +65,7 @@ data class ServerProfile(
 
         /**
          * Transport channel to be used for communicating with the server.
-         * e.g. TCP, SSH Tunnel
+         * Only direct TCP is supported; legacy values are rejected at connection time.
          */
         var channelType: Int = CHANNEL_TCP,
 
@@ -176,28 +176,13 @@ data class ServerProfile(
         var wolBroadcastAddress: String = "",
 
         @ColumnInfo(defaultValue = "9")
-        var wolPort: Int = 9,
-
-        /**
-         * These values are used for SSH Tunnel
-         */
-        var sshHost: String = "",
-        var sshPort: Int = 22,
-        var sshUsername: String = "",
-        var sshAuthType: Int = SSH_AUTH_KEY,
-        var sshPassword: String = "",
-        var sshPrivateKey: String = ""
+        var wolPort: Int = 9
 
 ) : Parcelable {
 
     companion object {
         // Channel types (from RFC 7869)
         const val CHANNEL_TCP = 1
-        const val CHANNEL_SSH_TUNNEL = 24
-
-        // SSH auth types
-        const val SSH_AUTH_KEY = 1
-        const val SSH_AUTH_PASSWORD = 2
 
         // View Modes
         const val VIEW_MODE_NORMAL = 0

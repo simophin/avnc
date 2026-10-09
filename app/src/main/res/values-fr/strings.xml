@@ -20,11 +20,8 @@
     <string name="title_view_only_mode">Visualisation uniquement</string>
     <string name="title_remember">Mémoriser</string>
     <string name="title_hide_remote_cursor">Masquer le curseur distant</string>
-    <string name="title_unknown_ssh_host">Hôte SSH inconnu</string>
-    <string name="title_ssh_host_key_changed">La clé de l\'hôte SSH a été modifiée</string>
     <string name="title_continue">Continuer</string>
     <string name="title_delete_servers_before_import">Supprimer les serveurs courants avant l\'importation</string>
-    <string name="title_password">Mot de passe</string>
     <string name="title_use_repeater">Utiliser un répéteur</string>
     <string name="title_source_code">Code source</string>
     <string name="hint_server_name">Nom (par ex. PC Travail)</string>
@@ -33,7 +30,6 @@
     <string name="hint_port">Port</string>
     <string name="hint_username">Nom d\'utilisateur</string>
     <string name="hint_password">Mot de passe</string>
-    <string name="hint_key_password">Mot de passe clé</string>
     <string name="msg_about_app">Un client pour VNC rapide et sécurisé. Visualisez et contrôlez à distance tout appareil exécutant un serveur VNC.
 \n
 \n
@@ -48,7 +44,6 @@
     <string name="err_qr_export_failed">Échec de la génération du code QR :</string>
     <string name="err_unsupported_qr_uri">URI non prise en charge ou invalide.</string>
     <string name="msg_confirm_import_uri">Importer depuis l’URI suivante ?</string>
-    <string name="msg_invalid_key_file">Fichier de clé privée invalide</string>
     <string name="msg_invalid_vnc_uri">URI VNC invalide</string>
     <string name="msg_copied_to_clipboard">Copié</string>
     <string name="desc_navigation_btn">Ouvrir le menu de navigation</string>
@@ -75,10 +70,7 @@
     <string name="hint_urlbar">Se connecter à un serveur</string>
     <string name="pref_input_summary">Gestes, souris, clés virtuelles</string>
     <string name="pref_experimental">Expérimental</string>
-    <string name="title_use_ssh_tunnel">Utiliser un tunnel SSH</string>
     <string name="title_about">À propos</string>
-    <string name="title_private_key">Clé privée</string>
-    <string name="title_change">Changer</string>
     <string name="title_license">Licence</string>
     <string name="title_report_bug">Signaler un problème</string>
     <string name="desc_back_btn">Retour</string>
@@ -199,20 +191,15 @@
     <string name="pref_double_tap_swipe">Double tapotement et glissement</string>
     <string name="msg_shortcut_server_deleted">Ce serveur a été supprimé</string>
     <string name="msg_zoom_reset_default">Le niveau de zoom a été réinitialisé aux valeurs par défaut</string>
-    <string name="title_unlock_private_key">Déverrouiller la clé privée</string>
-    <string name="title_ssh_login">Connexion SSH</string>
     <string name="pref_gesture_action_remote_drag_middle">Faire glisser avec le bouton central</string>
     <string name="title_resize_remote_desktop">Redimensionner la session distante en fonction de la fenêtre locale</string>
     <string name="title_try">Essayer</string>
     <string name="title_forget">Oublier</string>
     <string name="title_connect_on_app_start">Connexion auto quand l’app démarre</string>
     <string name="title_always_show_advanced_editor">Toujours afficher options avancées</string>
-    <string name="title_export_passwords_and_keys">Exporter mots de passe et clés</string>
     <string name="title_next">Suivant</string>
     <string name="title_load_defaults">Charger valeurs par défaut</string>
     <string name="hint_wol_mac">Adresse MAC</string>
-    <string name="hint_ssh_host">Hôte SSH</string>
-    <string name="hint_ssh_port">Port SSH</string>
     <string name="hint_send_text_to_server">Envoyer texte au serveur</string>
     <string name="msg_normal_view_mode">Mode normal activé</string>
     <string name="msg_input_disabled">Saisie désactivée</string>
@@ -243,8 +230,6 @@
     <string name="pref_keep_screen_on">Garder l\'écran allumé</string>
     <string name="pref_toolbar_open_with_button">Afficher bouton pour ouvrir</string>
     <string name="pref_show_gesture_style_toggle">Afficher style de geste</string>
-    <string name="pref_forget_known_hosts">Oublier hôtes connus</string>
-    <string name="pref_forget_known_hosts_question">Oublier les hôtes SSH connus et les certificats de serveur sécurisé ?</string>
     <string name="msg_gesture_style_locked_to_touchpad">Style de geste \'Touchpad\' est actif</string>
     <string name="pref_long_press_swipe_disabled_summary">Désactivé par la valeur actuelle du geste <b>Pression longue</b></string>
     <string name="pref_toolbar_open_with_swipe">Faites glisser depuis le bord pour ouvrir</string>

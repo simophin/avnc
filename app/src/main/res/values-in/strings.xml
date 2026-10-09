@@ -15,8 +15,6 @@
     <string name="title_undo">Urungkan</string>
     <string name="title_settings">Pengaturan</string>
     <string name="title_vnc_login">Login VNC</string>
-    <string name="title_ssh_login">Login SSH</string>
-    <string name="title_unlock_private_key">Buka kunci kunci privat</string>
     <string name="title_forget">Lupakan</string>
     <string name="title_remember">Ingat</string>
     <string name="title_export">Ekspor</string>
@@ -31,17 +29,10 @@
     <string name="title_orientation">Orientasi</string>
     <string name="title_image_quality_raw">Mentah</string>
     <string name="title_vnc_security">Keamanan</string>
-    <string name="title_use_ssh_tunnel">Gunakan terowongan SSH</string>
     <string name="title_always_show_advanced_editor">Selalu tampilkan opsi lanjutan</string>
-    <string name="title_unknown_ssh_host">Host SSH tidak dikenal</string>
-    <string name="title_ssh_host_key_changed">Kunci host SSH berubah</string>
     <string name="title_continue">Lanjutkan</string>
-    <string name="title_export_passwords_and_keys">Ekspor sandi dan kunci</string>
     <string name="title_delete_servers_before_import">Hapus server saat ini sebelum impor</string>
-    <string name="title_password">Kata sandi</string>
     <string name="title_use_repeater">Gunakan repeater</string>
-    <string name="title_private_key">Kunci privat</string>
-    <string name="title_change">Ubah</string>
     <string name="title_about">Tentang</string>
     <string name="title_license">Lisensi</string>
     <string name="title_open_source_libraries">Pustaka sumber terbuka</string>
@@ -63,9 +54,6 @@
     <string name="hint_password">Kata sandi</string>
     <string name="hint_wol_mac">Alamat MAC</string>
     <string name="hint_wol_address">Alamat siaran (opsional)</string>
-    <string name="hint_ssh_host">Host SSH</string>
-    <string name="hint_ssh_port">Port SSH</string>
-    <string name="hint_key_password">Kata sandi kunci</string>
     <string name="hint_send_text_to_server">Kirim teks ke server</string>
     <string name="msg_about_app">Klien VNC yang cepat dan aman. Lihat dan kendalikan perangkat apa pun yang menjalankan server VNC dari jarak jauh.  \n\nAVNC adalah perangkat lunak sumber terbuka dan copyleft — dibuat dengan bantuan banyak kontributor.</string>
     <string name="msg_server_profile_added">Server ditambahkan</string>
@@ -89,7 +77,6 @@
     <string name="msg_export_auth_required">Autentikasi untuk mengekspor server</string>
     <string name="msg_required">Diperlukan</string>
     <string name="msg_invalid_mac_address">Alamat MAC tidak valid</string>
-    <string name="msg_invalid_key_file">Berkas kunci privat tidak valid</string>
     <string name="msg_invalid_vnc_uri">URI VNC tidak valid</string>
     <string name="msg_copied_to_clipboard">Disalin</string>
     <string name="msg_tap_to_select_a_key">Ketuk untuk memilih kunci:</string>
@@ -224,8 +211,6 @@
     <string name="pref_saved_server_lock_summary">Wajib buka kunci biometrik/kata sandi untuk menyambung</string>
     <string name="pref_saved_server_lock">Kunci server tersimpan</string>
     <string name="pref_auto_reconnect">Sambung ulang otomatis</string>
-    <string name="pref_forget_known_hosts">Lupakan host yang dikenal</string>
-    <string name="pref_forget_known_hosts_question">Lupakan host SSH yang dikenal dan sertifikat server tepercaya?</string>
     <string name="pref_discovery">Pencarian</string>
     <string name="pref_discovery_autorun">Jalankan otomatis</string>
     <string name="pref_discovery_autorun_summary">Temukan server saat di beranda</string>

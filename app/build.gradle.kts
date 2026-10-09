@@ -141,7 +141,6 @@ dependencies {
 
     implementation("com.google.android.material:material:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-    implementation("org.connectbot:sshlib:2.2.36")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.14")
@@ -155,5 +154,4 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit-ktx:1.3.0")
     androidTestImplementation("androidx.room:room-testing:$roomVersion")
     androidTestImplementation("io.mockk:mockk-android:1.14.5")
-    androidTestImplementation("org.apache.sshd:sshd-core:2.16.0")
 }

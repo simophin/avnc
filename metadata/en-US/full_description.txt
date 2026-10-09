@@ -7,7 +7,6 @@ Features:
 - Virtual Keys
 - VNC Repeater support
 - Wake-on-LAN support
-- Built-in SSH tunnel (VNC over SSH)
 - Picture-in-Picture mode
 - View-only mode
 - No-video mode
