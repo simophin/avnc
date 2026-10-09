@@ -212,22 +212,15 @@ static void onGotFrameBufferUpdate(rfbClient *client, int x, int y, int width, i
 static void onFinishedFrameBufferUpdate(rfbClient *client) {
     auto ex = getClientExtension(client);
     const auto damage = ex->pendingDamage;
+    uint8_t *published = nullptr;
     if (!damage.empty()) {
         LOCK(ex->mutex);
         if (ex->renderBuffer && client->frameBuffer) {
-            const size_t stride = (size_t) ex->fbRealWidth * PixelBytes;
-            if (damage.left == 0 && damage.width() == ex->fbRealWidth) {
-                const size_t offset = (size_t) damage.top * stride;
-                memcpy(ex->renderBuffer + offset, client->frameBuffer + offset,
-                       (size_t) damage.height() * stride);
-            } else {
-                for (int y = damage.top; y < damage.bottom; ++y) {
-                    const size_t offset = (size_t) y * stride + damage.left * PixelBytes;
-                    memcpy(ex->renderBuffer + offset, client->frameBuffer + offset,
-                           (size_t) damage.width() * PixelBytes);
-                }
-            }
-            // Union with earlier updates when the receiver outpaces rendering.
+            // Publish immediately rather than copying before waking GL. Both
+            // buffers contain the same baseline before this message is decoded.
+            published = client->frameBuffer;
+            client->frameBuffer = ex->renderBuffer;
+            ex->renderBuffer = published;
             ex->uploadDamage.add(damage.left, damage.top, damage.width(), damage.height());
         }
         UNLOCK(ex->mutex);
@@ -235,8 +228,25 @@ static void onFinishedFrameBufferUpdate(rfbClient *client) {
     }
     auto obj = getManagedClient(client);
     auto env = context.getEnv();
-
     env->CallVoidMethod(obj, context.cbFramebufferUpdated);
+
+    // Restore the decoder's baseline for incremental updates and CopyRect.
+    // This runs after requesting rendering, in parallel with GL reading the
+    // immutable published buffer. Only the receiver writes the decoder buffer.
+    if (published) {
+        const size_t stride = (size_t) ex->fbRealWidth * PixelBytes;
+        if (damage.left == 0 && damage.width() == ex->fbRealWidth) {
+            const size_t offset = (size_t) damage.top * stride;
+            memcpy(client->frameBuffer + offset, published + offset,
+                   (size_t) damage.height() * stride);
+        } else {
+            for (int y = damage.top; y < damage.bottom; ++y) {
+                const size_t offset = (size_t) y * stride + damage.left * PixelBytes;
+                memcpy(client->frameBuffer + offset, published + offset,
+                       (size_t) damage.width() * PixelBytes);
+            }
+        }
+    }
 }
 
 /**

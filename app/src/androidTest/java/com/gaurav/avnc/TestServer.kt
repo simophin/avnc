@@ -100,6 +100,8 @@ class TestServer(name: String = "Friends", width: Int = 10, height: Int = 10) {
     var lastFrameSentNanos = 0L; private set
 
     fun sendRectangle(x: Int, y: Int, width: Int, height: Int, pixel: Int) {
+        val pixels = ByteBuffer.allocate(width * height * 4).order(ByteOrder.LITTLE_ENDIAN)
+        repeat(width * height) { pixels.putInt(pixel) }
         queuedActions.transfer { output ->
             lastFrameSentNanos = System.nanoTime()
             output.write(byteArrayOf(0, 0, 0, 1))
@@ -108,8 +110,6 @@ class TestServer(name: String = "Friends", width: Int = 10, height: Int = 10) {
             output.write(toByteArray(width.toShort()))
             output.write(toByteArray(height.toShort()))
             output.write(toByteArray(0)) // Raw
-            val pixels = ByteBuffer.allocate(width * height * 4).order(ByteOrder.LITTLE_ENDIAN)
-            repeat(width * height) { pixels.putInt(pixel) }
             output.write(pixels.array())
             output.flush()
         }
@@ -132,6 +132,17 @@ class TestServer(name: String = "Friends", width: Int = 10, height: Int = 10) {
             output.write(toByteArray(7)) // Tight
             output.write(0x80) // Fill, compact RGB pixels
             output.write(byteArrayOf((rgb shr 16).toByte(), (rgb shr 8).toByte(), rgb.toByte()))
+        }
+    }
+
+    fun sendTightPixels(x: Int, y: Int, first: Int, second: Int) {
+        queuedActions.transfer { output ->
+            output.write(byteArrayOf(0, 0, 0, 1))
+            for (v in listOf(x, y, 2, 1)) output.write(toByteArray(v.toShort()))
+            output.write(toByteArray(7)) // Tight
+            output.write(0) // Basic copy filter, six bytes are below compression threshold.
+            for (rgb in listOf(first, second))
+                output.write(byteArrayOf((rgb shr 16).toByte(), (rgb shr 8).toByte(), rgb.toByte()))
         }
     }
 
@@ -189,6 +200,8 @@ class TestServer(name: String = "Friends", width: Int = 10, height: Int = 10) {
      */
     private fun theServer() {
         val socket = ss.use { runCatching { it.accept() }.onFailure { return }.getOrThrow() }
+        // Tiny rectangle headers must not incur Nagle/delayed-ACK latency in benchmarks.
+        socket.tcpNoDelay = true
         val input = socket.getInputStream()
         val output = socket.getOutputStream()
 

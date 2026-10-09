@@ -82,9 +82,11 @@ class RenderingTest {
         }
     }
 
-    private fun withClient(width: Int, height: Int, block: (TestServer, VncClient) -> Unit) {
+    private fun withClient(width: Int, height: Int,
+                           observer: VncClient.Observer = VncClientTest.TestObserver(),
+                           block: (TestServer, VncClient) -> Unit) {
         val server = TestServer(width = width, height = height)
-        val client = VncClient(VncClientTest.TestObserver())
+        val client = VncClient(observer)
         try {
             client.configure(0, true, 5, false)
             server.start()
@@ -139,6 +141,11 @@ class RenderingTest {
             client.processServerMessage()
             gl.draw(client)
             assertEquals(0x665544, gl.pixel(26, 28))
+            server.sendTightPixels(35, 37, 0x102030, 0x405060)
+            client.processServerMessage()
+            gl.draw(client)
+            assertEquals(0x102030, gl.pixel(35, 37))
+            assertEquals(0x405060, gl.pixel(36, 37))
             server.sendEmptyUpdate()
             client.processServerMessage()
             gl.draw(client)
@@ -173,6 +180,30 @@ class RenderingTest {
             gl.draw(client)
             gl.drawCursor(client)
             assertEquals(0x665544, gl.pixel(32, 32))
+        }
+    }
+
+    @Test
+    fun publishedPixelsAreAvailableInsideUpdateCallback() {
+        var onUpdate: (() -> Unit)? = null
+        val observer = object : VncClientTest.TestObserver() {
+            override fun onFramebufferUpdated() { onUpdate?.invoke() }
+        }
+        withClient(64, 64, observer) { server, client ->
+            GlSession(64, 64).use { gl ->
+                gl.draw(client)
+                for (rgb in listOf(0x112233, 0xaabbcc, 0x665544)) {
+                    onUpdate = {
+                        // Render before processServerMessage returns, while the native
+                        // callback has not yet restored the decoder's baseline.
+                        gl.draw(client)
+                        assertEquals(rgb, gl.pixel(8, 10))
+                    }
+                    server.sendRectangle(7, 9, 3, 5, 0xff000000.toInt() or rgb)
+                    client.processServerMessage()
+                }
+                onUpdate = null
+            }
         }
     }
 
