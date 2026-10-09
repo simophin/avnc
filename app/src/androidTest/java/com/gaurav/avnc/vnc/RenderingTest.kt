@@ -22,6 +22,7 @@ class RenderingTest {
         private val surface: android.opengl.EGLSurface
         private val frame: Frame
         private val program: Program
+        private var initialized = false
 
         init {
             check(EGL14.eglInitialize(display, IntArray(2), 0, IntArray(2), 0))
@@ -48,7 +49,7 @@ class RenderingTest {
             program.setUniforms(projection)
             frame.updateFbSize(fbWidth.toFloat(), fbHeight.toFloat())
             frame.bind(program)
-            client.uploadFrameTexture()
+            initialized = client.uploadFrameTexture(force = !initialized)
             frame.draw()
             glFinish() // Include completed GPU work, not just command submission.
             assertEquals(GL_NO_ERROR, glGetError())

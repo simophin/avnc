@@ -34,10 +34,14 @@ class Renderer(val viewModel: VncViewModel) : GLSurfaceView.Renderer {
     private lateinit var program: Program
     private lateinit var frame: Frame
     private lateinit var cursor: Cursor
+    private var frameTextureInitialized = false
+    private var cursorTextureInitialized = false
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         glClearColor(0f, 0f, 0f, 1f)
 
+        frameTextureInitialized = false
+        cursorTextureInitialized = false
         frame = Frame()
         cursor = Cursor()
         program = Program()
@@ -101,7 +105,7 @@ class Renderer(val viewModel: VncViewModel) : GLSurfaceView.Renderer {
 
         frame.updateFbSize(state.fbWidth, state.fbHeight)
         frame.bind(program)
-        client.uploadFrameTexture()
+        frameTextureInitialized = client.uploadFrameTexture(force = !frameTextureInitialized)
         frame.draw()
 
         program.validate()
@@ -113,7 +117,7 @@ class Renderer(val viewModel: VncViewModel) : GLSurfaceView.Renderer {
 
             cursor.update(client.pointerX.toFloat(), client.pointerY.toFloat(), ci, frame)
             cursor.bind(program)
-            client.uploadCursorTexture()
+            cursorTextureInitialized = client.uploadCursorTexture(force = !cursorTextureInitialized)
             cursor.draw()
 
             glDisable(GL_BLEND)

@@ -281,16 +281,22 @@ class VncClient(private val observer: Observer) {
     /**
      * Puts framebuffer contents in currently active OpenGL texture.
      * Must be called from an OpenGL ES context (i.e. from renderer thread).
+     * Set [force] when the texture is new, including after context loss.
+     * Returns whether pixel data is available; unchanged contents reuse the texture.
      */
-    fun uploadFrameTexture() = ifConnected {
-        nativeUploadFrameTexture(nativePtr)
+    fun uploadFrameTexture(force: Boolean = false): Boolean {
+        var available = false
+        ifConnected { available = nativeUploadFrameTexture(nativePtr, force) }
+        return available
     }
 
     /**
      * Upload cursor contents in currently active OpenGL texture
      */
-    fun uploadCursorTexture() = ifConnected {
-        nativeUploadCursorTexture(nativePtr)
+    fun uploadCursorTexture(force: Boolean = false): Boolean {
+        var available = false
+        ifConnected { available = nativeUploadCursorTexture(nativePtr, force) }
+        return available
     }
 
     /**
@@ -360,8 +366,8 @@ class VncClient(private val observer: Observer) {
     private external fun nativeGetWidth(clientPtr: Long): Int
     private external fun nativeGetHeight(clientPtr: Long): Int
     private external fun nativeIsEncrypted(clientPtr: Long): Boolean
-    private external fun nativeUploadFrameTexture(clientPtr: Long)
-    private external fun nativeUploadCursorTexture(clientPtr: Long)
+    private external fun nativeUploadFrameTexture(clientPtr: Long, force: Boolean): Boolean
+    private external fun nativeUploadCursorTexture(clientPtr: Long, force: Boolean): Boolean
     private external fun nativeGetLastErrorStr(): String
     private external fun nativeCleanup(clientPtr: Long)
 

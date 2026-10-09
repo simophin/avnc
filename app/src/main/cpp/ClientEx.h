@@ -27,6 +27,13 @@ struct ClientEx {
     int fbRealWidth;
     int fbRealHeight;
 
+    // The decoder owns frameBuffer. GL only reads this published snapshot,
+    // preventing uploads from racing with writes (including Tight decoding).
+    uint8_t *renderBuffer;
+    bool pendingFrameUpdate; // Receiver thread only
+    bool frameDirty;         // Protected by mutex
+    bool cursorDirty;
+
     // Cursor data used for client-side cursor rendering
     Cursor *cursor;
 
@@ -62,7 +69,7 @@ void setManagedClient(rfbClient *client, jobject managedClient) {
  * Create new ClientEx and assign it to given client.
  */
 ClientEx *assignClientExtension(rfbClient *client) {
-    auto ex = (ClientEx *) malloc(sizeof(ClientEx));
+    auto ex = (ClientEx *) calloc(1, sizeof(ClientEx));
     if (ex) {
         INIT_MUTEX(ex->mutex);
         ex->cursor = nullptr;
@@ -79,6 +86,7 @@ void freeClientExtension(rfbClient *client) {
     if (ex) {
         TINI_MUTEX(ex->mutex);
         freeCursor(ex->cursor);
+        free(ex->renderBuffer);
         free(ex);
         setClientExtension(client, nullptr);
     }

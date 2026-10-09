@@ -202,7 +202,23 @@ static rfbBool onHandleCursorPos(rfbClient *client, int x, int y) {
     return TRUE;
 }
 
+static void onGotFrameBufferUpdate(rfbClient *client, int, int, int width, int height) {
+    if (width > 0 && height > 0)
+        getClientExtension(client)->pendingFrameUpdate = true;
+}
+
 static void onFinishedFrameBufferUpdate(rfbClient *client) {
+    auto ex = getClientExtension(client);
+    if (ex->pendingFrameUpdate) {
+        LOCK(ex->mutex);
+        if (ex->renderBuffer && client->frameBuffer) {
+            memcpy(ex->renderBuffer, client->frameBuffer,
+                   (size_t) ex->fbRealWidth * ex->fbRealHeight * PixelBytes);
+            ex->frameDirty = true;
+        }
+        UNLOCK(ex->mutex);
+        ex->pendingFrameUpdate = false;
+    }
     auto obj = getManagedClient(client);
     auto env = context.getEnv();
 
@@ -233,7 +249,15 @@ static rfbBool onMallocFrameBuffer(rfbClient *client) {
         if (client->frameBuffer)
             free(client->frameBuffer);
 
+        free(ex->renderBuffer);
         client->frameBuffer = static_cast<uint8_t *>(malloc(allocSize));
+        ex->renderBuffer = static_cast<uint8_t *>(calloc(1, allocSize));
+        ex->pendingFrameUpdate = false;
+        ex->frameDirty = true;
+        if (!ex->renderBuffer) {
+            free(client->frameBuffer);
+            client->frameBuffer = nullptr;
+        }
 
         if (client->frameBuffer) {
             ex->fbRealWidth = width;
@@ -270,6 +294,7 @@ static void onGotCursorShape(rfbClient *client, int xHot, int yHot, int width, i
     LOCK(ex->mutex);
     updateCursor(ex->cursor, client->rcSource, client->rcMask, (uint16_t) width, (uint16_t) height,
                  (uint16_t) xHot, (uint16_t) yHot);
+    ex->cursorDirty = true;
     UNLOCK(ex->mutex);
 
     jmethodID mid = env->GetMethodID(cls, "cbHandleCursorInfo", "(IIII)V");
@@ -287,6 +312,7 @@ static void setCallbacks(rfbClient *client) {
     client->GotXCutText = onGotXCutTextLatin1;
     client->GotXCutTextUTF8 = onGotXCutTextUTF8;
     client->HandleCursorPos = onHandleCursorPos;
+    client->GotFrameBufferUpdate = onGotFrameBufferUpdate;
     client->FinishedFrameBufferUpdate = onFinishedFrameBufferUpdate;
     client->MallocFrameBuffer = onMallocFrameBuffer;
     client->GotCursorShape = onGotCursorShape;
@@ -334,6 +360,7 @@ Java_com_gaurav_avnc_vnc_VncClient_nativeConfigure(JNIEnv * /*env*/, jobject /*t
     if (use_local_cursor) {
         client->appData.useRemoteCursor = TRUE;
         getClientExtension(client)->cursor = newCursor();
+        getClientExtension(client)->cursorDirty = true;
     }
 
     client->appData.qualityLevel = image_quality;
@@ -516,55 +543,36 @@ Java_com_gaurav_avnc_vnc_VncClient_nativeIsEncrypted(JNIEnv * /*env*/, jobject /
 }
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_gaurav_avnc_vnc_VncClient_nativeUploadFrameTexture(JNIEnv * /*env*/, jobject /*thiz*/,
-                                                            jlong client_ptr) {
+JNIEXPORT jboolean JNICALL
+Java_com_gaurav_avnc_vnc_VncClient_nativeUploadFrameTexture(JNIEnv *, jobject,
+                                                          jlong client_ptr, jboolean force) {
     auto client = (rfbClient *) client_ptr;
     auto ex = getClientExtension(client);
-
     LOCK(ex->mutex);
-
-    if (client->frameBuffer) {
-        glTexImage2D(GL_TEXTURE_2D,
-                     0,
-                     GL_RGBA,
-                     ex->fbRealWidth,
-                     ex->fbRealHeight,
-                     0,
-                     GL_RGBA,
-                     GL_UNSIGNED_BYTE,
-                     client->frameBuffer);
-
-        // Note: client->frameBuffer data is actually in 'BGRA' format, instead of 'RGBA'.
-        // But OpenGL ES doesn't support that directly. So we use 'GL_RGBA' here, and flip
-        // the components to correct order inside fragment shader.
+    const bool available = ex->renderBuffer && ex->fbRealWidth > 0 && ex->fbRealHeight > 0;
+    if (available && (force || ex->frameDirty)) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ex->fbRealWidth, ex->fbRealHeight,
+                     0, GL_RGBA, GL_UNSIGNED_BYTE, ex->renderBuffer);
+        // Pixels are BGRA; the fragment shader swaps red and blue.
+        ex->frameDirty = false;
     }
-
     UNLOCK(ex->mutex);
+    return available ? JNI_TRUE : JNI_FALSE;
 }
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_gaurav_avnc_vnc_VncClient_nativeUploadCursorTexture(JNIEnv * /*env*/, jobject /*thiz*/, jlong client_ptr) {
-
-    auto client = (rfbClient *) client_ptr;
-    auto ex = getClientExtension(client);
-    auto cursor = ex->cursor;
-
-    if (!cursor || !cursor->buffer)
-        return;
-
+JNIEXPORT jboolean JNICALL
+Java_com_gaurav_avnc_vnc_VncClient_nativeUploadCursorTexture(JNIEnv *, jobject,
+                                                           jlong client_ptr, jboolean force) {
+    auto ex = getClientExtension((rfbClient *) client_ptr);
     LOCK(ex->mutex);
-
-    glTexImage2D(GL_TEXTURE_2D,
-                 0,
-                 GL_RGBA,
-                 cursor->width,
-                 cursor->height,
-                 0,
-                 GL_RGBA,
-                 GL_UNSIGNED_BYTE,
-                 cursor->buffer);
-
+    auto cursor = ex->cursor;
+    const bool available = cursor && cursor->buffer;
+    if (available && (force || ex->cursorDirty)) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cursor->width, cursor->height,
+                     0, GL_RGBA, GL_UNSIGNED_BYTE, cursor->buffer);
+        ex->cursorDirty = false;
+    }
     UNLOCK(ex->mutex);
+    return available ? JNI_TRUE : JNI_FALSE;
 }
