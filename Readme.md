@@ -61,6 +61,21 @@ git submodule update --init --depth 1
 
 Now you can import the project in Android Studio, or build it directly from terminal.
 
+### Fork releases
+
+Publish a GitHub release for a tag containing the release workflow to build and
+attach `AVNC-<tag>-forked.apk` automatically. Published prereleases also run the
+workflow. The APK uses the `com.gaurav.avnc.forked` application ID.
+
+The signing key is committed at `signing/release.jks` (alias `release`). Its store
+and key password are the same and are saved in the repository Actions secret
+`RELEASE_KEYSTORE_PASSWORD`. The workflow requires this secret before building.
+Local `assembleForked` builds use this key when the environment variable
+`RELEASE_KEYSTORE_PASSWORD` is set; otherwise they use the debug key.
+
+Update `versionCode` and `versionName` in `app/build.gradle.kts` before tagging a
+new version. The release tag does not override the APK version.
+
 Read [Architecture.kt](app/src/main/java/com/gaurav/avnc/Architecture.kt) (preferably in
 Android Studio) to know more about the code.
 

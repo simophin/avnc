@@ -23,6 +23,7 @@ captures/
 # Keystore files
 *.jks
 *.keystore
+!signing/release.jks
 
 # Native build
 .externalNativeBuild

@@ -44,6 +44,16 @@ android {
         getByName("androidTest").assets.directories += "$projectDir/roomSchema"
     }
 
+    val releaseKeystorePassword = providers.environmentVariable("RELEASE_KEYSTORE_PASSWORD").orNull
+    if (!releaseKeystorePassword.isNullOrBlank()) {
+        signingConfigs.create("forkedRelease") {
+            storeFile = rootProject.file("signing/release.jks")
+            storePassword = releaseKeystorePassword
+            keyAlias = "release"
+            keyPassword = releaseKeystorePassword
+        }
+    }
+
     buildTypes {
 
         debug {
@@ -67,7 +77,7 @@ android {
             initWith(getByName("release"))
             applicationIdSuffix = ".forked"
             versionNameSuffix = " (forked)"
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("forkedRelease") ?: signingConfigs.getByName("debug")
         }
     }
 
