@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_cancel">Anuluj</string>
-    <string name="title_password">Hasło</string>
     <string name="title_add_server_profile">Dodaj serwer</string>
     <string name="title_delete">Usuń</string>
     <string name="title_clear">Wyczyść</string>
@@ -11,8 +10,6 @@
     <string name="title_undo">Cofnij</string>
     <string name="title_settings">Ustawienia</string>
     <string name="title_view_only_mode">Tylko podgląd</string>
-    <string name="title_use_ssh_tunnel">Użyj tunelu SSH</string>
-    <string name="title_private_key">Klucz prywatny</string>
     <string name="title_about">O alikacji</string>
     <string name="title_license">Licencja</string>
     <string name="title_open_source_libraries">Biblioteki open source</string>
@@ -31,7 +28,6 @@
 \nAVNC jest oprogramowaniem typu open source i copyleft - powstał dzięki pomocy wielu współpracowników.</string>
     <string name="msg_pip_not_supported">Brak wsparcia dla tego urządzenia</string>
     <string name="msg_loading">Ładowanie…</string>
-    <string name="msg_invalid_key_file">Nieprawidłowy plik klucza prywatnego</string>
     <string name="msg_invalid_vnc_uri">Nieprawidłowy identyfikator URI VNC</string>
     <string name="msg_copied_to_clipboard">Skopiowano</string>
     <string name="tip_empty_server_list">Lista serwerów jest pusta.
@@ -43,8 +39,6 @@
     <string name="desc_saved_servers_tab">Zapisane serwery</string>
     <string name="desc_discovered_servers_tab">Wykryte serwery</string>
     <string name="title_edit_server_profile">Edytuj serwer</string>
-    <string name="title_unknown_ssh_host">Nieznany host SSH</string>
-    <string name="title_ssh_host_key_changed">Zmieniono klucz hosta SSH</string>
     <string name="title_delete_servers_before_import">Usuń bieżące serwery przed importem</string>
     <string name="msg_ptr_hiding_not_supported">Brak wsparcia dla tego urządzenia</string>
     <string name="title_continue">Kontynuuj</string>
@@ -118,8 +112,6 @@
     <string name="title_remember">Zapamiętaj</string>
     <string name="title_export">Eksportuj</string>
     <string name="title_import">Importuj</string>
-    <string name="title_change">Zmień</string>
-    <string name="hint_key_password">Hasło klucza</string>
     <string name="msg_server_profile_added">Dodano serwer</string>
     <string name="msg_server_profile_deleted">Serwer usunięto</string>
     <string name="msg_imported">Importowane</string>
@@ -188,8 +180,6 @@
     <string name="title_button_up_delay">Wysyłaj opóźnione zdarzenia kliknięć</string>
     <string name="title_image_quality_raw">Surowe</string>
     <string name="msg_shortcut_server_deleted">Ten serwer został usunięty</string>
-    <string name="title_ssh_login">Logowanie SSH</string>
-    <string name="title_unlock_private_key">Odblokuj klucz prywatny</string>
     <string name="msg_zoom_reset_default">Przywrócenie domyślnych ustawień widoku</string>
     <string name="title_resize_remote_desktop">Zmiana rozmiaru sesji zdalnej do okna lokalnego</string>
     <string name="pref_gesture_action_remote_drag_middle">Przeciągnij środkowym przyciskiem</string>

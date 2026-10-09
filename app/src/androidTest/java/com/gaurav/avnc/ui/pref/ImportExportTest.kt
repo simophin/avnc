@@ -84,7 +84,7 @@ class ImportExportTest {
         // Insert sample data
         val sampleName = "Days of our Lives"
         val sampleSecret = "Drake Ramoray"
-        val profile = ServerProfile(name = sampleName, password = sampleSecret, sshPassword = sampleSecret, sshPrivateKey = sampleSecret)
+        val profile = ServerProfile(name = sampleName, password = sampleSecret)
         runBlocking { MainDb.getInstance(targetContext).serverProfileDao.save(profile) }
 
         // Setup export file
@@ -112,7 +112,7 @@ class ImportExportTest {
         // Insert sample data
         val sampleName = "Days of our Lives"
         val sampleSecret = "Drake Ramoray"
-        val profile = ServerProfile(name = sampleName, password = sampleSecret, sshPassword = sampleSecret, sshPrivateKey = sampleSecret)
+        val profile = ServerProfile(name = sampleName, password = sampleSecret)
         runBlocking { MainDb.getInstance(targetContext).serverProfileDao.save(profile) }
 
         // Setup export file
@@ -122,7 +122,7 @@ class ImportExportTest {
 
         // Export
         BiometricMocking.start()
-        onView(withText(R.string.title_export_passwords_and_keys)).doClick() // Check
+        onView(withText(R.string.title_export_passwords)).doClick() // Check
         onView(withText(R.string.title_export)).doClick()
         BiometricMocking.endWithSuccess()
         onView(withText(R.string.msg_exported)).checkWillBeDisplayed()
@@ -138,7 +138,7 @@ class ImportExportTest {
     @SdkSuppress(minSdkVersion = 28)
     fun exportFailsOnIncorrectBiometric() {
         BiometricMocking.start()
-        onView(withText(R.string.title_export_passwords_and_keys)).doClick()
+        onView(withText(R.string.title_export_passwords)).doClick()
         onView(withText(R.string.title_export)).doClick()
 
         val errorMessage = "You shall not pass!!!"

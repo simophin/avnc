@@ -46,27 +46,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:text='@{profile.host + (profile.port == 5900 ? "" :  " | " + profile.port) }'
-                app:layout_constraintEnd_toStartOf="@id/ssh_address"
+                app:layout_constraintEnd_toStartOf="@id/hint_icons"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
                 tools:text="192.168.1.1 | 5901" />
-
-            <TextView
-                android:id="@+id/ssh_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:ellipsize="middle"
-                android:singleLine="true"
-                android:text='@{"(" + profile.sshHost + (profile.sshPort == 22 ? "" :  " | " + profile.sshPort) + ")"}'
-                app:isVisible="@{profile.channelType == ServerProfile.CHANNEL_SSH_TUNNEL &amp;&amp; !profile.host.equals(profile.sshHost)}"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toStartOf="@id/hint_icons"
-                app:layout_constraintStart_toEndOf="@id/address"
-                app:layout_constraintTop_toTopOf="@id/address"
-                tools:text="(10.0.5.5 | 23)" />
 
             <LinearLayout
                 android:id="@+id/hint_icons"
@@ -74,14 +59,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/address"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ssh_address"
+                app:layout_constraintStart_toEndOf="@id/address"
                 app:layout_constraintTop_toTopOf="@id/address">
-
-                <ImageView
-                    style="@style/ServerCardHintIcon"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_ssh"
-                    app:isVisible="@{profile.channelType == ServerProfile.CHANNEL_SSH_TUNNEL}" />
 
                 <ImageView
                     style="@style/ServerCardHintIcon"

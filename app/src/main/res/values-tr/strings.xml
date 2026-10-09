@@ -14,12 +14,8 @@
     <string name="title_export">Dışa aktar</string>
     <string name="title_import">İçe aktar</string>
     <string name="title_view_only_mode">Yalnızca görüntüle</string>
-    <string name="title_use_ssh_tunnel">SSH tüneli kullan</string>
-    <string name="title_unknown_ssh_host">Bilinmeyen SSH ana makinesi</string>
     <string name="title_continue">Devam et</string>
     <string name="title_use_repeater">Yineleyici kullan</string>
-    <string name="title_private_key">Özel anahtar</string>
-    <string name="title_change">Değiştir</string>
     <string name="title_about">Hakkında</string>
     <string name="title_license">Lisans</string>
     <string name="title_open_source_libraries">Açık kaynaklı kütüphaneler</string>
@@ -35,7 +31,6 @@
     <string name="msg_server_profile_added">Sunucu eklendi</string>
     <string name="msg_server_profile_deleted">Sunucu silindi</string>
     <string name="msg_pip_not_supported">Bu aygıtta desteklenmiyor</string>
-    <string name="msg_invalid_key_file">Geçersiz özel anahtar dosyası</string>
     <string name="msg_invalid_vnc_uri">Geçersiz VNC URI\'si</string>
     <string name="tip_urlbar">IP adresi, ana makine adı veya \'vnc://\' URI\'si girebilirsiniz.</string>
     <string name="desc_navigation_btn">Gezinme çekmecesini aç</string>
@@ -86,8 +81,6 @@
     <string name="title_add_server_profile">Sunucu ekle</string>
     <string name="title_source_code">Kaynak kodu</string>
     <string name="title_edit_server_profile">Sunucuyu düzenle</string>
-    <string name="title_ssh_host_key_changed">SSH ana makine anahtarı değişti</string>
-    <string name="title_password">Parola</string>
     <string name="title_report_bug">Sorun bildir</string>
     <string name="title_duplicate">Çoğalt</string>
     <string name="msg_ptr_hiding_not_supported">Bu aygıtta desteklenmiyor</string>
@@ -100,7 +93,6 @@
     <string name="hint_username">Kullanıcı adı</string>
     <string name="msg_loading">Yükleniyor…</string>
     <string name="msg_imported">İçe aktarıldı</string>
-    <string name="hint_key_password">Anahtar parolası</string>
     <string name="msg_exported">Dışa aktarıldı</string>
     <string name="msg_copied_to_clipboard">Kopyalandı</string>
     <string name="msg_export_auth_required">Sunucuları dışa aktarmak için kimliğinizi doğrulayın</string>
@@ -190,13 +182,9 @@
     <string name="pref_long_press_swipe">Uzun bas ve kaydır</string>
     <string name="msg_shortcut_server_deleted">Bu sunucu silindi</string>
     <string name="msg_zoom_reset_default">Yakınlaştırma öntanımlı değere sıfırlandı</string>
-    <string name="title_unlock_private_key">Özel anahtarın kilidini aç</string>
-    <string name="title_ssh_login">SSH ile oturum aç</string>
     <string name="title_resize_remote_desktop">Uzak oturumu yerel pencereye göre yeniden boyutlandır</string>
     <string name="pref_gesture_action_remote_drag_middle">Orta düğme ile sürükle</string>
     <string name="desc_lock_zoom_btn">Yakınlaştırmayı kilitle</string>
-    <string name="hint_ssh_host">SSH ana makinesi</string>
-    <string name="hint_ssh_port">SSH bağlantı noktası</string>
     <string name="msg_zoom_locked">Yakınlaştırma kilitlendi</string>
     <string name="msg_zoom_unlocked">Yakınlaştırma kilidi açıldı</string>
     <string name="pref_keep_screen_on">Ekranı açık tut</string>
@@ -222,7 +210,6 @@
     <string name="title_try">Dene</string>
     <string name="title_forget">Unut</string>
     <string name="title_always_show_advanced_editor">Gelişmiş seçenekleri her zaman göster</string>
-    <string name="title_export_passwords_and_keys">Parolaları ve anahtarları dışa aktar</string>
     <string name="hint_wol_address">Genel yayın adresi (isteğe bağlı)</string>
     <string name="msg_normal_view_mode">Normal mod etkinleştirildi</string>
     <string name="msg_input_disabled">Giriş devre dışı</string>
@@ -243,8 +230,6 @@
     <string name="pref_capture_pointer">İmleci yakala</string>
     <string name="pref_vk_row_count">Satırlar</string>
     <string name="pref_toolbar_open_with_button">Açma düğmesini göster</string>
-    <string name="pref_forget_known_hosts">Bilinen ana makineleri unut</string>
-    <string name="pref_forget_known_hosts_question">Bilinen SSH ana makineleri ve güvenilir sunucu sertifikaları unutulsun mu?</string>
     <string name="pref_gesture_action_remote_back_press">Sunucuda geri basma</string>
     <string name="pref_vk_use_super_with_single_tap">Tek dokunma ile Süper tuşunu kullan</string>
     <string name="pref_bell">Zil</string>

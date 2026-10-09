@@ -98,15 +98,9 @@
     <string name="title_import">Увези</string>
     <string name="title_view_only_mode">Само за читање</string>
     <string name="title_hide_remote_cursor">Сакриј удаљеног показивача</string>
-    <string name="title_unknown_ssh_host">Непознати домаћин ССХ-а</string>
-    <string name="title_use_ssh_tunnel">Користи тунел ССХ-а</string>
-    <string name="title_ssh_host_key_changed">Кључ домаћина ССХ-а је промењен</string>
     <string name="title_continue">Настави</string>
     <string name="title_delete_servers_before_import">Избриши тренутне служитеље пре увоза</string>
-    <string name="title_password">Лозинка</string>
     <string name="title_use_repeater">Користи понављање</string>
-    <string name="title_private_key">Лични кључ</string>
-    <string name="title_change">Измени</string>
     <string name="title_about">О програму</string>
     <string name="title_license">Дозвола</string>
     <string name="title_open_source_libraries">Књижнице отвореног извора</string>
@@ -118,7 +112,6 @@
     <string name="hint_server_id">Назив служитеља</string>
     <string name="hint_username">Корисничко име</string>
     <string name="hint_password">Лозинка</string>
-    <string name="hint_key_password">Лозинка кључа</string>
     <string name="msg_server_profile_added">Додат је служитељ</string>
     <string name="msg_server_profile_deleted">Избрисан је служитељ</string>
     <string name="msg_pip_not_supported">Нема подршке на овом уређају</string>
@@ -127,7 +120,6 @@
     <string name="msg_imported">Увезено</string>
     <string name="msg_exported">Извезено</string>
     <string name="msg_export_auth_required">Пријавите се ради извоза служитеља</string>
-    <string name="msg_invalid_key_file">Датотека личног кључа није исправна</string>
     <string name="msg_copied_to_clipboard">Умножено</string>
     <string name="tip_empty_server_list">Списак служитеља је празан.
 \nКликните на „<b>+</b>“ ради додавања служитеља, или
@@ -150,8 +142,6 @@
     <string name="desc_discovery_stop_btn">Престани да откриваш служитеље</string>
     <string name="pref_discovery_autorun">Самопокрени</string>
     <string name="pref_rediscovery_indicator">Истакни поново пронађене служитеље</string>
-    <string name="title_unlock_private_key">Откључај лични кључ</string>
-    <string name="title_ssh_login">Пријава кроз ССХ</string>
     <string name="title_resize_remote_desktop">Промени величину удаљене седнице на величину прозора уређаја</string>
     <string name="title_orientation">Усмерење</string>
     <string name="msg_shortcut_server_deleted">Овај служитељ је избрисан</string>
@@ -184,8 +174,6 @@
     <string name="pref_display_cutout">Пришири у одсеченој области</string>
     <string name="pref_orientation">Усмерење заслона</string>
     <string name="pref_orientation_option_auto">Самостално</string>
-    <string name="hint_ssh_host">Домаћин ССХ-а</string>
-    <string name="hint_ssh_port">Прикључник ССХ-а</string>
     <string name="msg_zoom_locked">Увећавање је закључано</string>
     <string name="msg_zoom_unlocked">Увећавање је откључано</string>
     <string name="desc_lock_zoom_btn">Закључај увећање</string>
@@ -199,7 +187,6 @@
     <string name="title_connect_on_app_start">Самоповежи при покретању програма</string>
     <string name="title_enable_wol">Буђење-на-ЛАН-у</string>
     <string name="title_always_show_advanced_editor">Увек приказуј напредне могућности</string>
-    <string name="title_export_passwords_and_keys">Извези лозинке и кључеве</string>
     <string name="title_next">Следеће</string>
     <string name="title_got_it">Схватам</string>
     <string name="title_load_defaults">Учитај подразумевано</string>
@@ -243,6 +230,4 @@
     <string name="pref_toolbar_open_with_swipe">Убриши из ивице ради отварања</string>
     <string name="pref_toolbar_open_with_button">Приказуј дугме ради отварања</string>
     <string name="pref_show_gesture_style_toggle">Приказуј прекидач начина знакова</string>
-    <string name="pref_forget_known_hosts">Заборави познате домаћине</string>
-    <string name="pref_forget_known_hosts_question">Заборави познате домаћине ССХ и повеље поверења служитеља?</string>
 </resources>

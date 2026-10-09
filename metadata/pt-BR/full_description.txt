@@ -10,7 +10,6 @@ Funcionalidades:
 - Modo só de visualização
 - Descoberta do Servidor Zeroconf
 - Suporte ao TLS (AnonTLS, VeNCrypt)
-- Túnel SSH (VNC sobre SSH)
 - Importação/exportação de servidores
 - Suporte ao repetidor VNC
 - Sincronização do clipboard com servidor

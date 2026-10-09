@@ -32,8 +32,6 @@
     <string name="title_undo">செயல்தவிர்</string>
     <string name="title_settings">அமைப்புகள்</string>
     <string name="title_vnc_login">வி.என்.சி உள்நுழைவு</string>
-    <string name="title_ssh_login">பாஓடு உள்நுழைவு</string>
-    <string name="title_unlock_private_key">தனியார் விசையைத் திறக்கவும்</string>
     <string name="title_forget">மறந்துவிடு</string>
     <string name="title_remember">நினைவில்</string>
     <string name="title_export">ஏற்றுமதி</string>
@@ -48,15 +46,9 @@
     <string name="title_orientation">நோக்குநிலை</string>
     <string name="title_image_quality_raw">மூல</string>
     <string name="title_vnc_security">பாதுகாப்பு</string>
-    <string name="title_use_ssh_tunnel">பாஓடு சுரங்கப்பாதை பயன்படுத்தவும்</string>
-    <string name="title_unknown_ssh_host">தெரியாத பாஓடு புரவலன்</string>
-    <string name="title_ssh_host_key_changed">பாஓடு புரவலன் விசை மாற்றப்பட்டது</string>
     <string name="title_continue">தொடரவும்</string>
     <string name="title_delete_servers_before_import">இறக்குமதிக்கு முன் தற்போதைய சேவையகங்களை நீக்கவும்</string>
-    <string name="title_password">கடவுச்சொல்</string>
     <string name="title_use_repeater">ரிப்பீட்டரைப் பயன்படுத்தவும்</string>
-    <string name="title_private_key">தனிப்பட்ட விசை</string>
-    <string name="title_change">மாற்றம்</string>
     <string name="title_about">பற்றி</string>
     <string name="title_license">உரிமம்</string>
     <string name="title_open_source_libraries">திறந்த மூல நூலகங்கள்</string>
@@ -76,9 +68,6 @@
     <string name="hint_server_id">சேவையக ஐடி</string>
     <string name="hint_username">பயனர்பெயர்</string>
     <string name="hint_wol_mac">மேக் முகவரி</string>
-    <string name="hint_ssh_host">பாஓடு புரவலன்</string>
-    <string name="hint_ssh_port">பாஓடு துறைமுகம்</string>
-    <string name="hint_key_password">முக்கிய கடவுச்சொல்</string>
     <string name="hint_send_text_to_server">சேவையகத்திற்கு உரையை அனுப்பவும்</string>
     <string name="msg_about_app">வேகமான மற்றும் பாதுகாப்பான வி.என்.சி கிளையன்ட். வி.என்.சி சேவையகத்தை இயக்கும் எந்த சாதனத்தையும் தொலைதூரத்தில் பார்த்து கட்டுப்படுத்தவும்.\n\n\n ஏ.வி.என்.சி ஒரு திறந்த மூல மற்றும் நகலெடுக்கும் மென்பொருள் - பல பங்களிப்பாளர்களின் உதவியுடன் தயாரிக்கப்படுகிறது.</string>
     <string name="msg_server_profile_added">சேவையகம் சேர்க்கப்பட்டது</string>
@@ -95,7 +84,6 @@
     <string name="msg_saved">சேமிக்கப்பட்டது</string>
     <string name="msg_done">முடிந்தது</string>
     <string name="msg_export_auth_required">ஏற்றுமதி சேவையகங்களுக்கு ஏற்பு</string>
-    <string name="msg_invalid_key_file">தவறான தனியார் விசை கோப்பு</string>
     <string name="msg_invalid_vnc_uri">தவறான வி.என்.சி யூரி</string>
     <string name="msg_copied_to_clipboard">நகலெடுக்கப்பட்டது</string>
     <string name="msg_tap_to_select_a_key">ஒரு விசையைத் தேர்ந்தெடுக்க தட்டவும்:</string>
@@ -200,8 +188,6 @@
     <string name="pref_saved_server_lock_summary">இணைக்க பயோமெட்ரிக்/கடவுச்சொல் திறத்தல் தேவை</string>
     <string name="pref_saved_server_lock">பூட்டு சேமித்த சேவையகங்கள்</string>
     <string name="pref_auto_reconnect">தானாக மீண்டும் இணைக்கவும்</string>
-    <string name="pref_forget_known_hosts">அறியப்பட்ட ஓச்ட்களை மறந்து விடுங்கள்</string>
-    <string name="pref_forget_known_hosts_question">அறியப்பட்ட பாஓடு ஓச்ட்கள் மற்றும் நம்பகமான சேவையக சான்றிதழ்களை மறந்துவிடவா?</string>
     <string name="pref_discovery">கண்டுபிடிப்பு</string>
     <string name="pref_discovery_autorun">ஆட்டோரூன்</string>
     <string name="pref_discovery_autorun_summary">முகப்புப்பக்கத்தில் இருக்கும்போது சேவையகங்களைக் கண்டறியவும்</string>
@@ -211,7 +197,6 @@
     <string name="pref_logs">பதிவுகள்</string>
     <string name="pref_keycode_map">விசை குறியீடு வரைபடம்</string>
     <string name="pref_key_test">முக்கிய சோதனை</string>
-    <string name="title_export_passwords_and_keys">கடவுச்சொற்கள் மற்றும் திறவுகோல்களை ஏற்றுமதி செய்</string>
     <string name="title_try">முயற்சி வெற்றி</string>
     <string name="title_always_show_advanced_editor">எப்போதும் மேம்பட்ட விருப்பங்களைக் காட்டு</string>
     <string name="hint_wol_address">ஒளிபரப்பு முகவரி (விரும்பினால்)</string>

@@ -10,7 +10,6 @@ Funktionen:
 - Zuschauermodus (View-Only)
 - automatische Zeroconf-Serversuche im LAN
 - TLS-Unterstützung (AnonTLS, VeNCrypt)
-- SSH-Tunnel (VNC getunnelt durch SSH)
 - Exportieren und Importieren der abgespeicherten Server
 - Unterstützung für VNC-Repeater
 - Synchronisation der Zwischenablage

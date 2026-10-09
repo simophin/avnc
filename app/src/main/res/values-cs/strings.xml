@@ -15,8 +15,6 @@
     <string name="title_undo">Vrátit změny</string>
     <string name="title_settings">Nastavení</string>
     <string name="title_vnc_login">VNC přihlášení</string>
-    <string name="title_ssh_login">SSH přihlášení</string>
-    <string name="title_unlock_private_key">Odemknout osobní klíč</string>
     <string name="title_remember">Pamatovat</string>
     <string name="title_export">Export</string>
     <string name="title_import">Import</string>
@@ -29,16 +27,10 @@
     <string name="title_orientation">Orientace</string>
     <string name="title_image_quality_raw">Surová</string>
     <string name="title_vnc_security">Bezpečnost</string>
-    <string name="title_use_ssh_tunnel">Použít SSH tunel</string>
     <string name="title_always_show_advanced_editor">Vždy zobrazit pokročilé možnosti</string>
-    <string name="title_unknown_ssh_host">Neznámý SSH host</string>
-    <string name="title_ssh_host_key_changed">SSH hostitele změněn</string>
     <string name="title_continue">Pokračovat</string>
-    <string name="title_export_passwords_and_keys">Export hesel a klíčů</string>
     <string name="title_delete_servers_before_import">Odstranit stávající servery před importem</string>
     <string name="title_use_repeater">Použít opakovač</string>
-    <string name="title_private_key">Osobní klíč</string>
-    <string name="title_change">Změnit</string>
     <string name="title_about">O aplikaci</string>
     <string name="title_license">Licence</string>
     <string name="title_open_source_libraries">Zdrojové kódy knihoven</string>
@@ -51,9 +43,6 @@
     <string name="hint_username">Jméno</string>
     <string name="hint_password">Heslo</string>
     <string name="hint_wol_mac">MAC adresa</string>
-    <string name="hint_ssh_host">SSH hostitel</string>
-    <string name="hint_ssh_port">SSH port</string>
-    <string name="hint_key_password">Klíč</string>
     <string name="msg_about_app">Rychlý a bezpečný VNC klient. Vzdáleně zobrazte a ovládejte libovolné zařízení s běžícím serverem VNC.\n\n\nAVNC je open source a copyleft program — vyrobený s pomocí mnoha přispěvatelů.</string>
     <string name="msg_server_profile_added">Server přidán</string>
     <string name="msg_server_profile_deleted">Server smazán</string>
@@ -98,7 +87,6 @@
     <string name="title_add_server_profile">Přidat server</string>
     <string name="title_forget">Zapomenout</string>
     <string name="hint_server_name">Název (např. Pracovní Počítač)</string>
-    <string name="title_password">Heslo</string>
     <string name="title_none">Žádný</string>
     <string name="title_got_it">Mám to</string>
     <string name="hint_urlbar">Připojit k serveru</string>
@@ -107,7 +95,6 @@
     <string name="hint_repeater_host">Opakovač hostitele</string>
     <string name="hint_port">Port</string>
     <string name="msg_copied_to_clipboard">Zkopírováno</string>
-    <string name="msg_invalid_key_file">Neplatný soubor osobního klíče</string>
     <string name="pref_tools_summary">Import / Export, ladění</string>
     <string name="pref_tools">Nástroje</string>
     <string name="msg_wake_on_lan_help">Wake-on-LAN lze použít ke vzdálenému zapnutí počítače.\n\nNejprve nakonfigurujte WoL na vzdáleném počítači a poté jej povolte v AVNC.\nPoté, co je povoleno, WoL kouzelný paket bude automaticky odeslán před připojením k tomuto serveru.</string>
@@ -194,8 +181,6 @@
     <string name="pref_toolbar_alignment">Zarovnat</string>
     <string name="pref_toolbar_open_with_swipe">Posuňte od okraje k otevření</string>
     <string name="pref_auto_reconnect">Připojovat automaticky</string>
-    <string name="pref_forget_known_hosts">Zapomenout známé hostitele</string>
-    <string name="pref_forget_known_hosts_question">Zapomenout známé SSH hostitele a důvěryhodné certifikáty serverů?</string>
     <string name="pref_discovery">Objevování</string>
     <string name="pref_discovery_autorun_summary">Objevte servery už domovské stránce</string>
     <string name="pref_rediscovery_indicator">Zvýraznit znovu objevené servery</string>

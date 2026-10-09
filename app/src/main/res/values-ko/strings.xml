@@ -9,7 +9,6 @@
     <string name="title_copy_name">이름 복사</string>
     <string name="msg_exported">내보냄</string>
     <string name="msg_invalid_vnc_uri">잘못된 VNC URI</string>
-    <string name="title_private_key">개인 키</string>
     <string name="msg_ptr_hiding_not_supported">이 장치에서 지원되지 않음</string>
     <string name="title_advanced">고급</string>
     <string name="title_cancel">취소</string>
@@ -21,13 +20,8 @@
     <string name="title_import">가져오기</string>
     <string name="title_view_only_mode">보기 전용</string>
     <string name="title_hide_remote_cursor">원격 포인터 숨기기</string>
-    <string name="title_use_ssh_tunnel">SSH 터널 사용</string>
-    <string name="title_unknown_ssh_host">알 수 없는 SSH 호스트</string>
-    <string name="title_ssh_host_key_changed">SSH 호스트 키가 변경됨</string>
     <string name="title_continue">계속</string>
     <string name="title_delete_servers_before_import">가져오기 전에 현재 서버 삭제</string>
-    <string name="title_password">비밀번호</string>
-    <string name="title_change">변경</string>
     <string name="title_about">정보</string>
     <string name="title_license">라이센스</string>
     <string name="title_open_source_libraries">오픈 소스 라이브러리</string>
@@ -125,9 +119,7 @@
     <string name="pref_rediscovery_indicator">재검색 서버 강조 표시</string>
     <string name="title_copy_host">호스트 복사</string>
     <string name="title_use_repeater">리피터 사용</string>
-    <string name="msg_invalid_key_file">잘못된 개인 키 파일</string>
     <string name="hint_username">사용자이름</string>
-    <string name="hint_key_password">키 비밀번호</string>
     <string name="hint_password">비밀번호</string>
     <string name="msg_server_profile_added">서버 추가됨</string>
     <string name="msg_server_profile_deleted">서버 삭제됨</string>
@@ -187,19 +179,15 @@
     <string name="msg_button_up_delay_help">클릭 이벤트를 지연하면 앱이 클릭에 응답하지 않는 드문 경우에 도움이 될 수 있습니다.</string>
     <string name="pref_double_tap_swipe">두 번 탭하고 밀기</string>
     <string name="msg_shortcut_server_deleted">이 서버는 삭제되었음</string>
-    <string name="title_ssh_login">SSH 로그인</string>
     <string name="msg_zoom_reset_default">확대/축소를 기본값으로 재설정</string>
-    <string name="title_unlock_private_key">개인 키 잠금 해제</string>
     <string name="title_resize_remote_desktop">원격 세션 크기를 로컬 창으로 조정</string>
     <string name="pref_gesture_action_remote_drag_middle">가운데 버튼으로 드래그</string>
     <string name="tip_session_end">세션을 종료하려면 재생 중인 비디오에서 돌아가는 것처럼 뒤로 이동 단추를 누릅니다.</string>
-    <string name="hint_ssh_host">SSH 호스트</string>
     <string name="msg_zoom_unlocked">줌 잠금 해제</string>
     <string name="title_connect_on_app_start">앱 시작 시 자동 연결</string>
     <string name="title_next">다음</string>
     <string name="title_got_it">확인</string>
     <string name="pref_keep_screen_on">화면 켜기</string>
-    <string name="hint_ssh_port">SSH 호스트</string>
     <string name="msg_zoom_locked">줌 잠금</string>
     <string name="msg_viewer_tips_label">시작할 수 있는 몇 가지 팁</string>
     <string name="tip_toolbar_usage">가장자리에서 스와이프 인하여 도구 모음을 엽니다. 키보드를 열거나 제스처 스타일을 변경하거나 줌을 재설정하는 데 사용합니다.</string>
@@ -218,8 +206,5 @@
 \n활성화하면 WoL 매직 패킷이 이 서버에 연결되기 전에 자동으로 전송됩니다.</string>
     <string name="hint_send_text_to_server">서버로 텍스트 보내기</string>
     <string name="msg_done">실행</string>
-    <string name="title_export_passwords_and_keys">비밀번호 및 키 내보내기</string>
-    <string name="pref_forget_known_hosts">알고 있는 호스트 잊어버림</string>
     <string name="title_forget">잊어버림</string>
-    <string name="pref_forget_known_hosts_question">알고 있는 SSH 호스트 및 신뢰 할 수 있는 서버 인증서를 잊어버림?</string>
 </resources>

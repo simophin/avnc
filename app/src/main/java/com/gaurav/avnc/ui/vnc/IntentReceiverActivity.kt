@@ -87,7 +87,6 @@ class IntentReceiverActivity : AppCompatActivity() {
         else startVncActivity(this, profile)
     }
 
-
     private suspend fun findAndMergeMatchingProfile(uri: VncUri): ServerProfile? {
         return uri.connectionNameForProfile
                 ?.let { profileDao.getByName(it).firstOrNull() }
@@ -118,7 +117,7 @@ class IntentReceiverActivity : AppCompatActivity() {
             return false
         }
 
-        if (uri.channelType !in listOf(null, ServerProfile.CHANNEL_TCP, ServerProfile.CHANNEL_SSH_TUNNEL)) {
+        if (uri.channelType !in listOf(null, ServerProfile.CHANNEL_TCP)) {
             toast("Unknown channel type: ${uri.channelType}")
             return false
         }
@@ -126,16 +125,6 @@ class IntentReceiverActivity : AppCompatActivity() {
         val supportedSecurityTypes = resources.getStringArray(R.array.profile_editor_security_values)
         if (uri.securityType != null && uri.securityType.toString() !in supportedSecurityTypes) {
             toast("Unknown security type: ${uri.securityType}")
-            return false
-        }
-
-        if (uri.channelType == ServerProfile.CHANNEL_SSH_TUNNEL && uri.sshHost.isNullOrBlank()) {
-            toast("Missing SSH host in URI")
-            return false
-        }
-
-        if (uri.channelType == ServerProfile.CHANNEL_SSH_TUNNEL && uri.sshUsername.isNullOrBlank()) {
-            toast("Missing SSH username in URI")
             return false
         }
 

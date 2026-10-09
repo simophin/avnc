@@ -15,8 +15,6 @@
     <string name="title_undo">Desfacer</string>
     <string name="title_settings">Axustes</string>
     <string name="title_vnc_login">Inicio de sesión de VNC</string>
-    <string name="title_ssh_login">Inicio de sesión SSH</string>
-    <string name="title_unlock_private_key">Desbloquear cadea privada</string>
     <string name="title_forget">Olvidar</string>
     <string name="title_remember">Lembrar</string>
     <string name="title_export">Exportar</string>
@@ -31,17 +29,10 @@
     <string name="title_orientation">Orientación</string>
     <string name="title_image_quality_raw">Raw/crudo</string>
     <string name="title_vnc_security">Seguridade</string>
-    <string name="title_use_ssh_tunnel">Empregar tunel SSH</string>
     <string name="title_always_show_advanced_editor">Mostrar sempre opcións avanzadas</string>
-    <string name="title_unknown_ssh_host">Servidor SSH descoñecido</string>
-    <string name="title_ssh_host_key_changed">Clave do servidor SSH cambiada</string>
     <string name="title_continue">Continuar</string>
-    <string name="title_export_passwords_and_keys">Exportar contraseñas e claves</string>
     <string name="title_delete_servers_before_import">Eliminar os servidores actuais antes de importar</string>
-    <string name="title_password">Contraseña</string>
     <string name="title_use_repeater">Empregar repetidor</string>
-    <string name="title_private_key">Clave privada</string>
-    <string name="title_change">Cambiar</string>
     <string name="title_about">Acerca o proxecto</string>
     <string name="title_license">Licencia</string>
     <string name="title_open_source_libraries">Librerías de código aberto</string>
@@ -63,9 +54,6 @@
     <string name="hint_password">Contraseña</string>
     <string name="hint_wol_mac">Dirección MAC</string>
     <string name="hint_wol_address">Enderezo de emisión (opcional)</string>
-    <string name="hint_ssh_host">Host SSH</string>
-    <string name="hint_ssh_port">Porto SSH</string>
-    <string name="hint_key_password">Contraseña principal</string>
     <string name="hint_send_text_to_server">Enviar texto ao servidor</string>
     <string name="msg_about_app">Un cliente de VNC rápido e seguro. Mira e controla remotamente calqueira dispositivo cun servidor VNC.\n\n\nAVNC é un software de código aberto e copyleft — feito coa axuda de moitos contribuíntes.</string>
     <string name="msg_server_profile_added">Servidor engadido</string>
@@ -89,7 +77,6 @@
     <string name="msg_export_auth_required">Autenticarse para exportar os servidores</string>
     <string name="msg_required">Requerido</string>
     <string name="msg_invalid_mac_address">Dirección MAC inválida</string>
-    <string name="msg_invalid_key_file">Ficheiro de clave privada inválido</string>
     <string name="msg_invalid_vnc_uri">VNC URI inválida</string>
     <string name="msg_copied_to_clipboard">Copiado</string>
     <string name="msg_tap_to_select_a_key">Preme para seleccionar unha tecla:</string>

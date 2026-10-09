@@ -10,7 +10,6 @@ Funkcijas:
 - Tikai skatīšanas režīms
 - Automātiska Zeroconf servera atklāšana LAN tīklā
 - TLS atbalsts (AnonTLS, VeNCrypt)
-- SSH tunelis (VNC izmanto SSH tunelēšanu)
 - Ievietot/Izgūt saglabātos serverus
 - VNC retranslatora atbalsts
 - Starpliktuves sinhronizācija ar serveri

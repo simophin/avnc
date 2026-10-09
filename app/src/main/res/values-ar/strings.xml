@@ -20,8 +20,6 @@
     <string name="title_undo">تراجع</string>
     <string name="title_settings">الإعدادات</string>
     <string name="title_vnc_login">تسجيل دخول عبر VNC</string>
-    <string name="title_ssh_login">تسجيل دخول عبر SSH</string>
-    <string name="title_unlock_private_key">فك قفل المفتاح الخاص</string>
     <string name="title_remember">تذكّر</string>
     <string name="title_export">تصدير</string>
     <string name="title_import">استيراد</string>
@@ -35,15 +33,9 @@
     <string name="title_orientation">الاتجاه</string>
     <string name="title_image_quality_raw">الأصلية</string>
     <string name="title_vnc_security">الأمان</string>
-    <string name="title_use_ssh_tunnel">استخدام نفق SSH</string>
-    <string name="title_unknown_ssh_host">مضيف SSH مجهول</string>
-    <string name="title_ssh_host_key_changed">لقد تم تغيير مفتاح مضيف SSH</string>
     <string name="title_continue">متابعة</string>
     <string name="title_delete_servers_before_import">حذف الخوادم الحالية قبل عملية الاستيراد</string>
-    <string name="title_password">كلمة المرور</string>
     <string name="title_use_repeater">استخدام مكرر الإشارة</string>
-    <string name="title_private_key">المفتاح الخاص</string>
-    <string name="title_change">تغيير</string>
     <string name="title_about">معلومات عن AVNC</string>
     <string name="title_license">الترخيص</string>
     <string name="title_open_source_libraries">المكتبات مفتوحة المصدر</string>
@@ -64,9 +56,6 @@
     <string name="hint_username">اسم المستخدم</string>
     <string name="hint_password">كلمة المرور</string>
     <string name="hint_wol_mac">عنوان MAC</string>
-    <string name="hint_ssh_host">مضيف SSH</string>
-    <string name="hint_ssh_port">منفذ SSH</string>
-    <string name="hint_key_password">كلمة المرور الرئيسية</string>
     <string name="hint_send_text_to_server">إرسال النص إلى الخادم</string>
     <string name="msg_about_app">عميل VNC سريع وآمن. عرض أي جهاز يقوم بتشغيل خادم VNC والتحكم به عن بُعد.\n\n\nVNC هو برنامج مفتوح المصدر — تم إنشاؤه بمساعدة العديد من المساهمين.</string>
     <string name="msg_server_profile_added">تم إضافة الخادم</string>
@@ -83,7 +72,6 @@
     <string name="msg_exported">تم التصدير</string>
     <string name="msg_saved">تم الحفظ</string>
     <string name="msg_export_auth_required">قم بالمصادقة لتتمكن من تصدير الخوادم</string>
-    <string name="msg_invalid_key_file">ملف المفتاح الخاص غير صالح</string>
     <string name="msg_invalid_vnc_uri">VNC URI غير صالح</string>
     <string name="msg_copied_to_clipboard">تم النسخ</string>
     <string name="msg_tap_to_select_a_key">انقر لتحديد مفتاح:</string>
@@ -213,9 +201,6 @@
     <string name="pref_key_test">اختبار المفتاح</string>
     <string name="pref_km_right_alt_to_super">زر ويندوز → Alt اليمني</string>
     <string name="msg_done">تم</string>
-    <string name="pref_forget_known_hosts">انسى الخوادم المحفوظة</string>
-    <string name="pref_forget_known_hosts_question">هل تريد نسيان مضيفي SSH المعروفين وشهادات الخادم الموثوقة؟</string>
-    <string name="title_export_passwords_and_keys">تصدير كلمات المرور و المفاتيح</string>
     <string name="pref_km_back_to_escape">الخروج → زر الرجوع</string>
     <string name="pref_km_language_switch_to_super">زر الويندوز → تغير لغة الادخال</string>
     <string name="title_forget">انسى</string>

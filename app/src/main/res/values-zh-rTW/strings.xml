@@ -21,13 +21,9 @@
     <string name="title_image_quality">畫面質量</string>
     <string name="title_orientation">轉向</string>
     <string name="title_vnc_security">安全性</string>
-    <string name="title_use_ssh_tunnel">使用 SSH 隧道</string>
     <string name="title_delete_servers_before_import">在匯入前刪除當前伺服器</string>
-    <string name="title_password">密碼</string>
     <string name="title_use_repeater">使用中繼器</string>
-    <string name="title_private_key">私鑰</string>
     <string name="title_about">關於</string>
-    <string name="title_change">修改</string>
     <string name="title_license">許可證</string>
     <string name="title_open_source_libraries">開源庫</string>
     <string name="title_report_bug">報告錯誤</string>
@@ -38,8 +34,6 @@
     <string name="hint_host">主機</string>
     <string name="title_advanced">進階</string>
     <string name="title_import">匯入</string>
-    <string name="title_unknown_ssh_host">未知 SSH 主機</string>
-    <string name="title_ssh_host_key_changed">SSH 主機密鑰已更改</string>
     <string name="title_continue">繼續</string>
     <string name="title_unlock_dialog">解鎖以繼續</string>
     <string name="title_automatic">自動</string>
@@ -49,7 +43,6 @@
     <string name="hint_server_id">伺服器 ID</string>
     <string name="hint_username">使用者名稱</string>
     <string name="hint_password">密碼</string>
-    <string name="hint_key_password">密鑰密碼</string>
     <string name="msg_zoom_reset">重置縮放</string>
     <string name="msg_zoom_saved">將當前縮放設為預設</string>
     <string name="msg_pip_not_supported">不支援此裝置</string>
@@ -99,7 +92,6 @@
     <string name="pref_gesture_action_right_click">右鍵</string>
     <string name="pref_gesture_action_double_click">雙擊</string>
     <string name="pref_gesture_action_move_pointer">移動鼠標</string>
-    <string name="msg_invalid_key_file">無效的私鑰</string>
     <string name="msg_loading">載入中…</string>
     <string name="desc_reset_zoom_btn">重設縮放</string>
     <string name="desc_saved_servers_tab">已儲存的伺服器</string>
@@ -189,18 +181,14 @@
     <string name="pref_rediscovery_indicator">強調重新發現的伺服器</string>
     <string name="pref_km_right_alt_to_super">右 Alt → Super</string>
     <string name="msg_shortcut_server_deleted">此伺服器已被刪除</string>
-    <string name="title_ssh_login">SSH 登入</string>
     <string name="title_next">下一步</string>
     <string name="title_got_it">瞭解</string>
-    <string name="hint_ssh_port">SSH連接埠</string>
     <string name="msg_zoom_unlocked">縮放已解鎖</string>
     <string name="tip_session_end">要中斷連線，只需按返回按鈕，就像你在從影片返回一樣。</string>
     <string name="desc_lock_zoom_btn">鎖定縮放</string>
     <string name="pref_gesture_action_remote_drag_middle">用中鍵拖放</string>
     <string name="pref_show_gesture_style_toggle">顯示手勢樣式切換</string>
-    <string name="hint_ssh_host">SSH主機</string>
     <string name="title_resize_remote_desktop">調整至本地大小</string>
-    <string name="title_unlock_private_key">解鎖私鑰</string>
     <string name="msg_viewer_tips_label">一些讓你快速上手的提示</string>
     <string name="tip_toolbar_usage">從螢幕邊緣滑入以打開工具欄。用它來呼出鍵盤、變換手勢或者重設縮放。</string>
     <string name="pref_toolbar_open_with_swipe">從螢幕邊緣滑入以開啟</string>
@@ -211,7 +199,6 @@
     <string name="hint_send_text_to_server">傳送文本到伺服器上</string>
     <string name="msg_saved">已儲存</string>
     <string name="title_enable_wol">局域網路喚醒</string>
-    <string name="title_export_passwords_and_keys">匯出密碼和金鑰</string>
     <string name="title_try">嘗試</string>
     <string name="title_always_show_advanced_editor">始終顯示進階選項</string>
     <string name="msg_invalid_mac_address">無效的 MAC 位址</string>
@@ -219,8 +206,6 @@
     <string name="hint_wol_mac">MAC 位址</string>
     <string name="msg_tap_to_select_a_key">點按以選擇密鑰:</string>
     <string name="desc_toolbar_btn">打開工具列</string>
-    <string name="pref_forget_known_hosts_question">忘記已知的 SSH 主機和信任的伺服器證書？</string>
-    <string name="pref_forget_known_hosts">忘記已知的主機</string>
     <string name="msg_video_disabled">停用了視訊</string>
     <string name="msg_wake_on_lan_help">局域網路喚醒(Wake-On-Lan)可用於遠端開機一臺電腦。</string>
     <string name="hint_wol_address">廣播位址 (選填)</string>

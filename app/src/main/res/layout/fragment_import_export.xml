@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:checked="@={viewModel.exportSecrets}"
             android:enabled="@{viewModel.exportProfiles}"
-            android:text="@string/title_export_passwords_and_keys" />
+            android:text="@string/title_export_passwords" />
 
         <Space
             android:layout_width="0dp"

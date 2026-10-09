@@ -11,7 +11,6 @@ package com.gaurav.avnc.session
 import android.util.Log
 import com.gaurav.avnc.model.ServerProfile
 import com.gaurav.avnc.util.broadcastWoLPackets
-import com.gaurav.avnc.viewmodel.service.SshClient
 import com.gaurav.avnc.vnc.VncClient
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
@@ -27,7 +26,7 @@ import kotlin.concurrent.thread
  */
 class RemoteSession(private val observer: Observer) {
 
-    interface Observer : VncClient.Observer, SshClient.Observer {
+    interface Observer : VncClient.Observer {
         fun onConnecting()
         fun onConnected(vncClient: VncClient, messenger: Messenger)
         fun onDisconnected()
@@ -41,7 +40,6 @@ class RemoteSession(private val observer: Observer) {
     private val tag = "RemoteSession[$id]"
 
     private var vncClient: VncClient? = null
-    private var sshClient: SshClient? = null
     private var messenger: Messenger? = null
     private var sessionThread: Thread? = null
 
@@ -91,29 +89,21 @@ class RemoteSession(private val observer: Observer) {
     private fun startConnection(profile: ServerProfile) {
         log("Preparing clients")
         vncClient = VncClient(observer)
-        sshClient = SshClient(observer)
         configureClient(vncClient!!, profile)
 
         handleWoL(profile)
-        connect(profile, vncClient!!, sshClient!!)
+        connect(profile, vncClient!!)
     }
 
 
-    private fun connect(profile: ServerProfile, vncClient: VncClient, sshClient: SshClient) {
+    private fun connect(profile: ServerProfile, vncClient: VncClient) {
         log("Connecting to server")
         observer.onConnecting()
 
-        when (profile.channelType) {
-            ServerProfile.CHANNEL_TCP ->
-                vncClient.connect(profile.host, profile.port)
-
-            ServerProfile.CHANNEL_SSH_TUNNEL ->
-                sshClient.openTunnel(profile).use {
-                    vncClient.connect(it.host, it.port)
-                }
-
-            else -> throw IllegalStateException("Unknown Channel: ${profile.channelType}")
+        check(profile.channelType == ServerProfile.CHANNEL_TCP) {
+            "Unsupported transport: ${profile.channelType}. Edit this profile to use direct VNC."
         }
+        vncClient.connect(profile.host, profile.port)
 
         messenger = Messenger(vncClient)
 
@@ -132,11 +122,9 @@ class RemoteSession(private val observer: Observer) {
     private fun stopSession() {
         messenger?.shutdown()
         vncClient?.cleanup()
-        sshClient?.close()
 
         messenger = null
         vncClient = null
-        sshClient = null
         log("Session stopped")
     }
 

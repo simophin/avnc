@@ -21,7 +21,6 @@ class VncUriTest {
         assertNull(uri.host)
         assertNull(uri.port)
         assertNull(uri.connectionName)
-        assertNull(uri.sshHost)
     }
 
     @Test
@@ -32,17 +31,6 @@ class VncUriTest {
         assertEquals("foo", uri.password)
         assertEquals(2, uri.securityType)
         assertEquals(true, uri.viewOnly)
-    }
-
-    @Test
-    fun sshUriTest() {
-        val uri = VncUri("vnc://10.0.0.1/?ChannelType=24&SshHost=10.0.0.2&SshPort=222&SshPassword=foo&SshUsername=bar")
-        assertEquals("10.0.0.1", uri.host)
-        assertEquals("10.0.0.2", uri.sshHost)
-        assertEquals(222, uri.sshPort)
-        assertEquals("foo", uri.sshPassword)
-        assertEquals("bar", uri.sshUsername)
-        assertEquals(ServerProfile.CHANNEL_SSH_TUNNEL, uri.channelType)
     }
 
     @Test
@@ -97,7 +85,5 @@ class VncUriTest {
         // These were not given in URI, so should remain unchanged
         assertEquals("User1", profile.username)
 
-        // Only SSH password type is supported in URIs
-        assertEquals(ServerProfile.SSH_AUTH_PASSWORD, profile.sshAuthType)
     }
 }

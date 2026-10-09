@@ -10,7 +10,6 @@ Cechy:
 - Tryb tylko do oglądania
 - Wykrywanie serwera Zeroconf
 - Obsługa TLS (AnonTLS, VeNCrypt)
-- Tunel SSH (VNC przez SSH)
 - Import/Export serwerów
 - Obsługa VNC Repeater
 - Synchronizacja schowka z serwerem

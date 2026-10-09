@@ -57,16 +57,12 @@ class LoginFragment : DialogFragment() {
         binding.loginInfo = loginInfo
         binding.usernameLayout.isVisible = loginInfo.username.isBlank() && loginType == LoginInfo.Type.VNC_CREDENTIAL
         binding.passwordLayout.isVisible = loginInfo.password.isBlank()
-        binding.remember.isVisible = viewModel.profile.isSaved() && loginType != LoginInfo.Type.SSH_KEY_PASSWORD
+        binding.remember.isVisible = viewModel.profile.isSaved()
 
         binding.password.setOnEditorActionListener { _, _, _ ->
             onOk()
             dismiss()
             true
-        }
-
-        if (loginType == LoginInfo.Type.SSH_KEY_PASSWORD) {
-            binding.passwordLayout.setHint(R.string.hint_key_password)
         }
 
         setupAutoComplete()
@@ -88,8 +84,6 @@ class LoginFragment : DialogFragment() {
     private fun getTitle() = when (loginType) {
         LoginInfo.Type.VNC_PASSWORD,
         LoginInfo.Type.VNC_CREDENTIAL -> R.string.title_vnc_login
-        LoginInfo.Type.SSH_PASSWORD -> R.string.title_ssh_login
-        LoginInfo.Type.SSH_KEY_PASSWORD -> R.string.title_unlock_private_key
     }
 
     private fun getLoginInfoFromProfile(p: ServerProfile): LoginInfo {
@@ -116,7 +110,7 @@ class LoginFragment : DialogFragment() {
      * different servers running on different addresses/ports.
      *********************************************************************************************/
     private fun setupAutoComplete() {
-        if (viewModel.pref.server.lockSavedServer || loginType == LoginInfo.Type.SSH_KEY_PASSWORD)
+        if (viewModel.pref.server.lockSavedServer)
             return
 
         viewModel.savedProfiles.observe(this) { profiles ->
@@ -161,7 +155,7 @@ class LoginFragment : DialogFragment() {
     }
 
     private fun getPasswordLabel(profile: ServerProfile): String {
-        val host = if (loginType == LoginInfo.Type.SSH_PASSWORD) profile.sshHost else profile.host
+        val host = profile.host
         return "from: ${profile.name} [${host}]"
 
     }

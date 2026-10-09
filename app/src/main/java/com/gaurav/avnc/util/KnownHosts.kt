@@ -19,15 +19,6 @@ import javax.security.auth.x500.X500Principal
 
 private const val TAG = "KnownHosts"
 
-//-------------------- Known SSH Hosts ----------------------------
-fun getKnownHostsFile(context: Context) = File(context.filesDir, "known-hosts")
-
-fun forgetKnownHosts(context: Context): Boolean {
-    return runCatching { getKnownHostsFile(context).delete() }
-            .onFailure { Log.e(TAG, "Cannot forget known hosts", it) }
-            .isSuccess
-}
-
 //------------------ Trusted certificates -------------------------
 private fun bytesToHex(bytes: ByteArray): String {
     val chars = "0123456789abcdef"

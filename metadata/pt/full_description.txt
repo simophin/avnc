@@ -7,7 +7,6 @@ Funcionalidades:
 - Chaves Virtuais
 - Suporte de Repetidor VNC
 - Suporte Wake-on-LAN
-- Túnel SSH embutido (VNC sobre SSH)
 - Modo de Imagem-em-Imagem
 - Modo só de visualização
 - Modo Sem-Vídeo

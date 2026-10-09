@@ -35,7 +35,7 @@ object LeakCanaryInitializer {
     }
 
     /**
-     * [VncViewModel] instance can remain in memory for a long time if VNC/SSH client
+     * [VncViewModel] instance can remain in memory for a long time if VNC client
      * is connecting to server because we have no way to cancel these operations.
      * These will eventually fail after a timeout.
      *

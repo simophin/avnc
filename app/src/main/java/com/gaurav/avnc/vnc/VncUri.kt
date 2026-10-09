@@ -39,7 +39,6 @@ class VncUri(str: String) {
      */
     private val javaUri = runCatching { URI(uriString) }.getOrNull()
 
-
     val host = javaUri?.host?.trim('[', ']')
     val port = if (javaUri?.port == -1) null else javaUri?.port
     val connectionName = uri.getQueryParameter("ConnectionName")
@@ -52,11 +51,6 @@ class VncUri(str: String) {
     val channelType = uri.getQueryParameter("ChannelType")?.toIntOrNull()
     val colorLevel = uri.getQueryParameter("ColorLevel")?.toIntOrNull()
     val viewOnly = uri.getQueryParameter("ViewOnly")?.let { uri.getBooleanQueryParameter("ViewOnly", false) }
-
-    val sshHost = uri.getQueryParameter("SshHost") ?: host
-    val sshPort = uri.getQueryParameter("SshPort")?.toIntOrNull()
-    val sshUsername = uri.getQueryParameter("SshUsername")
-    val sshPassword = uri.getQueryParameter("SshPassword")
 
     /**
      *  Applies this URI to given profile. Any parameter present in this URI will
@@ -72,11 +66,6 @@ class VncUri(str: String) {
         channelType?.let { profile.channelType = it }
         colorLevel?.let { profile.colorLevel = it }
         viewOnly?.let { profile.viewMode = if (it) ServerProfile.VIEW_MODE_NO_INPUT else ServerProfile.VIEW_MODE_NORMAL }
-        sshHost?.let { profile.sshHost = it }
-        sshPort?.let { profile.sshPort = it }
-        sshUsername?.let { profile.sshUsername = it }
-        sshPassword?.let { profile.sshPassword = it }
-        profile.sshAuthType = ServerProfile.SSH_AUTH_PASSWORD
 
         return profile
     }

@@ -7,7 +7,6 @@ Caractéristiques :
 - clavier virtuel
 - support des relais VNC
 - support du Wake-On-Lan
-- tunnel SSH intégré (VNC over SSH)
 - mode Picture-in-Picture
 - mode affichage uniquement 
 - mode sans vidéo

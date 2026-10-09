@@ -10,10 +10,8 @@ package com.gaurav.avnc.ui.home
 
 import android.app.Dialog
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -36,24 +34,17 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.gaurav.avnc.R
 import com.gaurav.avnc.databinding.FragmentProfileEditorAdvancedBinding
 import com.gaurav.avnc.databinding.FragmentProfileEditorBinding
 import com.gaurav.avnc.model.ServerProfile
 import com.gaurav.avnc.util.MsgDialog
-import com.gaurav.avnc.util.OpenableDocument
 import com.gaurav.avnc.util.parseMacAddress
 import com.gaurav.avnc.viewmodel.EditorViewModel
 import com.gaurav.avnc.viewmodel.HomeViewModel
-import com.gaurav.avnc.viewmodel.service.PemKey
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.ElevationOverlayProvider
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /********************************************************************************
  * ServerProfile editor. There are two modes:
@@ -151,6 +142,7 @@ class SimpleProfileEditor : DialogFragment() {
         dialog.setOnShowListener {
             dialog.getButton(Dialog.BUTTON_POSITIVE).setOnClickListener {
                 if (validateNotEmpty(binding.host) and validateNotEmpty(binding.port)) {
+                    profile.channelType = ServerProfile.CHANNEL_TCP
                     homeViewModel.saveProfile(profile)
                     dismiss()
                 }
@@ -170,7 +162,6 @@ class AdvancedProfileEditor : Fragment() {
     private val homeViewModel by activityViewModels<HomeViewModel>()
     private val viewModel by viewModels<EditorViewModel> { EditorViewModelFactory(this) }
     private lateinit var binding: FragmentProfileEditorAdvancedBinding
-    private val keyFilePicker = registerForActivityResult(OpenableDocument()) { importPrivateKey(it) }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -183,7 +174,6 @@ class AdvancedProfileEditor : Fragment() {
         binding.saveBtn.setOnClickListener { save() }
         binding.cancelBtn.setOnClickListener { dismiss() }
         binding.toolbar.setNavigationOnClickListener { dismiss() }
-        binding.keyImportBtn.setOnClickListener { keyFilePicker.launch(arrayOf("*/*")) }
 
         //setupHelpButton(binding.keyCompatModeHelpBtn, R.string.title_key_compat_mode, R.string.msg_key_compat_mode_help)
         setupHelpButton(binding.buttonUpDelayHelpBtn, R.string.title_button_up_delay, R.string.msg_button_up_delay_help)
@@ -290,14 +280,6 @@ class AdvancedProfileEditor : Fragment() {
                     validateNotEmpty(binding.wolPort)
         }
 
-        if (binding.useSshTunnel.isChecked) {
-            result = result and
-                    validateNotEmpty(binding.sshHost) and
-                    validateNotEmpty(binding.sshPort) and
-                    validateNotEmpty(binding.sshUsername) and
-                    validatePrivateKey()
-        }
-
         return result
     }
 
@@ -325,46 +307,6 @@ class AdvancedProfileEditor : Fragment() {
             binding.wolMac.error = getText(R.string.msg_invalid_mac_address)
         }.let {
             return it.isSuccess
-        }
-    }
-
-    private fun validatePrivateKey(): Boolean {
-        if (binding.sshAuthTypeKey.isChecked && viewModel.hasSshPrivateKey.value != true) {
-            binding.keyImportBtn.error = getText(R.string.msg_required)
-            return false
-        }
-        return true
-    }
-
-
-    private fun importPrivateKey(uri: Uri?) {
-        if (uri == null)
-            return
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            var key = ""
-            val result = runCatching {
-                requireContext().contentResolver.openAssetFileDescriptor(uri, "r")!!.use {
-                    // Valid key files are only few KBs. So if selected file is too big,
-                    // user has accidentally selected something else.
-                    check(it.length < 2 * 1024 * 1024) { "File is too big [${it.length}]" }
-                    key = it.createInputStream().use { s -> s.reader().use { r -> r.readText() } }
-                }
-
-                PemKey(key) //Try to parse key
-            }
-
-            withContext(Dispatchers.Main) {
-                result.onSuccess {
-                    viewModel.profile.sshPrivateKey = key
-                    viewModel.hasSshPrivateKey.value = true
-                    binding.keyImportBtn.error = null
-                    Snackbar.make(binding.root, R.string.msg_imported, Snackbar.LENGTH_SHORT).show()
-                }.onFailure {
-                    MsgDialog.show(parentFragmentManager, getString(R.string.msg_invalid_key_file), it.message ?: "")
-                    Log.e("ProfileEditor", "Error importing Private Key", it)
-                }
-            }
         }
     }
 

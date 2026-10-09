@@ -13,11 +13,7 @@
     <string name="title_export">Exportieren</string>
     <string name="title_import">Importieren</string>
     <string name="title_view_only_mode">Nur anzeigen</string>
-    <string name="title_use_ssh_tunnel">Durch SSH tunneln</string>
-    <string name="title_password">Passwort</string>
     <string name="title_use_repeater">Repeater nutzen</string>
-    <string name="title_private_key">Privater Schlüssel</string>
-    <string name="title_change">Ändern</string>
     <string name="title_about">Über</string>
     <string name="title_report_bug">Melde einen Fehler</string>
     <string name="title_source_code">Quelltext</string>
@@ -28,7 +24,6 @@
 \n
 \n
 \nAVNC ist eine Open-Source- und Copyleft-Software, die mit Hilfe vieler Mitwirkender erstellt wurde.</string>
-    <string name="msg_invalid_key_file">Ungültiger private key</string>
     <string name="msg_invalid_vnc_uri">Ungültige VNC-URI</string>
     <string name="msg_copied_to_clipboard">Kopiert</string>
     <string name="tip_empty_server_list">Die Serverliste ist leer.
@@ -103,7 +98,6 @@
     <string name="hint_port">Port</string>
     <string name="title_license">Lizenz</string>
     <string name="title_open_source_libraries">Open-Source-Bibliotheken</string>
-    <string name="hint_key_password">Passwort des Schlüssels</string>
     <string name="msg_pip_not_supported">Wird auf diesem Gerät nicht unterstützt</string>
     <string name="msg_loading">Lädt…</string>
     <string name="msg_imported">Importiert</string>
@@ -147,8 +141,6 @@
     <string name="pref_discovery_autorun_summary">Schon auf der Startseite automatisch nach Servern suchen</string>
     <string name="pref_rediscovery_indicator">Wiederentdeckte Server hervorheben</string>
     <string name="pref_debugging">Fehlersuche</string>
-    <string name="title_unknown_ssh_host">Unbekannter SSH-Zielpunkt</string>
-    <string name="title_ssh_host_key_changed">Der öffentliche Schlüssel des SSH-Zielpunktes hat sich geändert</string>
     <string name="hint_server_id">Server-ID</string>
     <string name="pref_gesture_action_remote_drag">Entfernten Inhalt ziehen</string>
     <string name="pref_gesture_style_touchscreen_summary">Aktionen am Berührungspunkt ausführen</string>
@@ -189,12 +181,8 @@
     <string name="pref_auto_reconnect">Automatisch wiederverbinden</string>
     <string name="msg_shortcut_server_deleted">Dieser Server wurde gelöscht</string>
     <string name="msg_button_up_delay_help">Klicks zu verzögern kann in seltenen Fällen helfen, wenn eine App nicht auf Klicks reagiert.</string>
-    <string name="title_ssh_login">SSH-Anmeldung</string>
-    <string name="title_unlock_private_key">Privaten Schlüssel freischalten</string>
     <string name="msg_zoom_reset_default">Zoom auf Standardeinstellung zurücksetzen</string>
     <string name="pref_gesture_action_remote_drag_middle">Mit mittlerer Taste ziehen</string>
-    <string name="hint_ssh_host">SSH Host</string>
-    <string name="hint_ssh_port">SSH Port</string>
     <string name="msg_zoom_locked">Zoom gesperrt</string>
     <string name="msg_zoom_unlocked">Zoom entsperrt</string>
     <string name="hint_send_text_to_server">Text an den Server senden</string>
@@ -218,7 +206,6 @@
     <string name="title_try">Versuchen</string>
     <string name="title_forget">Vergessen</string>
     <string name="title_always_show_advanced_editor">Erweiterte Optionen immer anzeigen</string>
-    <string name="title_export_passwords_and_keys">Passwörter und Schlüssel exportieren</string>
     <string name="title_load_defaults">Standardwerte laden</string>
     <string name="msg_saved">Gespeichert</string>
     <string name="msg_done">Erledigt</string>
@@ -232,6 +219,4 @@
     <string name="pref_long_press_swipe_disabled_summary">Deaktiviert durch den aktuellen Wert der Geste <b>Langes Drücken</b></string>
     <string name="pref_customize_virtual_keys">Tasten anpassen</string>
     <string name="pref_toolbar_open_with_button">Schaltfläche zum Öffnen anzeigen</string>
-    <string name="pref_forget_known_hosts">Bekannte Hosts vergessen</string>
-    <string name="pref_forget_known_hosts_question">Bekannte SSH-Hosts und vertrauenswürdige Serverzertifikate vergessen?</string>
 </resources>
