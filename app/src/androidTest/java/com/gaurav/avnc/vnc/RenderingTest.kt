@@ -23,6 +23,8 @@ class RenderingTest {
         private val frame: Frame
         private val program: Program
         private var initialized = false
+        private val cursorFrame: Frame
+        private var cursorInitialized = false
 
         init {
             check(EGL14.eglInitialize(display, IntArray(2), 0, IntArray(2), 0))
@@ -39,6 +41,7 @@ class RenderingTest {
             check(EGL14.eglMakeCurrent(display, surface, surface, context))
             glViewport(0, 0, width, height)
             frame = Frame()
+            cursorFrame = Frame()
             program = Program()
         }
 
@@ -52,6 +55,15 @@ class RenderingTest {
             initialized = client.uploadFrameTexture(force = !initialized)
             frame.draw()
             glFinish() // Include completed GPU work, not just command submission.
+            assertEquals(GL_NO_ERROR, glGetError())
+        }
+
+        fun drawCursor(client: VncClient) {
+            cursorFrame.updateFbSize(width.toFloat(), height.toFloat())
+            cursorFrame.bind(program)
+            cursorInitialized = client.uploadCursorTexture(force = !cursorInitialized)
+            cursorFrame.draw()
+            glFinish()
             assertEquals(GL_NO_ERROR, glGetError())
         }
 
@@ -104,6 +116,63 @@ class RenderingTest {
         GlSession(64, 64).use { gl ->
             gl.draw(client) // A fresh GL context must upload even without a remote update.
             assertEquals(0xabcdef, gl.pixel(8, 10))
+        }
+    }
+
+    @Test
+    fun coalescedUpdatesCopyRectTightAndResize() = withClient(64, 64) { server, client ->
+        GlSession(64, 64).use { gl ->
+            gl.draw(client)
+            server.sendRectangle(3, 5, 4, 6, 0xff112233.toInt())
+            client.processServerMessage()
+            server.sendRectangle(40, 42, 7, 9, 0xffaabbcc.toInt())
+            client.processServerMessage()
+            gl.draw(client) // Both updates must survive a single upload.
+            assertEquals(0x112233, gl.pixel(4, 6))
+            assertEquals(0xaabbcc, gl.pixel(41, 43))
+            assertEquals(0, gl.pixel(20, 20))
+            server.sendCopyRectangle(3, 5, 15, 17, 4, 6)
+            client.processServerMessage()
+            gl.draw(client)
+            assertEquals(0x112233, gl.pixel(16, 18))
+            server.sendTightFill(25, 27, 5, 7, 0x665544)
+            client.processServerMessage()
+            gl.draw(client)
+            assertEquals(0x665544, gl.pixel(26, 28))
+            server.sendEmptyUpdate()
+            client.processServerMessage()
+            gl.draw(client)
+            assertEquals(0x665544, gl.pixel(26, 28))
+            server.sendResize(32, 32)
+            client.processServerMessage()
+            client.processServerMessage() // Initial pixels requested for the resized desktop.
+            gl.draw(client, 32, 32)
+            assertEquals(0, gl.pixel(26, 28))
+            server.sendRectangle(0, 0, 32, 32, 0xffabcdef.toInt())
+            client.processServerMessage()
+            gl.draw(client, 32, 32)
+            assertEquals(0xabcdef, gl.pixel(26, 28))
+        }
+    }
+
+    @Test
+    fun cursorShapeChangesAndContextRecreation() = withClient(64, 64) { server, client ->
+        GlSession(64, 64).use { gl ->
+            gl.draw(client)
+            gl.drawCursor(client) // Default cursor
+            for ((size, rgb) in listOf(8 to 0x112233, 8 to 0xaabbcc, 16 to 0x665544)) {
+                server.sendCursor(size, size, 0xff000000.toInt() or rgb)
+                client.processServerMessage()
+                gl.drawCursor(client)
+                assertEquals(rgb, gl.pixel(32, 32))
+                gl.drawCursor(client) // Unchanged shape
+                assertEquals(rgb, gl.pixel(32, 32))
+            }
+        }
+        GlSession(64, 64).use { gl ->
+            gl.draw(client)
+            gl.drawCursor(client)
+            assertEquals(0x665544, gl.pixel(32, 32))
         }
     }
 

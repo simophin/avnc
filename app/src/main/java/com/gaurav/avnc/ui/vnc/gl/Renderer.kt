@@ -110,10 +110,10 @@ class Renderer(val viewModel: VncViewModel) : GLSurfaceView.Renderer {
 
         program.validate()
 
-        if (drawCursor) {
+        val ci = client.cursorInfo
+        if (drawCursor && ci.width > 0 && ci.height > 0) {
             glEnable(GL_BLEND)
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-            val ci = client.cursorInfo
 
             cursor.update(client.pointerX.toFloat(), client.pointerY.toFloat(), ci, frame)
             cursor.bind(program)

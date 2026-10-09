@@ -115,6 +115,44 @@ class TestServer(name: String = "Friends", width: Int = 10, height: Int = 10) {
         }
     }
 
+    fun sendCopyRectangle(srcX: Int, srcY: Int, x: Int, y: Int, width: Int, height: Int) {
+        queuedActions.transfer { output ->
+            output.write(byteArrayOf(0, 0, 0, 1))
+            for (v in listOf(x, y, width, height)) output.write(toByteArray(v.toShort()))
+            output.write(toByteArray(1)) // CopyRect
+            output.write(toByteArray(srcX.toShort()))
+            output.write(toByteArray(srcY.toShort()))
+        }
+    }
+
+    fun sendTightFill(x: Int, y: Int, width: Int, height: Int, rgb: Int) {
+        queuedActions.transfer { output ->
+            output.write(byteArrayOf(0, 0, 0, 1))
+            for (v in listOf(x, y, width, height)) output.write(toByteArray(v.toShort()))
+            output.write(toByteArray(7)) // Tight
+            output.write(0x80) // Fill, compact RGB pixels
+            output.write(byteArrayOf((rgb shr 16).toByte(), (rgb shr 8).toByte(), rgb.toByte()))
+        }
+    }
+
+    fun sendCursor(width: Int, height: Int, pixel: Int) {
+        queuedActions.transfer { output ->
+            output.write(byteArrayOf(0, 0, 0, 1))
+            output.write(toByteArray(0)) // Hotspot x,y
+            output.write(toByteArray(width.toShort()))
+            output.write(toByteArray(height.toShort()))
+            output.write(toByteArray(-239)) // RichCursor
+            val pixels = ByteBuffer.allocate(width * height * 4).order(ByteOrder.LITTLE_ENDIAN)
+            repeat(width * height) { pixels.putInt(pixel) }
+            output.write(pixels.array())
+            output.write(ByteArray(((width + 7) / 8) * height) { 0xff.toByte() })
+        }
+    }
+
+    fun sendEmptyUpdate() {
+        queuedActions.transfer { it.write(byteArrayOf(0, 0, 0, 0)) }
+    }
+
     fun sendResize(width: Int, height: Int) {
         queuedActions.transfer { output ->
             frameWidth = width.toShort()

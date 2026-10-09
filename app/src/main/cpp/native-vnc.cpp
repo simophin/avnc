@@ -202,22 +202,36 @@ static rfbBool onHandleCursorPos(rfbClient *client, int x, int y) {
     return TRUE;
 }
 
-static void onGotFrameBufferUpdate(rfbClient *client, int, int, int width, int height) {
-    if (width > 0 && height > 0)
-        getClientExtension(client)->pendingFrameUpdate = true;
+static void onGotFrameBufferUpdate(rfbClient *client, int x, int y, int width, int height) {
+    // Ignore empty/metadata rectangles and guard arithmetic before forming a box.
+    if (x >= 0 && y >= 0 && x < client->width && y < client->height &&
+        width > 0 && height > 0 && width <= client->width - x && height <= client->height - y)
+        getClientExtension(client)->pendingDamage.add(x, y, width, height);
 }
 
 static void onFinishedFrameBufferUpdate(rfbClient *client) {
     auto ex = getClientExtension(client);
-    if (ex->pendingFrameUpdate) {
+    const auto damage = ex->pendingDamage;
+    if (!damage.empty()) {
         LOCK(ex->mutex);
         if (ex->renderBuffer && client->frameBuffer) {
-            memcpy(ex->renderBuffer, client->frameBuffer,
-                   (size_t) ex->fbRealWidth * ex->fbRealHeight * PixelBytes);
-            ex->frameDirty = true;
+            const size_t stride = (size_t) ex->fbRealWidth * PixelBytes;
+            if (damage.left == 0 && damage.width() == ex->fbRealWidth) {
+                const size_t offset = (size_t) damage.top * stride;
+                memcpy(ex->renderBuffer + offset, client->frameBuffer + offset,
+                       (size_t) damage.height() * stride);
+            } else {
+                for (int y = damage.top; y < damage.bottom; ++y) {
+                    const size_t offset = (size_t) y * stride + damage.left * PixelBytes;
+                    memcpy(ex->renderBuffer + offset, client->frameBuffer + offset,
+                           (size_t) damage.width() * PixelBytes);
+                }
+            }
+            // Union with earlier updates when the receiver outpaces rendering.
+            ex->uploadDamage.add(damage.left, damage.top, damage.width(), damage.height());
         }
         UNLOCK(ex->mutex);
-        ex->pendingFrameUpdate = false;
+        ex->pendingDamage.clear();
     }
     auto obj = getManagedClient(client);
     auto env = context.getEnv();
@@ -252,8 +266,9 @@ static rfbBool onMallocFrameBuffer(rfbClient *client) {
         free(ex->renderBuffer);
         client->frameBuffer = static_cast<uint8_t *>(malloc(allocSize));
         ex->renderBuffer = static_cast<uint8_t *>(calloc(1, allocSize));
-        ex->pendingFrameUpdate = false;
-        ex->frameDirty = true;
+        ex->pendingDamage.clear();
+        ex->uploadDamage.clear();
+        ex->uploadDamage.add(0, 0, width, height);
         if (!ex->renderBuffer) {
             free(client->frameBuffer);
             client->frameBuffer = nullptr;
@@ -550,11 +565,46 @@ Java_com_gaurav_avnc_vnc_VncClient_nativeUploadFrameTexture(JNIEnv *, jobject,
     auto ex = getClientExtension(client);
     LOCK(ex->mutex);
     const bool available = ex->renderBuffer && ex->fbRealWidth > 0 && ex->fbRealHeight > 0;
-    if (available && (force || ex->frameDirty)) {
+    if (available && (force || ex->textureWidth != ex->fbRealWidth ||
+                      ex->textureHeight != ex->fbRealHeight)) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ex->fbRealWidth, ex->fbRealHeight,
                      0, GL_RGBA, GL_UNSIGNED_BYTE, ex->renderBuffer);
+        ex->textureWidth = ex->fbRealWidth;
+        ex->textureHeight = ex->fbRealHeight;
+        ex->uploadDamage.clear();
+    } else if (available && !ex->uploadDamage.empty()) {
+        const auto damage = ex->uploadDamage;
+        const size_t stride = (size_t) ex->fbRealWidth * PixelBytes;
+        const uint8_t *pixels = ex->renderBuffer + (size_t) damage.top * stride;
+        if (damage.width() == ex->fbRealWidth) {
+            // Full-width rows are already packed, including full-screen updates.
+            glTexSubImage2D(GL_TEXTURE_2D, 0, damage.left, damage.top,
+                           damage.width(), damage.height(), GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+        } else {
+            const size_t rowBytes = (size_t) damage.width() * PixelBytes;
+            const size_t bytes = rowBytes * damage.height();
+            if (bytes > ex->uploadCapacity) {
+                auto buffer = static_cast<uint8_t *>(realloc(ex->uploadBuffer, bytes));
+                if (buffer) {
+                    ex->uploadBuffer = buffer;
+                    ex->uploadCapacity = bytes;
+                }
+            }
+            if (bytes <= ex->uploadCapacity) {
+                for (int y = 0; y < damage.height(); ++y)
+                    memcpy(ex->uploadBuffer + y * rowBytes,
+                           pixels + y * stride + damage.left * PixelBytes, rowBytes);
+                glTexSubImage2D(GL_TEXTURE_2D, 0, damage.left, damage.top,
+                               damage.width(), damage.height(), GL_RGBA, GL_UNSIGNED_BYTE,
+                               ex->uploadBuffer);
+            } else {
+                // Allocation failure must not drop an update; upload the full snapshot.
+                glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, ex->fbRealWidth, ex->fbRealHeight,
+                               GL_RGBA, GL_UNSIGNED_BYTE, ex->renderBuffer);
+            }
+        }
         // Pixels are BGRA; the fragment shader swaps red and blue.
-        ex->frameDirty = false;
+        ex->uploadDamage.clear();
     }
     UNLOCK(ex->mutex);
     return available ? JNI_TRUE : JNI_FALSE;
@@ -567,10 +617,17 @@ Java_com_gaurav_avnc_vnc_VncClient_nativeUploadCursorTexture(JNIEnv *, jobject,
     auto ex = getClientExtension((rfbClient *) client_ptr);
     LOCK(ex->mutex);
     auto cursor = ex->cursor;
-    const bool available = cursor && cursor->buffer;
-    if (available && (force || ex->cursorDirty)) {
+    const bool available = cursor && cursor->buffer && cursor->width > 0 && cursor->height > 0;
+    if (available && (force || ex->cursorTextureWidth != cursor->width ||
+                      ex->cursorTextureHeight != cursor->height)) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cursor->width, cursor->height,
                      0, GL_RGBA, GL_UNSIGNED_BYTE, cursor->buffer);
+        ex->cursorTextureWidth = cursor->width;
+        ex->cursorTextureHeight = cursor->height;
+        ex->cursorDirty = false;
+    } else if (available && ex->cursorDirty) {
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, cursor->width, cursor->height,
+                       GL_RGBA, GL_UNSIGNED_BYTE, cursor->buffer);
         ex->cursorDirty = false;
     }
     UNLOCK(ex->mutex);
