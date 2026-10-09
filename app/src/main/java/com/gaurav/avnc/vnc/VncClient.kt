@@ -133,13 +133,6 @@ class VncClient(private val observer: Observer) {
         }
     }
 
-    fun setupRepeater(serverId: Int) {
-        stateLock.read {
-            if (!connected && !destroyed)
-                nativeSetDest(nativePtr, "ID", serverId)
-        }
-    }
-
     /**
      * Initializes VNC connection.
      */
@@ -353,7 +346,6 @@ class VncClient(private val observer: Observer) {
     private external fun nativeClientCreate(): Long
     private external fun nativeConfigure(clientPtr: Long, securityType: Int, useLocalCursor: Boolean, imageQuality: Int, useRawEncoding: Boolean)
     private external fun nativeInit(clientPtr: Long, host: String, port: Int): Boolean
-    private external fun nativeSetDest(clientPtr: Long, host: String, port: Int)
     private external fun nativeProcessServerMessage(clientPtr: Long): Boolean
     private external fun nativeSendKeyEvent(clientPtr: Long, keySym: Int, xtCode: Int, isDown: Boolean): Boolean
     private external fun nativeSendPointerEvent(clientPtr: Long, x: Int, y: Int, mask: Int): Boolean

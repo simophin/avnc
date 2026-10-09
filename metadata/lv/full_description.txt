@@ -11,5 +11,4 @@ Funkcijas:
 - Automātiska Zeroconf servera atklāšana LAN tīklā
 - TLS atbalsts (AnonTLS, VeNCrypt)
 - Ievietot/Izgūt saglabātos serverus
-- VNC retranslatora atbalsts
 - Starpliktuves sinhronizācija ar serveri

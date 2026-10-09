@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="🎉 Welcome to AVNC v3 🎉"
+            android:text="🎉 Welcome to AVNC Forked v3 🎉"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
         <TextView

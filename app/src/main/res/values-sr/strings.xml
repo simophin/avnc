@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hint_repeater_host">Понови домаћина</string>
     <string name="hint_server_name">Име (нпр. Радни рачунар)</string>
     <string name="msg_about_app">Брзи и безбедни корисник ВНЦ-а. Удаљени преглед и управљање било каквим уређајима који опслужују ВНЦ.
 \n
@@ -100,7 +99,6 @@
     <string name="title_hide_remote_cursor">Сакриј удаљеног показивача</string>
     <string name="title_continue">Настави</string>
     <string name="title_delete_servers_before_import">Избриши тренутне служитеље пре увоза</string>
-    <string name="title_use_repeater">Користи понављање</string>
     <string name="title_about">О програму</string>
     <string name="title_license">Дозвола</string>
     <string name="title_open_source_libraries">Књижнице отвореног извора</string>
@@ -109,7 +107,6 @@
     <string name="hint_urlbar">Повежи се са служитељем</string>
     <string name="hint_host">Домаћин</string>
     <string name="hint_port">Прикључник</string>
-    <string name="hint_server_id">Назив служитеља</string>
     <string name="hint_username">Корисничко име</string>
     <string name="hint_password">Лозинка</string>
     <string name="msg_server_profile_added">Додат је служитељ</string>

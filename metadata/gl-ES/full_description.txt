@@ -5,7 +5,6 @@ Características:
 - Material Design (con tema escuro)
 - Xestos configurables
 - Teclas virtuais
-- Soporte para repetidor VNC
 - Soporte Wake-on-LAN
 - Modo imaxe-en-imaxe
 - Modo só visualización

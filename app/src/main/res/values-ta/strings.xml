@@ -48,7 +48,6 @@
     <string name="title_vnc_security">பாதுகாப்பு</string>
     <string name="title_continue">தொடரவும்</string>
     <string name="title_delete_servers_before_import">இறக்குமதிக்கு முன் தற்போதைய சேவையகங்களை நீக்கவும்</string>
-    <string name="title_use_repeater">ரிப்பீட்டரைப் பயன்படுத்தவும்</string>
     <string name="title_about">பற்றி</string>
     <string name="title_license">உரிமம்</string>
     <string name="title_open_source_libraries">திறந்த மூல நூலகங்கள்</string>
@@ -63,9 +62,7 @@
     <string name="hint_urlbar">சேவையகத்துடன் இணைக்கவும்</string>
     <string name="hint_server_name">பெயர் (எ.கா. வேலை பிசி)</string>
     <string name="hint_host">விருந்தோம்பி</string>
-    <string name="hint_repeater_host">மீண்டும் புரவலன்</string>
     <string name="hint_port">துறைமுகம்</string>
-    <string name="hint_server_id">சேவையக ஐடி</string>
     <string name="hint_username">பயனர்பெயர்</string>
     <string name="hint_wol_mac">மேக் முகவரி</string>
     <string name="hint_send_text_to_server">சேவையகத்திற்கு உரையை அனுப்பவும்</string>

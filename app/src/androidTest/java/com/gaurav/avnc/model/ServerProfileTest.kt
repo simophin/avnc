@@ -30,4 +30,19 @@ class ServerProfileTest {
         val exported = json.encodeToString(profile)
         assertFalse(exported.contains("ssh", ignoreCase = true))
     }
+
+    @Test
+    fun legacyRepeaterBackupImportsAndDropsRepeaterSettings() {
+        val profile = json.decodeFromString<ServerProfile>("""{
+            "name": "Saved server", "host": "server", "port": 5901,
+            "password": "vnc-secret", "useRepeater": true, "idOnRepeater": 12345
+        }""")
+
+        assertEquals("Saved server", profile.name)
+        assertEquals("server", profile.host)
+        assertEquals(5901, profile.port)
+        assertEquals("vnc-secret", profile.password)
+        assertFalse(json.encodeToString(profile).contains("repeater", ignoreCase = true))
+    }
+
 }

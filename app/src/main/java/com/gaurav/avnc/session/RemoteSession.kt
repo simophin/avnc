@@ -135,9 +135,6 @@ class RemoteSession(private val observer: Observer) {
         vncClient.configure(profile.securityType, true  /* Hardcoded to true */,
                             profile.imageQuality, profile.useRawEncoding)
 
-        if (profile.useRepeater)
-            vncClient.setupRepeater(profile.idOnRepeater)
-
         vncClient.setInputDisabled(profile.viewMode == ServerProfile.VIEW_MODE_NO_INPUT)
         vncClient.setFrameBufferUpdatesPaused(profile.viewMode == ServerProfile.VIEW_MODE_NO_VIDEO)
     }

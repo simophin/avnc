@@ -37,75 +37,67 @@
         android:layout_height="match_parent">
 
 
-        <LinearLayout
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            app:scrimColor="@{0}">
 
-            <include android:id="@+id/desktop_toolbar" layout="@layout/desktop_toolbar" />
-
-            <androidx.drawerlayout.widget.DrawerLayout
-                android:id="@+id/drawer_layout"
+            <FrameLayout
+                android:id="@+id/frame_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:scrimColor="@{0}">
+                android:layout_height="match_parent">
 
-                <FrameLayout
-                    android:id="@+id/frame_container"
+                <!--FrameView-->
+                <com.gaurav.avnc.ui.vnc.FrameView
+                    android:id="@+id/frame_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:background="@drawable/bg_frame_view" /> <!--Workaround for hole punching issues-->
 
-                    <!--FrameView-->
-                    <com.gaurav.avnc.ui.vnc.FrameView
-                        android:id="@+id/frame_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone"
-                        android:background="@drawable/bg_frame_view" /> <!--Workaround for hole punching issues-->
+                <com.gaurav.avnc.ui.vnc.input.InputView
+                    android:id="@+id/input_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-                    <com.gaurav.avnc.ui.vnc.input.InputView
-                        android:id="@+id/input_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                <ViewStub
+                    android:id="@+id/no_video_overlay_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout="@layout/no_video_overlay" />
 
-                    <ViewStub
-                        android:id="@+id/no_video_overlay_stub"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout="@layout/no_video_overlay" />
+                <ImageButton
+                    android:id="@+id/open_toolbar_btn"
+                    android:layout_width="32dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/bg_round_rect_ripple"
+                    android:contentDescription="@string/desc_toolbar_btn"
+                    android:src="@drawable/ic_toolbar_open"
+                    android:visibility="gone"
+                    app:backgroundAlpha="@{.5}" />
 
-                    <ImageButton
-                        android:id="@+id/open_toolbar_btn"
-                        android:layout_width="32dp"
-                        android:layout_height="36dp"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/bg_round_rect_ripple"
-                        android:contentDescription="@string/desc_toolbar_btn"
-                        android:src="@drawable/ic_toolbar_open"
-                        android:visibility="gone"
-                        app:backgroundAlpha="@{.5}" />
+                <!--Virtual keys-->
+                <ViewStub
+                    android:id="@+id/virtual_keys_stub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout="@layout/virtual_keys" />
 
-                    <!--Virtual keys-->
-                    <ViewStub
-                        android:id="@+id/virtual_keys_stub"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:layout="@layout/virtual_keys" />
+            </FrameLayout>
 
-                </FrameLayout>
+            <!--A View containing helpful tips will be dynamically inserted here for new users -->
 
-                <!--A View containing helpful tips will be dynamically inserted here for new users -->
+            <!--Drawer-->
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_drawer"
+                app:viewModel="@{viewModel}" />
 
-                <!--Drawer-->
-                <include
-                    android:id="@+id/toolbar"
-                    layout="@layout/toolbar_drawer"
-                    app:viewModel="@{viewModel}" />
+        </androidx.drawerlayout.widget.DrawerLayout>
 
-            </androidx.drawerlayout.widget.DrawerLayout>
-        </LinearLayout>
 
         <!--Status-->
         <androidx.constraintlayout.widget.ConstraintLayout

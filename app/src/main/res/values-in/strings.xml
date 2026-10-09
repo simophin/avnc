@@ -32,7 +32,6 @@
     <string name="title_always_show_advanced_editor">Selalu tampilkan opsi lanjutan</string>
     <string name="title_continue">Lanjutkan</string>
     <string name="title_delete_servers_before_import">Hapus server saat ini sebelum impor</string>
-    <string name="title_use_repeater">Gunakan repeater</string>
     <string name="title_about">Tentang</string>
     <string name="title_license">Lisensi</string>
     <string name="title_open_source_libraries">Pustaka sumber terbuka</string>
@@ -47,9 +46,7 @@
     <string name="hint_urlbar">Sambungkan ke Server</string>
     <string name="hint_server_name">Nama (misalnya PC Kantor)</string>
     <string name="hint_host">Host</string>
-    <string name="hint_repeater_host">Host repeater</string>
     <string name="hint_port">Port</string>
-    <string name="hint_server_id">ID Server</string>
     <string name="hint_username">Nama pengguna</string>
     <string name="hint_password">Kata sandi</string>
     <string name="hint_wol_mac">Alamat MAC</string>

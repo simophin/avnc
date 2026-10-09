@@ -11,5 +11,4 @@ Funktionen:
 - automatische Zeroconf-Serversuche im LAN
 - TLS-Unterstützung (AnonTLS, VeNCrypt)
 - Exportieren und Importieren der abgespeicherten Server
-- Unterstützung für VNC-Repeater
 - Synchronisation der Zwischenablage

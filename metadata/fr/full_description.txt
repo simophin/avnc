@@ -5,7 +5,6 @@ Caractéristiques :
 - Material Design (avec le thème sombre)
 - Gestes configurables
 - clavier virtuel
-- support des relais VNC
 - support du Wake-On-Lan
 - mode Picture-in-Picture
 - mode affichage uniquement 

@@ -142,18 +142,6 @@ data class ServerProfile(
         var useCount: Int = 0,
 
         /**
-         * Whether UltraVNC Repeater is used for connections.
-         * When repeater is used, [host] & [port] identifies the repeater.
-         */
-        var useRepeater: Boolean = false,
-
-        /**
-         * When using a repeater, this value identifies the VNC server.
-         * Valid IDs: [0, 999999999].
-         */
-        var idOnRepeater: Int = 0,
-
-        /**
          * Resize remote desktop to match with local window size.
          */
         var resizeRemoteDesktop: Boolean = false,

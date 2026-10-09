@@ -7,7 +7,7 @@
   -->
 
 <resources>
-    <string name="app_name" translatable="false">AVNC</string>
+    <string name="app_name" translatable="false">AVNC Forked</string>
 
     <string name="title_add_server_profile">Add server</string>
     <string name="title_edit_server_profile">Edit server</string>
@@ -48,7 +48,6 @@
     <string name="title_export_profiles">Export servers</string>
     <string name="title_export_passwords">Export passwords</string>
     <string name="title_delete_servers_before_import">Delete current servers before import</string>
-    <string name="title_use_repeater">Use repeater</string>
     <string name="title_about">About</string>
     <string name="title_license">Licence</string>
     <string name="title_open_source_libraries">Open source libraries</string>
@@ -65,9 +64,7 @@
     <string name="hint_urlbar">Connect to a Server</string>
     <string name="hint_server_name">Name (e.g. Work PC)</string>
     <string name="hint_host">Host</string>
-    <string name="hint_repeater_host">Repeater host</string>
     <string name="hint_port">Port</string>
-    <string name="hint_server_id">Server ID</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_wol_mac">MAC address</string>

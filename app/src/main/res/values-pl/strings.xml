@@ -19,7 +19,6 @@
     <string name="hint_server_name">Nazwa (np. Komputer służbowy)</string>
     <string name="hint_host">Host</string>
     <string name="hint_port">Port</string>
-    <string name="hint_server_id">Identyfikator serwera</string>
     <string name="hint_username">Nazwa użytkownika</string>
     <string name="hint_password">Hasło</string>
     <string name="msg_about_app">Szybki i bezpieczny klient VNC. Umożliwia zdalne wyświetlanie i kontrolowanie dowolnego urządzenia z serwerem VNC.
@@ -138,7 +137,6 @@
     <string name="pref_gesture_action_remote_drag">Przeciągnij zdalną zawartość</string>
     <string name="pref_vk">Wirtualna klawiatura</string>
     <string name="pref_vk_open_with_keyboard">Otwórz za pomocą klawiatury</string>
-    <string name="title_use_repeater">Użyj wzmacniacza</string>
     <string name="title_hide_remote_cursor">Ukryj zdalny wskaźnik</string>
     <string name="pref_gesture_style_touchpad_summary">Wykonaj działania na wskaźniku</string>
     <string name="pref_km_language_switch_to_super">Zmiana języka → Super</string>
@@ -166,7 +164,6 @@
     <string name="desc_zoom_options_btn">Opcje powiększenia</string>
     <string name="title_unlock_dialog">Odblokuj, aby kontynuować</string>
     <string name="title_image_quality">Jakość obrazu</string>
-    <string name="hint_repeater_host">Host wzmacniacza</string>
     <string name="pref_gesture_style_auto_summary">W oparciu o ustawienia aplikacji</string>
     <string name="pref_saved_server_lock_summary">Wymagaj odblokowania biometrycznego/hasła do połączenia</string>
     <string name="pref_double_tap_swipe">Dotknij dwukrotnie i przesuń palcem</string>

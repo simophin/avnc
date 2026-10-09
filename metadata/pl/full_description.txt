@@ -11,5 +11,4 @@ Cechy:
 - Wykrywanie serwera Zeroconf
 - Obsługa TLS (AnonTLS, VeNCrypt)
 - Import/Export serwerów
-- Obsługa VNC Repeater
 - Synchronizacja schowka z serwerem

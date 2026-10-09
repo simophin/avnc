@@ -13,13 +13,11 @@
     <string name="title_export">Exportieren</string>
     <string name="title_import">Importieren</string>
     <string name="title_view_only_mode">Nur anzeigen</string>
-    <string name="title_use_repeater">Repeater nutzen</string>
     <string name="title_about">Über</string>
     <string name="title_report_bug">Melde einen Fehler</string>
     <string name="title_source_code">Quelltext</string>
     <string name="hint_urlbar">Verbinde dich mit einem Server</string>
     <string name="hint_server_name">Bezeichnung (z.B. Arbeits-PC)</string>
-    <string name="hint_repeater_host">Hostname/IP-Adresse des Repeaters</string>
     <string name="msg_about_app">Ein schneller und sicherer VNC-Client. Beobachten und steuern Sie jedes entfernte Gerät, auf welchem ein VNC-Server läuft.
 \n
 \n
@@ -141,7 +139,6 @@
     <string name="pref_discovery_autorun_summary">Schon auf der Startseite automatisch nach Servern suchen</string>
     <string name="pref_rediscovery_indicator">Wiederentdeckte Server hervorheben</string>
     <string name="pref_debugging">Fehlersuche</string>
-    <string name="hint_server_id">Server-ID</string>
     <string name="pref_gesture_action_remote_drag">Entfernten Inhalt ziehen</string>
     <string name="pref_gesture_style_touchscreen_summary">Aktionen am Berührungspunkt ausführen</string>
     <string name="pref_gesture_style_touchpad_summary">Aktionen am Zeiger ausführen</string>

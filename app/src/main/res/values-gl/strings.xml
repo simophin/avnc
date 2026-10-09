@@ -32,7 +32,6 @@
     <string name="title_always_show_advanced_editor">Mostrar sempre opcións avanzadas</string>
     <string name="title_continue">Continuar</string>
     <string name="title_delete_servers_before_import">Eliminar os servidores actuais antes de importar</string>
-    <string name="title_use_repeater">Empregar repetidor</string>
     <string name="title_about">Acerca o proxecto</string>
     <string name="title_license">Licencia</string>
     <string name="title_open_source_libraries">Librerías de código aberto</string>
@@ -47,9 +46,7 @@
     <string name="hint_urlbar">Conectar a un servidor</string>
     <string name="hint_server_name">Nome (e.x. PC de traballo)</string>
     <string name="hint_host">Servidor</string>
-    <string name="hint_repeater_host">Anfitrión repetidor</string>
     <string name="hint_port">Porto</string>
-    <string name="hint_server_id">ID do servidor</string>
     <string name="hint_username">Nome de usuario</string>
     <string name="hint_password">Contraseña</string>
     <string name="hint_wol_mac">Dirección MAC</string>

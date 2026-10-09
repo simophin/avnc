@@ -22,7 +22,6 @@
     <string name="title_orientation">轉向</string>
     <string name="title_vnc_security">安全性</string>
     <string name="title_delete_servers_before_import">在匯入前刪除當前伺服器</string>
-    <string name="title_use_repeater">使用中繼器</string>
     <string name="title_about">關於</string>
     <string name="title_license">許可證</string>
     <string name="title_open_source_libraries">開源庫</string>
@@ -37,10 +36,8 @@
     <string name="title_continue">繼續</string>
     <string name="title_unlock_dialog">解鎖以繼續</string>
     <string name="title_automatic">自動</string>
-    <string name="hint_repeater_host">中繼主機</string>
     <string name="title_image_quality_raw">原始</string>
     <string name="hint_port">端口</string>
-    <string name="hint_server_id">伺服器 ID</string>
     <string name="hint_username">使用者名稱</string>
     <string name="hint_password">密碼</string>
     <string name="msg_zoom_reset">重置縮放</string>

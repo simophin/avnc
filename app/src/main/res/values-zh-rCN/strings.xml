@@ -20,9 +20,7 @@
     <string name="hint_urlbar">连接到服务器</string>
     <string name="hint_server_name">名称（例如：工作电脑）</string>
     <string name="hint_host">主机</string>
-    <string name="hint_repeater_host">中继器主机</string>
     <string name="hint_port">端口</string>
-    <string name="hint_server_id">服务器 ID</string>
     <string name="hint_username">用户名</string>
     <string name="hint_password">密码</string>
     <string name="msg_server_profile_added">服务器已添加</string>
@@ -102,7 +100,6 @@
     <string name="pref_rediscovery_indicator">高亮显示被重新发现的服务器</string>
     <string name="pref_import_export">导入/导出 服务器</string>
     <string name="title_clear">清除</string>
-    <string name="title_use_repeater">使用中继器</string>
     <string name="pref_debugging">调试</string>
     <string name="pref_logs">日志</string>
     <string name="pref_keycode_map">键码映射</string>

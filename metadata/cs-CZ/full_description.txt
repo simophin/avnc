@@ -11,5 +11,4 @@ Funkce:
 - Nalezení serverů Zeroconf
 - Podpora TLS (AnonTLS, VeNCrypt)
 - Import/export serverů
-- Podpora VNC opakovačů
 - Synchronizace schránky se serverem

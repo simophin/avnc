@@ -2,7 +2,7 @@
 <p align="center"><img src="metadata/en-US/branding/wordmark.svg" alt="AVNC Banner" height="200"></img></a>
 
 
-<p align="center"> <b>AVNC</b> is a VNC client for Android. </p>
+<p align="center"> <b>AVNC Forked</b> is a VNC client for Android. </p>
 
 -------------------------------------------------------------------------------
 
@@ -11,7 +11,6 @@
 - Material Design (with Dark theme)
 - Configurable gestures
 - Virtual Keys
-- VNC Repeater support
 - Wake-on-LAN support
 - Picture-in-Picture mode
 - View-only mode
@@ -63,8 +62,9 @@ Now you can import the project in Android Studio, or build it directly from term
 ### Fork releases
 
 Publish a GitHub release for a tag containing the release workflow to build and
-attach `AVNC-<tag>-forked.apk` automatically. Published prereleases also run the
-workflow. The APK uses the `com.gaurav.avnc.forked` application ID.
+attach `AVNC-Forked-<tag>.apk` automatically. Published prereleases also run the
+workflow. The APK uses the normal `release` build type, the `com.gaurav.avnc` application ID,
+and the display name `AVNC Forked`.
 
 To test the Release workflow without publishing, run it manually from the Actions
 tab or with `gh workflow run release.yml`. It builds the selected branch by
@@ -74,8 +74,8 @@ save the signed APK as an Actions artifact and do not attach it to a release.
 The signing key is committed at `signing/release.jks` (alias `release`). Its store
 and key password are the same and are saved in the repository Actions secret
 `RELEASE_KEYSTORE_PASSWORD`. The workflow requires this secret before building.
-Local `assembleForked` builds use this key when the environment variable
-`RELEASE_KEYSTORE_PASSWORD` is set; otherwise they use the debug key.
+Local `assembleRelease` builds use this key when the environment variable
+`RELEASE_KEYSTORE_PASSWORD` is set; otherwise they produce an unsigned APK.
 
 Update `versionCode` and `versionName` in `app/build.gradle.kts` before tagging a
 new version. The release tag does not override the APK version.

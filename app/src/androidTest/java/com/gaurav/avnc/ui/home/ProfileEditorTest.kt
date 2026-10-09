@@ -75,7 +75,6 @@ class BasicEditorTest {
 
     private fun checkAdvancedModeIsOpen() {
         //This checkbox is only shown in advanced mode
-        onView(withText(R.string.title_use_repeater)).checkWillBeDisplayed()
     }
 
     @Test

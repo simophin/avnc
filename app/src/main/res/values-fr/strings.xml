@@ -22,11 +22,9 @@
     <string name="title_hide_remote_cursor">Masquer le curseur distant</string>
     <string name="title_continue">Continuer</string>
     <string name="title_delete_servers_before_import">Supprimer les serveurs courants avant l\'importation</string>
-    <string name="title_use_repeater">Utiliser un répéteur</string>
     <string name="title_source_code">Code source</string>
     <string name="hint_server_name">Nom (par ex. PC Travail)</string>
     <string name="hint_host">Hôte</string>
-    <string name="hint_repeater_host">Hôte du répéteur</string>
     <string name="hint_port">Port</string>
     <string name="hint_username">Nom d\'utilisateur</string>
     <string name="hint_password">Mot de passe</string>
@@ -75,7 +73,6 @@
     <string name="title_report_bug">Signaler un problème</string>
     <string name="desc_back_btn">Retour</string>
     <string name="pref_viewer">Visionneuse</string>
-    <string name="hint_server_id">Identifiant du serveur</string>
     <string name="msg_pip_not_supported">Non pris en charge sur cet appareil</string>
     <string name="msg_server_profile_deleted">Serveur supprimé</string>
     <string name="desc_server_url">Adresse du serveur</string>
