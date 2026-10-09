@@ -128,9 +128,9 @@ class EdgeToEdgeWrapperLayout(context: Context, attrs: AttributeSet?, defStyleAt
             return Type.systemBars() or Type.displayCutout()
 
         if (!viewerDrawsBehindCutout)
-            return Type.displayCutout()
+            return Type.displayCutout() or Type.captionBar()
 
-        return 0
+        return Type.captionBar()
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
