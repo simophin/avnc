@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?colorSurface"
+        android:visibility="gone"
+        android:fillViewport="true"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/fit_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desktop_fit"
+                android:src="@drawable/ic_zoom_reset" />
+            <ImageButton
+                android:id="@+id/zoom_out_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desktop_zoom_out"
+                android:src="@drawable/ic_zoom_out" />
+            <ImageButton
+                android:id="@+id/zoom_in_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desktop_zoom_in"
+                android:src="@drawable/ic_zoom_in" />
+            <ImageButton
+                android:id="@+id/clipboard_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desktop_clipboard"
+                android:src="@drawable/ic_upload" />
+            <ImageButton
+                android:id="@+id/fullscreen_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desktop_fullscreen"
+                android:src="@drawable/ic_launch" />
+            <ImageButton
+                android:id="@+id/more_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desc_toolbar_btn"
+                android:src="@drawable/ic_toolbar" />
+            <ImageButton
+                android:id="@+id/disconnect_btn"
+                style="@style/ImageButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/desktop_disconnect"
+                android:src="@drawable/ic_clear" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</layout>

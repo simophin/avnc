@@ -270,6 +270,13 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
         refreshFrameView()
     }
 
+    fun fitDesktopToViewport() {
+        val fs = frameState
+        if (fs.fbWidth <= 0 || fs.fbHeight <= 0 || fs.baseScale <= 0) return
+        val zoom = minOf(fs.vpWidth / fs.fbWidth, fs.vpHeight / fs.fbHeight) / fs.baseScale
+        setZoom(zoom, zoom)
+    }
+
     fun resetZoomToDefault() {
         frameState.setZoom(profile.zoom1, profile.zoom2)
         refreshFrameView()
@@ -346,18 +353,17 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
         return loginInfoRequest.getResponseFor(type, viewModelScope)  // Blocking call
     }
 
-    /**
-     * Resize remote desktop to match with local window size (if requested by user).
-     * In portrait mode, safe area is used instead of window to exclude the keyboard.
-     */
+    private val desktopResizer = RemoteDesktopResizer(viewModelScope) { width, height ->
+        messenger?.setDesktopSize(width, height)
+    }
+
+    /** Resize after the visible viewport has settled, including keyboard and toolbar insets. */
     fun resizeRemoteDesktop() {
-        if (connected && profile.resizeRemoteDesktop && !videoDisabled)
-            frameState.let {
-                if (it.windowWidth > it.windowHeight)
-                    messenger?.setDesktopSize(it.windowWidth.toInt(), it.windowHeight.toInt())
-                else
-                    messenger?.setDesktopSize(it.safeArea.width().toInt(), it.safeArea.height().toInt())
-            }
+        if (!connected || !profile.resizeRemoteDesktop || videoDisabled) {
+            desktopResizer.reset()
+            return
+        }
+        desktopResizer.request(frameState.vpWidth.toInt(), frameState.vpHeight.toInt())
     }
 
     fun setFrameBufferUpdatesPaused(paused: Boolean) {

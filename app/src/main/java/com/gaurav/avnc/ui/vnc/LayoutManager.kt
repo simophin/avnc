@@ -57,6 +57,8 @@ class LayoutManager(private val activity: VncActivity) {
 
     fun onConnectionStateChanged() {
         updateFullscreen()
+        activity.desktopToolbar.updateVisibility(windowInsets)
+        viewModel.resizeRemoteDesktop()
     }
 
     @RequiresApi(30)
@@ -70,7 +72,11 @@ class LayoutManager(private val activity: VncActivity) {
 
     private fun hookGlobalLayoutListener() {
         addOnGlobalLayoutListener(activity, rootView) {
-            viewModel.frameState.setWindowSize(rootView.width.toFloat(), rootView.height.toFloat())
+            activity.desktopToolbar.updateVisibility(windowInsets)
+            val desktop = activity.binding.desktopToolbar.root.isVisible
+            viewModel.frameState.setWindowSize(
+                    (if (desktop) frameView.width else rootView.width).toFloat(),
+                    (if (desktop) frameView.height else rootView.height).toFloat())
             viewModel.frameState.setViewportSize(frameView.width.toFloat(), frameView.height.toFloat())
             activity.virtualKeys.container?.let { updateVirtualKeyInsets(it) }
 
@@ -129,14 +135,16 @@ class LayoutManager(private val activity: VncActivity) {
     /************************************************************************************
      * Fullscreen
      ************************************************************************************/
-    private val fullscreenEnabled = viewModel.pref.viewer.fullscreen
+    private var fullscreenEnabled = viewModel.pref.viewer.fullscreen
     private val defaultSystemBarBehaviour = insetController.systemBarsBehavior
 
-    private fun updateFullscreen() {
-        if (!fullscreenEnabled)
-            return
+    fun toggleFullscreen() {
+        fullscreenEnabled = !fullscreenEnabled
+        updateFullscreen()
+    }
 
-        if (viewModel.connected)
+    private fun updateFullscreen() {
+        if (fullscreenEnabled && viewModel.connected)
             enterFullscreen()
         else
             leaveFullscreen()
@@ -158,6 +166,10 @@ class LayoutManager(private val activity: VncActivity) {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         insetController.show(Type.systemBars())
         insetController.systemBarsBehavior = defaultSystemBarBehaviour
+        if (SDK_INT < 30) {
+            @Suppress("DEPRECATION")
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
     }
 
     @RequiresApi(30)
@@ -223,7 +235,8 @@ class LayoutManager(private val activity: VncActivity) {
     }
 
     private fun applyInsets() {
-        val opaqueInsets = listOf(windowInsets.getInsets(Type.ime()), windowInsets.getInsets(Type.navigationBars()))
+        val opaqueInsets = listOf(windowInsets.getInsets(Type.ime()), windowInsets.getInsets(Type.navigationBars()),
+                                  windowInsets.getInsets(Type.captionBar()))
         val maxOpaqueInsets = opaqueInsets.fold(Insets.NONE) { a, i -> Insets.max(a, i) }
         applyOpaqueInsets(maxOpaqueInsets)
 
@@ -242,8 +255,9 @@ class LayoutManager(private val activity: VncActivity) {
             activity.virtualKeys.onKeyboardClose()
 
         val insets = windowInsetsToViewInsets(opaqueInsets, rootView)
-        if (rootView.paddingRight != insets.right || rootView.paddingBottom != insets.bottom)
-            rootView.updatePadding(0, 0, insets.right, insets.bottom)
+        if (rootView.paddingLeft != insets.left || rootView.paddingTop != insets.top ||
+            rootView.paddingRight != insets.right || rootView.paddingBottom != insets.bottom)
+            rootView.updatePadding(insets.left, insets.top, insets.right, insets.bottom)
     }
 
     private fun applySafeAreaInsets(safeAreaInsets: Insets) {
