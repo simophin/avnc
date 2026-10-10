@@ -119,4 +119,29 @@ class DatabaseTest {
         }
     }
 
+    @Test
+    fun addingClipboardSyncDefaultsToAuto() {
+        helper.createDatabase(dbName, 9).use { db ->
+            val values = ContentValues()
+            db.query("PRAGMA table_info(profiles)").use { columns ->
+                while (columns.moveToNext()) {
+                    val name = columns.getString(columns.getColumnIndexOrThrow("name"))
+                    val type = columns.getString(columns.getColumnIndexOrThrow("type"))
+                    if (type == "TEXT") values.put(name, "")
+                    else values.put(name, 0)
+                }
+            }
+            values.put("ID", 1)
+            values.put("host", "server")
+            db.insert("profiles", SQLiteDatabase.CONFLICT_ABORT, values)
+        }
+
+        helper.runMigrationsAndValidate(dbName, 10, true).use { db ->
+            db.query("SELECT * FROM profiles").use { profiles ->
+                assertTrue(profiles.moveToNext())
+                assertEquals("server", profiles.getString(profiles.getColumnIndexOrThrow("host")))
+                assertEquals("auto", profiles.getString(profiles.getColumnIndexOrThrow("clipboardSync")))
+            }
+        }
+    }
 }

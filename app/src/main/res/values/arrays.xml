@@ -202,6 +202,29 @@
         <item>touchpad</item>
     </string-array>
 
+    <!--Values for clipboard sync-->
+    <string-array name="profile_editor_clipboard_sync_labels">
+        <item>@string/title_automatic</item>
+        <item>@string/profile_clipboard_sync_both</item>
+        <item>@string/profile_clipboard_sync_remote_to_local</item>
+        <item>@string/profile_clipboard_sync_local_to_remote</item>
+        <item>@string/profile_clipboard_sync_off</item>
+    </string-array>
+    <string-array name="profile_editor_clipboard_sync_descriptions">
+        <item>@string/pref_gesture_style_auto_summary</item>
+        <item>@string/profile_clipboard_sync_both_summary</item>
+        <item>@string/profile_clipboard_sync_remote_to_local_summary</item>
+        <item>@string/profile_clipboard_sync_local_to_remote_summary</item>
+        <item>@string/profile_clipboard_sync_off_summary</item>
+    </string-array>
+    <string-array name="profile_editor_clipboard_sync_values">
+        <item>auto</item>
+        <item>both</item>
+        <item>remote-to-local</item>
+        <item>local-to-remote</item>
+        <item>off</item>
+    </string-array>
+
     <!--Values for security types-->
     <string-array name="profile_editor_security_labels">
         <item>@string/title_automatic</item>

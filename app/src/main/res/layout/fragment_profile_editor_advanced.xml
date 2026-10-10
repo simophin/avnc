@@ -296,6 +296,31 @@
                         app:values="@{ @stringArray/orientation_values }"
                         tools:entries="@array/dummy_array" />
 
+                    <!--Clipboard sync-->
+                    <TextView
+                        android:id="@+id/clipboard_sync_label"
+                        style="@style/FormField.LabelWithIcon"
+                        android:labelFor="@id/clipboard_sync"
+                        android:text="@string/pref_clipboard_sync"
+                        app:drawableStartCompat="@drawable/ic_clipboard"
+                        app:layout_constraintBottom_toBottomOf="@id/clipboard_sync"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/clipboard_sync" />
+
+                    <com.gaurav.avnc.util.SpinnerEx
+                        android:id="@+id/clipboard_sync"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/action_btn_size"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/screen_orientation"
+                        app:layout_constraintTop_toBottomOf="@id/screen_orientation"
+                        app:value="@={viewModel.profile.clipboardSync}"
+                        app:valueDescriptions="@{ @stringArray/profile_editor_clipboard_sync_descriptions }"
+                        app:valueLabels="@{ @stringArray/profile_editor_clipboard_sync_labels }"
+                        app:values="@{ @stringArray/profile_editor_clipboard_sync_values }"
+                        tools:entries="@array/dummy_array" />
+
 
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <!-- Security                                                   -->
@@ -316,8 +341,8 @@
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/action_btn_size"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/screen_orientation"
-                        app:layout_constraintTop_toBottomOf="@id/screen_orientation"
+                        app:layout_constraintStart_toStartOf="@id/clipboard_sync"
+                        app:layout_constraintTop_toBottomOf="@id/clipboard_sync"
                         app:value="@={viewModel.profile.securityType}"
                         app:valueLabels="@{ @stringArray/profile_editor_security_labels }"
                         app:values="@{ @stringArray/profile_editor_security_values }"

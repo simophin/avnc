@@ -28,6 +28,7 @@ import com.gaurav.avnc.model.ServerProfile
     AutoMigration(from = 6, to = 7, spec = MainDb.MigrationSpec6to7::class),  // in v3.0.0
     AutoMigration(from = 7, to = 8, spec = MainDb.MigrationSpec7to8::class),
     AutoMigration(from = 8, to = 9, spec = MainDb.MigrationSpec8to9::class),
+    AutoMigration(from = 9, to = 10),
 ])
 abstract class MainDb : RoomDatabase() {
     abstract val serverProfileDao: ServerProfileDao
@@ -36,7 +37,7 @@ abstract class MainDb : RoomDatabase() {
         /**
          * Current database version
          */
-        const val VERSION = 9
+        const val VERSION = 10
 
         private var instance: MainDb? = null
 

@@ -315,15 +315,23 @@ class VncViewModel(app: Application) : BaseViewModel(app) {
      * Miscellaneous
      **************************************************************************/
 
+    private val clipboardSyncMode
+        get() = profile.clipboardSync.let {
+            if (it == "auto") (if (pref.server.clipboardSync) "both" else "off") else it
+        }
+
+    private val canSendClipboard get() = clipboardSyncMode.let { it == "both" || it == "local-to-remote" }
+    private val canReceiveClipboard get() = clipboardSyncMode.let { it == "both" || it == "remote-to-local" }
+
     fun sendClipboardText() {
-        if (pref.server.clipboardSync && connected) launchIO {
+        if (connected && canSendClipboard) launchIO {
             getClipboardText(app)?.let { messenger?.sendClipboardText(it) }
         }
     }
 
     private var clipReceiverJob: Job? = null
     private fun receiveClipboardText(text: String) {
-        if (!pref.server.clipboardSync)
+        if (!canReceiveClipboard)
             return
 
         // This is a protective measure against servers which send every 'selection' made on the server.

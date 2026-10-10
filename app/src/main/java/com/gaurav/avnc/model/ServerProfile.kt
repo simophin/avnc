@@ -164,7 +164,15 @@ data class ServerProfile(
         var wolBroadcastAddress: String = "",
 
         @ColumnInfo(defaultValue = "9")
-        var wolPort: Int = 9
+        var wolPort: Int = 9,
+
+        /**
+         * Clipboard sync mode.
+         * Possible values: auto, both, remote-to-local, local-to-remote, off
+         * 'auto' follows the global clipboard sync setting.
+         */
+        @ColumnInfo(defaultValue = "auto")
+        var clipboardSync: String = "auto"
 
 ) : Parcelable {
 

@@ -46,6 +46,7 @@ import com.gaurav.avnc.instrumentation
 import com.gaurav.avnc.model.ServerProfile
 import com.gaurav.avnc.onToast
 import com.gaurav.avnc.pollingAssert
+import com.gaurav.avnc.getClipboardText
 import com.gaurav.avnc.setClipboardHtml
 import com.gaurav.avnc.setClipboardText
 import com.gaurav.avnc.targetContext
@@ -183,6 +184,53 @@ class VncActivityTest : VncSessionTest() {
         setClipboardHtml(sample)
         vncSession.run {
             pollingAssert { assertEquals(sample, vncSession.server.receivedCutText) }
+        }
+    }
+
+    @Test
+    fun serverToClientClipboard() {
+        val sample = "Unagi"
+        setClipboardText("")
+        vncSession.profile.clipboardSync = "both"
+        vncSession.run {
+            vncSession.server.sendCutText(sample)
+            pollingAssert { assertEquals(sample, getClipboardText()) }
+        }
+    }
+
+    @Test
+    fun clientToServerClipboardBlockedInRemoteToLocalMode() {
+        setClipboardText("Pivot! Pivot!")
+        vncSession.profile.clipboardSync = "remote-to-local"
+        vncSession.run {
+            Thread.sleep(1500) // Initial sync is delayed
+            assertEquals("", vncSession.server.receivedCutText)
+        }
+    }
+
+    @Test
+    fun serverToClientClipboardBlockedInLocalToRemoteMode() {
+        val local = "How you doin'?"
+        setClipboardText(local)
+        vncSession.profile.clipboardSync = "local-to-remote"
+        vncSession.run {
+            pollingAssert { assertEquals(local, vncSession.server.receivedCutText) }
+            vncSession.server.sendCutText("Selected text on server")
+            Thread.sleep(1000)
+            assertEquals(local, getClipboardText())
+        }
+    }
+
+    @Test
+    fun clipboardSyncOffInProfileOverridesGlobal() {
+        setClipboardText("We were on a break!")
+        targetPrefs.edit { putBoolean("clipboard_sync", true) }
+        vncSession.profile.clipboardSync = "off"
+        vncSession.run {
+            vncSession.server.sendCutText("Selected text on server")
+            Thread.sleep(1500)
+            assertEquals("", vncSession.server.receivedCutText)
+            assertEquals("We were on a break!", getClipboardText())
         }
     }
 
